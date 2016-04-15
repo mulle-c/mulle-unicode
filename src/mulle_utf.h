@@ -36,6 +36,7 @@
 #define mulle_utf_h__
 
 #include "mulle_utf_type.h"
+#include "mulle_utf_ctype.h"
 
 #include "mulle_utf8.h"
 #include "mulle_utf16.h"
