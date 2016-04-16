@@ -1,0 +1,4 @@
+   case 0xF0000 :
+   case 0xFFFFD :
+   case 0x100000 :
+   case 0x10FFFD :
