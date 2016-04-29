@@ -9,7 +9,7 @@
 #include "mulle_utf_is_privatecharacter.h"
 
 
-int   mulle_utf16_is_privatecharacter( mulle_utf16char_t c)
+int   mulle_utf16_is_privatecharacter( mulle_utf16_t c)
 {
    // quick check for most
    if( c < 0xE000)
@@ -21,9 +21,9 @@ int   mulle_utf16_is_privatecharacter( mulle_utf16char_t c)
    return( 0);
 }
 
-int   mulle_utf32_is_privatecharacter( mulle_utf32char_t c)
+int   mulle_utf32_is_privatecharacter( mulle_utf32_t c)
 {
-   if( mulle_utf16_is_privatecharacter( (mulle_utf16char_t) c))
+   if( mulle_utf16_is_privatecharacter( (mulle_utf16_t) c))
       return( 1);
    
    if( c >= 0xF0000 && c <= 0xFFFFD)

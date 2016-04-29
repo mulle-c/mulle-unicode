@@ -9,7 +9,7 @@
 #include "mulle_utf_tolower.h"
 
 
-int   mulle_utf16_tolower( mulle_utf16char_t c)
+int   mulle_utf16_tolower( mulle_utf16_t c)
 {
    switch( c)
    {
@@ -19,10 +19,10 @@ int   mulle_utf16_tolower( mulle_utf16char_t c)
 }
 
 
-int   mulle_utf32_tolower( mulle_utf32char_t c)
+int   mulle_utf32_tolower( mulle_utf32_t c)
 {
    if( c <= 0xFFFF)
-      return( mulle_utf16_tolower( (mulle_utf16char_t) c));
+      return( mulle_utf16_tolower( (mulle_utf16_t) c));
    
    switch( c)
    {

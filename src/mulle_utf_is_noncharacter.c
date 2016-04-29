@@ -9,7 +9,7 @@
 #include "mulle_utf_is_noncharacter.h"
 
 
-int   mulle_utf16_is_noncharacter( mulle_utf16char_t c)
+int   mulle_utf16_is_noncharacter( mulle_utf16_t c)
 {
    // a contiguous range of 32 noncharacters: U+FDD0..U+FDEF in the BMP
    if( c >= 0xFDD0 && c <= 0xFDEF)
@@ -19,7 +19,7 @@ int   mulle_utf16_is_noncharacter( mulle_utf16char_t c)
 
 
 // Q: Which code points are noncharacters?
-int   mulle_utf32_is_noncharacter( mulle_utf32char_t c)
+int   mulle_utf32_is_noncharacter( mulle_utf32_t c)
 {
    // quick check for most
    if( c < 0x0FFF)
@@ -29,7 +29,7 @@ int   mulle_utf32_is_noncharacter( mulle_utf32char_t c)
    if( c > 0x10FFFF)
       return( 1);
    
-   if( mulle_utf16_is_noncharacter( (mulle_utf16char_t) c))
+   if( mulle_utf16_is_noncharacter( (mulle_utf16_t) c))
       return( 1);
    
    // the last two code points of the BMP, U+FFFE and U+FFFF

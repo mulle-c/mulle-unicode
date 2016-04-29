@@ -9,7 +9,7 @@
 #include "mulle_utf_is_nonbase.h"
 
 
-int   mulle_utf16_is_nonbase( mulle_utf16char_t c)
+int   mulle_utf16_is_nonbase( mulle_utf16_t c)
 {
    if( c < 0x0300)
       return( 0);
@@ -27,10 +27,10 @@ int   mulle_utf16_is_nonbase( mulle_utf16char_t c)
 }
 
 
-int   mulle_utf32_is_nonbase( mulle_utf32char_t c)
+int   mulle_utf32_is_nonbase( mulle_utf32_t c)
 {
    if( c <= 0xFFFF)
-      return( mulle_utf16_is_nonbase( (mulle_utf16char_t) c));
+      return( mulle_utf16_is_nonbase( (mulle_utf16_t) c));
 
    switch( c)
    {
