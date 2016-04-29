@@ -9,7 +9,7 @@
 #include "mulle_utf_is_validurlquery.h"
 
 
-int   mulle_utf16_is_validurlquery( mulle_utf16char_t c)
+int   mulle_utf16_is_validurlquery( mulle_utf16_t c)
 {
    switch( c)
    {
@@ -33,9 +33,9 @@ int   mulle_utf16_is_validurlquery( mulle_utf16char_t c)
 }
 
 
-int   mulle_utf32_is_validurlquery( mulle_utf32char_t c)
+int   mulle_utf32_is_validurlquery( mulle_utf32_t c)
 {
-   return( mulle_utf16_is_validurlquery( (mulle_utf16char_t) c));
+   return( mulle_utf16_is_validurlquery( (mulle_utf16_t) c));
 }
 
 

@@ -30,6 +30,7 @@ src/mulle_utf_is_letter.h
 src/mulle_utf_is_lowercase.h
 src/mulle_utf_is_newline.h
 src/mulle_utf_is_nonbase.h
+src/mulle_utf_is_nonpercentescape.h
 src/mulle_utf_is_punctuation.h
 src/mulle_utf_is_symbol.h
 src/mulle_utf_is_uppercase.h
@@ -61,6 +62,7 @@ src/mulle_utf_is_letter.c
 src/mulle_utf_is_lowercase.c
 src/mulle_utf_is_newline.c
 src/mulle_utf_is_nonbase.c
+src/mulle_utf_is_nonpercentescape.c
 src/mulle_utf_is_punctuation.c
 src/mulle_utf_is_symbol.c
 src/mulle_utf_is_uppercase.c

@@ -9,7 +9,7 @@
 #include "mulle_utf_is_lowercase.h"
 
 
-int   mulle_utf16_is_lowercase( mulle_utf16char_t c)
+int   mulle_utf16_is_lowercase( mulle_utf16_t c)
 {
    // common shortcut
    if( c <= 127)
@@ -25,10 +25,10 @@ int   mulle_utf16_is_lowercase( mulle_utf16char_t c)
 }
 
 
-int   mulle_utf32_is_lowercase( mulle_utf32char_t c)
+int   mulle_utf32_is_lowercase( mulle_utf32_t c)
 {
    if( c <= 0xFFFF)
-      return( mulle_utf16_is_lowercase( (mulle_utf16char_t) c));
+      return( mulle_utf16_is_lowercase( (mulle_utf16_t) c));
 
    switch( c)
    {
