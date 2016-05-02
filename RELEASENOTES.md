@@ -1,3 +1,11 @@
+# 0.2
+
+* removed BOM check from most routines. It is now expected that you strip
+  the BOM away yourself
+* added mulle_char5 encoding 
+* surrogate pairs are considered non-characters in utf32 encoding 
+
+
 # 0.1
 
 * started versioning
