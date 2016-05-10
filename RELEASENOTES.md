@@ -1,3 +1,8 @@
+# 0.3
+
+* add routines to iterate over utf8/utf16/utf32 forwards and (!) backwards
+* fixed some bugs with respect to surrogate asserts in utf32
+
 # 0.2
 
 * removed BOM check from most routines. It is now expected that you strip
