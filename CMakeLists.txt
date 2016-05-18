@@ -40,6 +40,7 @@ src/mulle_utf_is_validurlhost.h
 src/mulle_utf_is_validurlpassword.h
 src/mulle_utf_is_validurlpath.h
 src/mulle_utf_is_validurlquery.h
+src/mulle_utf_is_validurlscheme.h
 src/mulle_utf_is_validurluser.h
 src/mulle_utf_is_whitespace.h
 src/mulle_utf_is_whitespaceornewline.h
@@ -73,6 +74,7 @@ src/mulle_utf_is_validurlhost.c
 src/mulle_utf_is_validurlpassword.c
 src/mulle_utf_is_validurlpath.c
 src/mulle_utf_is_validurlquery.c
+src/mulle_utf_is_validurlscheme.c
 src/mulle_utf_is_validurluser.c
 src/mulle_utf_is_whitespace.c
 src/mulle_utf_is_whitespaceornewline.c
