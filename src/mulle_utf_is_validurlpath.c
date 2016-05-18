@@ -2,7 +2,7 @@
 //  mulle_utf_is_validurlpath.h
 //  mulle-utf
 //
-//  Created by Nat! on 2016-04-15 17:24:35 +0200.
+//  Created by Nat! on 2016-05-16 16:34:06 +0200.
 //  Copyright © 2016 Mulle kybernetiK. All rights reserved.
 //
 
@@ -11,6 +11,12 @@
 
 int   mulle_utf16_is_validurlpath( mulle_utf16_t c)
 {
+   if( c < 0x0021)
+      return( 0);
+
+   if( c > 0x007e)
+      return( 0);
+
    switch( c)
    {
    case 0x0022 :
@@ -28,16 +34,19 @@ int   mulle_utf16_is_validurlpath( mulle_utf16_t c)
    case 0x007b :
    case 0x007c :
    case 0x007d :
-      return( 1);
+      return( 0);
    }
-   return( 0);
+   return( 1);
 
 }
 
 
 int   mulle_utf32_is_validurlpath( mulle_utf32_t c)
 {
-   return( mulle_utf16_is_validurlpath( (mulle_utf16_t) c));
+   if( c <= 0xFFFF)
+      return( mulle_utf16_is_validurlpath( (mulle_utf16_t) c));
+
+   return( 0);
 }
 
 

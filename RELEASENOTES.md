@@ -1,3 +1,9 @@
+# 0.4
+
+* Unify all utf8/16/32_info structs into one `mulle_utf_information`.
+* added mulle_utf_is_validurlscheme.h
+
+
 # 0.3
 
 * add routines to iterate over utf8/utf16/utf32 forwards and (!) backwards
