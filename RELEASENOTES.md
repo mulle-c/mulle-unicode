@@ -1,3 +1,10 @@
+# 0.5
+
+* incorporated some code from `mulle_regex`, namely those `_string` functions.
+* add dependency to `mulle_allocator` for convenience methods
+* changed parameter order in bytebuffer conversion functions!
+* allow len to be passed as -1 to `mulle_utf<>_information` for convenience.
+
 # 0.4
 
 * Unify all utf8/16/32_info structs into one `mulle_utf_information`.

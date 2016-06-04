@@ -12,12 +12,15 @@ else()
 endif()
 
 
-set(HEADERS
+set( HEADERS
 src/mulle_utf.h
 src/mulle_utf16.h
 src/mulle_utf32.h
+src/mulle_utf16_string.h
+src/mulle_utf32_string.h
 src/mulle_utf8.h
 src/mulle_char5.h
+src/mulle_utf_convenience.h
 src/mulle_utf_type.h
 src/mulle_utf_ctype.h
 src/mulle_utf_is_noncharacter.h
@@ -49,11 +52,14 @@ src/mulle_utf_toupper.h
 )
 
 
-add_library(mulle_utf
+add_library( mulle_utf
+src/mulle_char5.c
+src/mulle_utf8.c
 src/mulle_utf16.c
 src/mulle_utf32.c
-src/mulle_utf8.c
-src/mulle_char5.c
+src/mulle_utf16_string.c
+src/mulle_utf32_string.c
+src/mulle_utf_convenience.c
 src/mulle_utf_is_noncharacter.c
 src/mulle_utf_is_privatecharacter.c
 src/mulle_utf_is_alphanumeric.c
