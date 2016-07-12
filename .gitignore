@@ -9,3 +9,7 @@ xcuserdata/
 *~.*
 project.xcworkspace/
 tmp/
+*.exe
+*.exe.dSYM/
+research/
+unicode/
