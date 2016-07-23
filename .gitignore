@@ -13,3 +13,5 @@ tmp/
 *.exe.dSYM/
 research/
 unicode/
+/include
+/lib
