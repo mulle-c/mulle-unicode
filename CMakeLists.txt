@@ -89,6 +89,21 @@ src/mulle_utf_toupper.c
 )
 
 
-INSTALL(TARGETS mulle_utf DESTINATION "lib")
+add_library( mulle_utf_standalone SHARED
+src/mulle_utf_standalone.c
+)
+
+add_dependencies( mulle_utf_standalone mulle_utf)
+
+TARGET_LINK_LIBRARIES( mulle_utf_standalone
+${BEGIN_ALL_LOAD}
+mulle_utf
+mulle_allocator
+mulle_test_allocator
+${END_ALL_LOAD}
+)
+
+
+INSTALL(TARGETS mulle_utf mulle_utf_standalone DESTINATION "lib")
 INSTALL(FILES ${HEADERS} DESTINATION "include/mulle_utf")
 

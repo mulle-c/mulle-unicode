@@ -13,4 +13,4 @@
 
 
 // food for the linker
-uint32_t mulle_standalone_utf_version = MULLE_UTF_VERSION;
+uint32_t   mulle_utf_standalone_version = MULLE_UTF_VERSION;
