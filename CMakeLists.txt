@@ -20,6 +20,7 @@ src/mulle_utf16_string.h
 src/mulle_utf32_string.h
 src/mulle_utf8.h
 src/mulle_char5.h
+src/mulle_char7.h
 src/mulle_utf_convenience.h
 src/mulle_utf_type.h
 src/mulle_utf_ctype.h
@@ -54,6 +55,7 @@ src/mulle_utf_toupper.h
 
 add_library( mulle_utf
 src/mulle_char5.c
+src/mulle_char7.c
 src/mulle_utf8.c
 src/mulle_utf16.c
 src/mulle_utf32.c
