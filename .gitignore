@@ -10,7 +10,8 @@ xcuserdata/
 project.xcworkspace/
 tmp/
 *.exe
-*.exe.dSYM/
+*.exe.debug
+*.dSYM/
 research/
 unicode/
 /include
