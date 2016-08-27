@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.0)
+cmake_minimum_required (VERSION 3.4)
 
 project (mulle-utf)
 
@@ -108,4 +108,3 @@ ${END_ALL_LOAD}
 
 INSTALL(TARGETS mulle_utf mulle_utf_standalone DESTINATION "lib")
 INSTALL(FILES ${HEADERS} DESTINATION "include/mulle_utf")
-
