@@ -5,6 +5,7 @@
 * changed parameter order in bytebuffer conversion functions!
 * allow len to be passed as -1 to `mulle_utf<>_information` for convenience.
 
+
 # 0.4
 
 * Unify all utf8/16/32_info structs into one `mulle_utf_information`.
@@ -15,6 +16,7 @@
 
 * add routines to iterate over utf8/utf16/utf32 forwards and (!) backwards
 * fixed some bugs with respect to surrogate asserts in utf32
+
 
 # 0.2
 
@@ -32,4 +34,4 @@
   because by default the utf routines will use host order. If you want
   to have flipped output just change the `add`routine.
 
-* renamed mulle_utf8char_t and friends to mulle_utf8_t 
+* renamed mulle_utf8char_t and friends to mulle_utf8_t
