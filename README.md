@@ -35,14 +35,14 @@ UTF directly is kinda questionable, but I believe common.
 
 ## API
 
-File                               | Description
----------------------------------- | ----------------------------------------
-[`mulle_char5`](dox/API_CHAR5.md)  | Encode small identifiers of a limited character set into integers
-[`mulle_char7`](dox/API_CHAR7.md)  | Encode small ASCII strings into integers
-[`mulle_utf32`](dox/API_UTF32.md)  | Handle UTF32 and unichar strings
-[`mulle_utf16`](dox/API_UTF16.md)  | Handle UTF16 strings
-[`mulle_utf8`](dox/API_UTF8.md)    | Hande UTF8 strings
-[`ctype`](dox/API_CTYPE.md)        | `<ctype.h>` like functionality for UTF32 and UTF16 strings
+File                                    | Description
+--------------------------------------- | ----------------------------------------
+[`mulle_char7`](dox/API_CHAR7.md)       | Encode small ASCII strings into integers
+[`mulle_char5`](dox/API_CHAR5.md)       | Encode some more smallish ASCII strings integers
+[`Conversion`](dox/API_CONVERSION.md)   | Convert back and forth between UTF8, UTF16, UTF32,
+[`Information`](dox/API_INFORMATION.md) | Analyze and classify string encodings
+[`String`](dox/API_STRING.md)           | Primitive UTF16 and UTF32 string handling
+[`Ctype`](dox/API_CTYPE.md)             | `<ctype.h>` like functionality for UTF32 and UTF16 strings
 
 
 ## Author

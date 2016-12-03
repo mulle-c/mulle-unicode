@@ -36,3 +36,7 @@ tests/information/classify
 tests/information/null
 tests/iteration/iteration
 tests/strnlen/mulle_utf8_strnlen
+tests/char5/encode.debug
+tests/char5/makeint.debug
+tests/char5/substring.debug
+tests/information/classify.debug
