@@ -3,7 +3,9 @@
 //  mulle-utf
 //
 //  Created by Nat! on 2016-05-16 16:34:06 +0200.
-//  Copyright © 2016 Mulle kybernetiK. All rights reserved.
+//  Copyright © 2016 Mulle kybernetiK.
+//  Copyright (c) 2016 Codeon GmbH.
+//  All rights reserved.
 //
 
 #include "mulle_utf_is_validurlquery.h"

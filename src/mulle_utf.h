@@ -3,7 +3,9 @@
 //  mulle-utf
 //
 //  Created by Nat! on 18.03.16.
-//  Copyright © 2016 Mulle kybernetiK. All rights reserved.
+//  Copyright © 2016 Mulle kybernetiK.
+//  Copyright (c) 2016 Codeon GmbH.
+// All rights reserved.
 //
 //
 //  Redistribution and use in source and binary forms, with or without
@@ -35,7 +37,7 @@
 #ifndef mulle_utf_h__
 #define mulle_utf_h__
 
-#define MULLE_UTF_VERSION  ((0 << 20) | (5 << 8) | 0)
+#define MULLE_UTF_VERSION  ((1 << 20) | (0 << 8) | 1)
 
 #include "mulle_utf_type.h"
 
