@@ -3,13 +3,15 @@
 //  mulle-utf
 //
 //  Created by Nat! on 16.04.16.
-//  Copyright © 2016 Mulle kybernetiK. All rights reserved.
+//  Copyright © 2016 Mulle kybernetiK.
+//  Copyright (c) 2016 Codeon GmbH.
+//  All rights reserved.
 //
 
 #include "mulle_utf_toupper.h"
 
 
-int   mulle_utf16_toupper( mulle_utf16_t c)
+mulle_utf16_t   mulle_utf16_toupper( mulle_utf16_t c)
 {
    switch( c)
    {
@@ -19,7 +21,7 @@ int   mulle_utf16_toupper( mulle_utf16_t c)
 }
 
 
-int   mulle_utf32_toupper( mulle_utf32_t c)
+mulle_utf32_t   mulle_utf32_toupper( mulle_utf32_t c)
 {
    if( c <= 0xFFFF)
       return( mulle_utf16_toupper( (mulle_utf16_t) c));
@@ -33,7 +35,7 @@ int   mulle_utf32_toupper( mulle_utf32_t c)
 
 
 // diff with to upper
-int   mulle_utf16_totitlecase( mulle_utf16_t c)
+mulle_utf16_t   mulle_utf16_totitlecase( mulle_utf16_t c)
 {
    switch( c)
    {
@@ -54,7 +56,7 @@ int   mulle_utf16_totitlecase( mulle_utf16_t c)
 }
 
 
-int   mulle_utf32_totitlecase( mulle_utf32_t c)
+mulle_utf32_t   mulle_utf32_totitlecase( mulle_utf32_t c)
 {
    return( mulle_utf16_totitlecase( (mulle_utf16_t) c));
 }
