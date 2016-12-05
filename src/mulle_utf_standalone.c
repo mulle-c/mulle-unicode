@@ -10,7 +10,6 @@
 
 
 #include "mulle_utf.h"
-
 #include <stdint.h>
 
 
