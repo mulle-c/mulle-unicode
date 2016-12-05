@@ -42,7 +42,6 @@ int   mulle_utf32_is_noncharacter( mulle_utf32_t c)
    if( c >= 0xD800 && c < 0xE000)
       return( 1);
    
-   
    // the last two code points of the BMP, U+FFFE and U+FFFF
    // the last two code points of each of the 16 supplementary planes: U+1FFFE, U+1FFFF, U+2FFFE, U+2FFFF, ... U+10FFFE, U+10FFFF
    switch( c & 0xffff)
@@ -59,6 +58,3 @@ int   mulle_utf_is_noncharacterplane( unsigned int plane)
 {
    return( 1);
 }
-
-
-
