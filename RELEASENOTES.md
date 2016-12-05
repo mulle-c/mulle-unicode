@@ -1,3 +1,9 @@
+1.0.5
+===
+
+* improve documentation
+* reintroduce bom16 functions
+
 1.0.3
 ===
 
