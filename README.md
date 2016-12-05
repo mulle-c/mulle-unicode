@@ -11,11 +11,9 @@ It is the backbone of **NSString** and **NSCharacterSet**.
 Fork      |  Build Status | Release Version
 ----------|---------------|-----------------------------------
 [Mulle kybernetiK](//github.com/mulle-nat/mulle-utf) | [![Build Status](https://travis-ci.org/mulle-nat/mulle-utf.svg?branch=release)](https://travis-ci.org/mulle-nat/mulle-utf) | ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-nat/mulle-utf.svg) [![Build Status](https://travis-ci.org/mulle-nat/mulle-utf.svg?branch=release)](https://travis-ci.org/mulle-nat/mulle-utf)
-[Community](https://github.com/mulle-objc/mulle-utf/tree/release) | [![Build Status](https://travis-ci.org/mulle-objc/mulle-utf.svg)](https://travis-ci.org/mulle-objc/mulle-utf) | ![Community tag](https://img.shields.io/github/tag/mulle-objc/mulle-utf.svg) [![Build Status](https://travis-ci.org/mulle-objc/mulle-utf.svg?branch=release)](https://travis-ci.org/mulle-objc/mulle-utf)
 
 
-
-## Encoding strings as integers
+## Encode strings as integers
 
 * **mulle_char5** is a compression scheme, that uses a set of 31 characters
 to encode strings into integers of varying sizes. This can be useful for small
