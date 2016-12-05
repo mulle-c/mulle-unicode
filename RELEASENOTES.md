@@ -1,8 +1,8 @@
 1.0.1
 ===
 
-* changed the char5 characterset for typical Objective-C identifiers rather
-than C identifier. Sorry C :) Need to update the compiler too.
+* changed the char5 characterset to match typical Objective-C identifiers
+better. Need to update the compiler too.
 * redid the API to be more consistent with other projects
 
 
@@ -39,8 +39,8 @@ than C identifier. Sorry C :) Need to update the compiler too.
 
 * removed BOM check from most routines. It is now expected that you strip
   the BOM away yourself
-* added mulle_char5 encoding 
-* surrogate pairs are considered non-characters in utf32 encoding 
+* added mulle_char5 encoding
+* surrogate pairs are considered non-characters in utf32 encoding
 
 
 0.1
