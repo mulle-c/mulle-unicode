@@ -1,10 +1,14 @@
+1.0.3
+===
+
+* add travis.yml
+
 1.0.1
 ===
 
 * changed the char5 characterset to match typical Objective-C identifiers
 better. Need to update the compiler too.
 * redid the API to be more consistent with other projects
-
 
 0.5.1
 ===
