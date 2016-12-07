@@ -1,3 +1,10 @@
+1.0.7
+===
+
+* improve documentation
+* consistent errno return value for bufferconvert
+
+
 1.0.5
 ===
 

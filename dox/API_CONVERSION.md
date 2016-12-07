@@ -1,35 +1,107 @@
 # Conversion
 
 mulle-utf enables you to convert back and forth between UTF8, UTF16 and UTF32.
+The preferred and safe way to to the conversion is using the buffer routines
+in conjunction with [mulle-buffer](//github.com/mulle-nat/mulle-buffer).
+
+Here is an example how to convert a UTF8 string into UTF32 using a
+`mulle_buffer`:
+
+```
+   struct mulle_buffer   buffer;
+   mulle_utf32_t         *s;
+
+   mulle_buffer_init( &buffer, NULL);
+   mulle_utf8_bufferconvert_to_utf32( "VfL Bochum 1848",
+                                      (size_t) -1,
+                                      &buffer,
+                                      mulle_buffer_add_bytes);
+   s = mulle_buffer_extract( &buffer);
+   mulle_buffer_done( &buffer);
+   mulle_free( s);
+```
 
 
 ## Functions
 
-The conversion functions are all uniform. Only `mulle_utf8_convert_to_utf16`
-is explained in more detail:
+The conversion functions are all uniform. Only
+`mulle_utf8_convert_to_utf16` and `mulle_utf8_bufferconvert_to_utf16` are
+explained in more detail.
+
+
+## Buffer functions
+
+These are the actual low-level conversion functions. It is assumed that the
+passed-in UTF data is welformed and correct. For UTF data of unknown source,
+you should run `mulle_utf8_information` before conversion to catch errors.
+
+### `mulle_utf8_bufferconvert_to_utf16`
 
 
 ```
-mulle_utf16_t  *mulle_utf8_convert_to_utf16( mulle_utf8_t *src,
-                                             size_t len,
-                                             struct mulle_allocator *allocator);
-mulle_utf32_t  *mulle_utf8_convert_to_utf32( mulle_utf8_t *src,
-                                             size_t len,
-mulle_utf8_t  *mulle_utf16_convert_to_utf8( mulle_utf16_t *src,
-                                            size_t len,
-                                            struct mulle_allocator *allocator);
-mulle_utf32_t  *mulle_utf16_convert_to_utf32( mulle_utf16_t *src,
-                                              size_t len,
-                                              struct mulle_allocator *allocator);
-
-mulle_utf8_t  *mulle_utf32_convert_to_utf8( mulle_utf32_t *src,
-                                            size_t len,
-                                            struct mulle_allocator *allocator);
-mulle_utf16_t  *mulle_utf32_convert_to_utf16( mulle_utf32_t *src,
-                                             size_t len,
-                                             struct mulle_allocator *allocator);
-                                             struct mulle_allocator *allocator);
+int   mulle_utf8_bufferconvert_to_utf16( mulle_utf8_t *src,
+                                         size_t len,
+                                         void *buffer,
+                                         void (*addbytes)( void *buffer, void *bytes, size_t size))
 ```
+
+Convert up to `len` bytes of UTF8 string `src` to UTF16 in host byte order.
+You may pass -1 for `len`, to let the function determine the length of `src`
+with `mulle_utf8_strlen`. It is OK to have '\0' in your `src` data.
+The `addbytes` function will called repeatedly, with `size` `bytes`
+representing the converted  `mulle_utf16_t` characters.
+There will be NO trailing 0 character.
+
+Example: A conversion of a single character string "A" would result in a
+call to `addbytes` like this:
+
+```
+mulle_utf16_t   c;
+
+c = 'A';
+(*addbytes)( buffer, &c, sizeof( mulle_utf16_t));
+```
+
+The return value will be -1 and `errno` set to `EINVAL` if `src` is decidedly
+not a proper UTF8 string.
+
+Also available:
+
+```
+int  mulle_utf8_bufferconvert_to_utf32( mulle_utf8_t *src,
+                                        size_t len,
+                                        void *buffer,
+                                        void (*addbytes)( void *buffer, void *bytes, size_t size));
+
+
+int  mulle_utf16_bufferconvert_to_utf8( mulle_utf16_t *src,
+                                        size_t len,
+                                        void *buffer,
+                                        void (*addbytes)( void *buffer, void *bytes, size_t length));
+
+int  mulle_utf16_bufferconvert_to_utf32( mulle_utf16_t *src,
+                                         size_t len,
+                                         void *buffer,
+                                         void (*addbytes)( void *buffer, void *bytes, size_t length));
+
+int  mulle_utf32_bufferconvert_to_utf8( mulle_utf32_t *src,
+                                        size_t len,
+                                        void *buffer,
+                                        void (*addbytes)( void *buffer, void *bytes, size_t size));
+
+int  mulle_utf32_bufferconvert_to_utf16( mulle_utf32_t *src,
+                                         size_t len,
+                                         void *buffer,
+                                         void (*addbytes)( void *buffer, void *bytes, size_t size));
+```
+
+
+## Allocator functions
+
+These functions are based on the buffer routines. They analyze the string with
+the information functions and then convert the input into an allocated
+string that is returned.
+
 
 ### `mulle_utf8_convert_to_utf16`
 
@@ -47,3 +119,23 @@ will stop there.
 The return value will be NULL and `errno` set to `EINVAL` if `src` is not
 a proper UTF8 string.
 
+
+Also available:
+
+```
+mulle_utf32_t  *mulle_utf8_convert_to_utf32( mulle_utf8_t *src,
+                                             size_t len,
+mulle_utf8_t   *mulle_utf16_convert_to_utf8( mulle_utf16_t *src,
+                                             size_t len,
+                                             struct mulle_allocator *allocator);
+mulle_utf32_t  *mulle_utf16_convert_to_utf32( mulle_utf16_t *src,
+                                              size_t len,
+                                              struct mulle_allocator *allocator);
+
+mulle_utf8_t   *mulle_utf32_convert_to_utf8( mulle_utf32_t *src,
+                                             size_t len,
+                                             struct mulle_allocator *allocator);
+mulle_utf16_t  *mulle_utf32_convert_to_utf16( mulle_utf32_t *src,
+                                              size_t len,
+                                              struct mulle_allocator *allocator);
+```
