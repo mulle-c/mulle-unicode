@@ -1,3 +1,9 @@
+1.0.9
+===
+
+* improve documentation
+* fix homebrew formula generation
+
 1.0.7
 ===
 
