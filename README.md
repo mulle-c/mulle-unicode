@@ -30,7 +30,6 @@ UTF directly is kinda questionable, but I believe common.
 >> TODO (maybe): split this up into mulle_unicode, mulle_unitype, mulle_utf
 
 
-
 ## API
 
 File                                    | Description
@@ -41,6 +40,27 @@ File                                    | Description
 [`Information`](dox/API_INFORMATION.md) | Analyze and classify string encodings
 [`String`](dox/API_STRING.md)           | Primitive UTF16 and UTF32 string handling
 [`Ctype`](dox/API_CTYPE.md)             | `<ctype.h>` like functionality for UTF32 and UTF16 strings
+
+
+## Install
+
+On OS X and Linux you can use [homebrew](//brew.sh), respectively
+[linuxbrew](//linuxbrew.sh) to install the library:
+
+```
+brew tap mulle-kybernetik/software/mulle-utf
+```
+
+On other platforms you can use **mulle-install** from
+[mulle-build](//github.com/mulle-nat/mulle-build) to install the library:
+
+```
+mulle-install --prefix /usr/local --branch release https://github.com/mulle-nat/mulle-utf
+```
+
+Otherwise read:
+
+* [How to Build](dox/BUILD.md)
 
 
 ## Author
