@@ -25,7 +25,7 @@ mulle_utf32_t   mulle_utf32_toupper( mulle_utf32_t c)
 {
    if( c <= 0xFFFF)
       return( mulle_utf16_toupper( (mulle_utf16_t) c));
-   
+
    switch( c)
    {
 #include "unicode/toupper-utf32.inc"

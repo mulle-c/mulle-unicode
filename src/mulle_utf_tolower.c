@@ -25,7 +25,7 @@ mulle_utf32_t   mulle_utf32_tolower( mulle_utf32_t c)
 {
    if( c <= 0xFFFF)
       return( mulle_utf16_tolower( (mulle_utf16_t) c));
-   
+
    switch( c)
    {
 #include "unicode/tolower-utf32.inc"
