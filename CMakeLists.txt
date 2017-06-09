@@ -91,6 +91,17 @@ src/mulle_utf_toupper.c
 )
 
 
+find_library( MULLE_ALLOCATOR_LIBRARY NAMES mulle_allocator)
+message( STATUS "MULLE_ALLOCATOR_LIBRARY is ${MULLE_ALLOCATOR_LIBRARY}")
+find_library( MULLE_TEST_ALLOCATOR_LIBRARY NAMES mulle_test_allocator)
+message( STATUS "MULLE_TEST_ALLOCATOR_LIBRARY is ${MULLE_TEST_ALLOCATOR_LIBRARY}")
+
+set( STATIC_DEPENDENCIES
+${MULLE_ALLOCATOR_LIBRARY}
+${MULLE_TEST_ALLOCATOR_LIBRARY}
+)
+
+
 add_library( mulle_utf_standalone SHARED
 src/mulle_utf_standalone.c
 )
@@ -100,9 +111,9 @@ add_dependencies( mulle_utf_standalone mulle_utf)
 TARGET_LINK_LIBRARIES( mulle_utf_standalone
 ${BEGIN_ALL_LOAD}
 mulle_utf
-mulle_allocator
-mulle_test_allocator
+${STATIC_DEPENDENCIES}
 ${END_ALL_LOAD}
+${DEPENDENCIES}
 )
 
 

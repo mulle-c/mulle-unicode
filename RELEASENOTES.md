@@ -1,3 +1,7 @@
+### 1.0.11
+
+* modernize project
+
 1.0.9
 ===
 
