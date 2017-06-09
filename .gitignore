@@ -12,6 +12,7 @@ tmp/
 *.exe
 *.exe.debug
 *.dSYM/
+*.old
 research/
 unicode/
 /include
