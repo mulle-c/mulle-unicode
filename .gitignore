@@ -13,6 +13,7 @@ tmp/
 *.exe.debug
 *.dSYM/
 *.old
+*.bak
 research/
 unicode/
 /include
@@ -56,3 +57,5 @@ tests/information/classify.debug
 /tests/mulle-tests
 
 /bin/mulle-homebrew
+bin/tap-info.sh
+tap-info.sh
