@@ -108,10 +108,23 @@ src/mulle_utf_standalone.c
 
 add_dependencies( mulle_utf_standalone mulle_utf)
 
+set( TARGET_ALL_LOAD_LIBRARIES
+$<TARGET_FILE:mulle_utf>
+${STATIC_DEPENDENCIES}
+)
+
+if( FORCE_LOAD)
+   set( TMP)
+   foreach( library ${TARGET_ALL_LOAD_LIBRARIES})
+      list( APPEND TMP "${FORCE_LOAD} ${library}")
+   endforeach( library)
+   set( TARGET_ALL_LOAD_LIBRARIES ${TMP})
+endif()
+
+
 TARGET_LINK_LIBRARIES( mulle_utf_standalone
 ${BEGIN_ALL_LOAD}
-mulle_utf
-${STATIC_DEPENDENCIES}
+${TARGET_ALL_LOAD_LIBRARIES}
 ${END_ALL_LOAD}
 ${DEPENDENCIES}
 )
