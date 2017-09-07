@@ -96,35 +96,56 @@ message( STATUS "MULLE_ALLOCATOR_LIBRARY is ${MULLE_ALLOCATOR_LIBRARY}")
 find_library( MULLE_TEST_ALLOCATOR_LIBRARY NAMES mulle_test_allocator)
 message( STATUS "MULLE_TEST_ALLOCATOR_LIBRARY is ${MULLE_TEST_ALLOCATOR_LIBRARY}")
 
-set( STATIC_DEPENDENCIES
+
+set( TARGET_ALL_LOAD_LIBRARIES
+$<TARGET_FILE:mulle_utf>
 ${MULLE_ALLOCATOR_LIBRARY}
 ${MULLE_TEST_ALLOCATOR_LIBRARY}
 )
 
+foreach( library ${TARGET_ALL_LOAD_LIBRARIES})
+   list( APPEND TARGET_FORCE_ALL_LOAD_LIBRARIES "${FORCE_LOAD_PREFIX}${library}")
+endforeach( library)
+
+
+if( MSVC)
+   set( DEF_FILE mulle_utf_standalone.def)
+   set_source_files_properties( ${DEF_FILE} PROPERTIES HEADER_FILE_ONLY TRUE)
+   set( CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS OFF)
+   set( CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /DEF:${DEF_FILE}")
+   # /NODEFAULTLIB:MSVCRT")
+
+   message( STATUS "MSVC will generate \"${DEF_FILE}\" from ${TARGET_ALL_LOAD_LIBRARIES}")
+
+   add_definitions( -DMULLE_ALLOCATOR_EXTERN_GLOBAL=extern)
+
+   add_custom_command( OUTPUT ${DEF_FILE}
+                       COMMAND mulle-mingw-dumpdef.bat -o "${DEF_FILE}"
+                               --directory "${BUILD_RELATIVE_DEPENDENCIES_DIR}/lib"
+                               --prefix "mulle" 
+                               --prefix "Mulle" 
+                               --prefix "ns"
+                               --prefix "NS" 
+                               --prefix "_mulle" 
+                               --prefix "_Mulle" 
+                               --prefix "_ns"
+                               --prefix "_NS" 
+                               ${TARGET_ALL_LOAD_LIBRARIES}
+                       DEPENDS "${SOURCES}" "${HEADERS}"
+                       VERBATIM)
+   find_program( CREATE_INC mulle-objc-create-dependencies-inc.bat ${DEPENDENCIES_DIR}/bin)
+endif()
 
 add_library( mulle_utf_standalone SHARED
 src/mulle_utf_standalone.c
+${DEF_FILE}
 )
 
 add_dependencies( mulle_utf_standalone mulle_utf)
 
-set( TARGET_ALL_LOAD_LIBRARIES
-$<TARGET_FILE:mulle_utf>
-${STATIC_DEPENDENCIES}
-)
-
-if( FORCE_LOAD)
-   set( TMP)
-   foreach( library ${TARGET_ALL_LOAD_LIBRARIES})
-      list( APPEND TMP "${FORCE_LOAD} ${library}")
-   endforeach( library)
-   set( TARGET_ALL_LOAD_LIBRARIES ${TMP})
-endif()
-
-
 TARGET_LINK_LIBRARIES( mulle_utf_standalone
 ${BEGIN_ALL_LOAD}
-${TARGET_ALL_LOAD_LIBRARIES}
+${TARGET_FORCE_ALL_LOAD_LIBRARIES}
 ${END_ALL_LOAD}
 ${DEPENDENCIES}
 )
