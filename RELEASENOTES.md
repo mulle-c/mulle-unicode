@@ -1,3 +1,7 @@
+### 1.1.3
+
+* fixes for _WIN32
+
 ### 1.0.13
 
 * make it a cmake "C" project
