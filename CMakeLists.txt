@@ -36,6 +36,7 @@ ${C_DEPENDENCY_LIBRARIES}
 
 include( Standalone)
 
-
 INSTALL( TARGETS mulle_utf mulle_utf_standalone DESTINATION "lib")
 INSTALL( FILES ${PUBLIC_HEADERS} DESTINATION "include/mulle_utf")
+
+include( MulleTest)
