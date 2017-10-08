@@ -1,3 +1,7 @@
+### 1.1.11
+
+* don't use failing extrachar function in information routine
+
 ### 1.1.9
 
 * support new mulle-tests
