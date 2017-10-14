@@ -1,3 +1,8 @@
+### 1.1.13
+
+* migrate to mulle-project
+* fix glaring regression in mulle_utf8_information
+
 ### 1.1.11
 
 * don't use failing extrachar function in information routine
