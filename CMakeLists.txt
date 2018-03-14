@@ -2,44 +2,66 @@ cmake_minimum_required( VERSION 3.0)
 
 project( mulle-utf C)
 
-set( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/mulle-configuration/cmake)
-message( STATUS "CMAKE_MODULE_PATH is ${CMAKE_MODULE_PATH}")
-message( STATUS "CMAKE_BUILD_TYPE is ${CMAKE_BUILD_TYPE}")
-if( "${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
-  include( Debug)
-else()
-  include( Release)
-endif()
+
+### mulle-sde environment
+
+# add cmake module paths to search path
+list( INSERT CMAKE_MODULE_PATH 0 "${PROJECT_SOURCE_DIR}/cmake/share")
+list( INSERT CMAKE_MODULE_PATH 0 "${PROJECT_SOURCE_DIR}/cmake")
+
+include( Environment)
+
+
+### Files
+
+include( PreFiles OPTIONAL)
 
 set( MULLE_UTF_LIBRARY ON)
-include( CMakeSourcesAndHeaders.txt)
-include( CMakeDependencies.txt)
+
+#
+# Include all non underscored .cmake files in ./cmake
+#
+file( GLOB LOCAL_CMAKE_INCLUDES
+   "cmake/[A-Za-z0-9]*.cmake"
+)
+
+foreach( FILE ${LOCAL_CMAKE_INCLUDES} )
+   include( "${FILE}")
+endforeach()
 
 
 include_directories( ${INCLUDE_DIRS})
 
+include( PostFiles OPTIONAL)
 
-set( PUBLIC_HEADERS
-${HEADERS}
-CMakeDependencies.txt
-)
+### Library
 
+include( PreLibrary OPTIONAL)
 
-add_library( mulle_utf
+add_library( "mulle-utf"
 ${SOURCES}
+${PUBLIC_HEADERS}
+${PRIVATE_HEADERS}
+${CMAKE_EDITABLE_FILES}
 )
 
-set( STANDALONE_BASE_NAME "mulle_utf")
-set( STANDALONE_NAME "mulle_utf_standalone")
-set( STANDALONE_DEFINITIONS ${MULLE_UTF_DEFINITIONS})
-set( STANDALONE_ALL_LOAD_LIBRARIES
-$<TARGET_FILE:mulle_utf>
-${C_DEPENDENCY_LIBRARIES}
+if( BUILD_SHARED_LIBS)
+   target_link_libraries( mulle-utf
+${DEPENDENCIES_LIBRARIES}
+${OS_SPECIFIC_LIBRARIES}
 )
+endif()
 
-include( Standalone)
+include( PostLibrary OPTIONAL)
 
-INSTALL( TARGETS mulle_utf mulle_utf_standalone DESTINATION "lib")
-INSTALL( FILES ${PUBLIC_HEADERS} DESTINATION "include/mulle_utf")
+### Install
 
-include( MulleTest)
+include( PreInstall OPTIONAL)
+
+install( TARGETS "mulle-utf" DESTINATION "lib")
+install( FILES ${PUBLIC_HEADERS}  DESTINATION "include/mulle-utf")
+install( FILES ${PRIVATE_HEADERS} DESTINATION "include/mulle-utf/private")
+
+install( FILES ${CMAKE_INCLUDES}  DESTINATION "include/mulle-utf/cmake")
+
+include( PostInstall OPTIONAL)
