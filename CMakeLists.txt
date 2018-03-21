@@ -54,11 +54,27 @@ endif()
 
 include( PostLibrary OPTIONAL)
 
+
+set( STANDALONE_BASE_NAME "mulle-utf")
+set( STANDALONE_NAME "mulle-utf-standalone")
+set( STANDALONE_DEFINITIONS ${MULLE_UTF_DEFINITIONS})
+set( STANDALONE_DEPENDENCIES
+mulle-utf
+)
+
+set( STANDALONE_ALL_LOAD_LIBRARIES
+$<TARGET_FILE:mulle-utf>
+${C_DEPENDENCY_LIBRARIES}
+${OS_SPECIFIC_LIBRARIES}
+)
+
+include( Standalone)
+
 ### Install
 
 include( PreInstall OPTIONAL)
 
-install( TARGETS "mulle-utf" DESTINATION "lib")
+install( TARGETS "mulle-utf" "mulle-utf-standalone" DESTINATION "lib")
 install( FILES ${PUBLIC_HEADERS}  DESTINATION "include/mulle-utf")
 install( FILES ${PRIVATE_HEADERS} DESTINATION "include/mulle-utf/private")
 
