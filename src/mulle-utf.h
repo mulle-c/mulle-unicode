@@ -39,6 +39,8 @@
 
 #define MULLE_UTF_VERSION  ((1 << 20) | (1 << 8) | 13)
 
+#include "dependencies.h"
+
 #include "mulle-utf-type.h"
 
 #include "mulle-char5.h"
