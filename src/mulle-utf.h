@@ -37,7 +37,7 @@
 #ifndef mulle_utf_h__
 #define mulle_utf_h__
 
-#define MULLE_UTF_VERSION  ((1 << 20) | (1 << 8) | 13)
+#define MULLE_UTF_VERSION  ((2 << 20) | (0 << 8) | 0)
 
 #include "dependencies.h"
 
