@@ -1,3 +1,7 @@
+### 2.0.2
+
+* fix missing eval
+
 ### 2.0.1
 
 * fix travis.yml
