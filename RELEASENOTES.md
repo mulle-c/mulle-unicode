@@ -1,3 +1,7 @@
+### 2.0.5
+
+* fix mingw, update sde
+
 ### 2.0.4
 
 * Various small improvements

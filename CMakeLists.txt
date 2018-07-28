@@ -91,7 +91,12 @@ add_library( "mulle-utf"
 )
 
 
-set( INSTALL_LIBRARY_TARGETS "mulle-utf")
+include( Library OPTIONAL)
+
+set( INSTALL_LIBRARY_TARGETS
+   "mulle-utf"
+   "${INSTALL_LIBRARY_TARGETS}"
+)
 
 include( PostLibrary OPTIONAL)
 
