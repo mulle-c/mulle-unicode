@@ -1,3 +1,7 @@
+### 2.0.7
+
+* fix a linux warning about strnlen the hard way
+
 ### 2.0.6
 
 * remove obsolete file
