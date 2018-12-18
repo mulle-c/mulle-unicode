@@ -1,3 +1,7 @@
+### 2.0.8
+
+* upgrade to newest mulle-sde
+
 ### 2.0.7
 
 * fix a linux warning about strnlen the hard way
