@@ -1,0 +1,2 @@
+mulle-utf;tar;no-all-load,no-import,only-standalone;39942794-68C2-46C7-B595-D44F258D1F9C;${MULLE_UTF_URL:-https://github.com/mulle-c/mulle-utf/archive/${MULLE_UTF_BRANCH:-latest}.tar.gz};;;;
+mulle-testallocator;tar;no-all-load,no-import;5170F14E-76B5-49BD-84B8-FE134257E9A0;${MULLE_TESTALLOCATOR_URL:-https://github.com/mulle-core/mulle-testallocator/archive/${MULLE_TESTALLOCATOR_BRANCH:-latest}.tar.gz};;;;
