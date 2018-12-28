@@ -1,3 +1,7 @@
+### 2.0.9
+
+* use memmove in a strategic place
+
 ### 2.0.8
 
 * upgrade to newest mulle-sde

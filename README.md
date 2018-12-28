@@ -1,5 +1,7 @@
 # mulle-utf
 
+🔤 UTF8-16-32 analysis, conversion, classification library
+
 a C (C99) library to analyze and convert unicode strings. It also contains some
 limited `<string.h>` functionality for UTF16 and UTF32. And it contains some
 fairly extensive `<ctype.h>` functionality for UTF16 and UTF32 based on the
@@ -8,9 +10,9 @@ Unicode 3.0.0 specification.
 It is the backbone of **NSString** and **NSCharacterSet**.
 
 
-Fork      |  Build Status | Release Version
-----------|---------------|-----------------------------------
-[Mulle kybernetiK](//github.com/mulle-c/mulle-utf) | [![Build Status](https://travis-ci.org/mulle-c/mulle-utf.svg?branch=release)](https://travis-ci.org/mulle-c/mulle-utf) | ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-c/mulle-utf.svg) [![Build Status](https://travis-ci.org/mulle-c/mulle-utf.svg?branch=release)](https://travis-ci.org/mulle-c/mulle-utf)
+Build Status | Release Version
+-------------|-----------------------------------
+[![Build Status](https://travis-ci.org/mulle-c/mulle-utf.svg?branch=release)](https://travis-ci.org/mulle-c/mulle-utf) | ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-c/mulle-utf.svg) [![Build Status](https://travis-ci.org/mulle-c/mulle-utf.svg?branch=release)](https://travis-ci.org/mulle-c/mulle-utf)
 
 
 ## Install
