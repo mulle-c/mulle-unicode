@@ -29,17 +29,20 @@
 #   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 #   POSSIBILITY OF SUCH DAMAGE.
 #
+[ "${TRACE}" = 'YES' ] && set -x && : "$0" "$@"
+
 
 #
-# overwrite inherited task and add mulle-c-sourcetree-update
-# it would be nice to inherit this properly instead of clobbering it
+# if action is empty, assume it means we are inside mulle-sde monitor update
 #
-cmake_sourcetree_update_task_run()
+main()
 {
-   log_entry "mulle-sde/cmake::cmake_sourcetree_update_task_run" "$@"
+   local action="$1"     # unused
+   local filename="$2"
+   local category="$3"
 
-   log_info "Updating ${C_MAGENTA}${C_BOLD}${PROJECT_NAME}${C_INFO} sourcetree"
-
-   exekutor cmake-sourcetree-update ${CMAKE_SOURCETREE_UPDATE_FLAGS} "$@" &&
-   exekutor c-sourcetree-update ${C_SOURCETREE_UPDATE_FLAGS} "$@"
+   echo "source"
 }
+
+main "$@"
+

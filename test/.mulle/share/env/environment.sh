@@ -28,7 +28,7 @@ fi
 #
 # now read in custom envionment (required)
 #
-. "${MULLE_VIRTUAL_ROOT}/.mulle-env/share/include-environment.sh"
+. "${MULLE_VIRTUAL_ROOT}/.mulle/share/env/include-environment.sh"
 
 #
 # basic setup for interactive shells
@@ -62,7 +62,7 @@ case "${MULLE_SHELL_MODE}" in
 
       # install mulle-env-reload
 
-      alias mulle-env-reload='. "${MULLE_VIRTUAL_ROOT}/.mulle-env/share/include-environment.sh"'
+      alias mulle-env-reload='. "${MULLE_VIRTUAL_ROOT}/.mulle/share/env/include-environment.sh"'
 
 
       #
@@ -71,7 +71,7 @@ case "${MULLE_SHELL_MODE}" in
       DEFAULT_IFS="${IFS}"
       shopt -s nullglob; IFS="
 "
-      for FILENAME in "${MULLE_VIRTUAL_ROOT}/.mulle-env/share/libexec"/*-bash-completion.sh
+      for FILENAME in "${MULLE_VIRTUAL_ROOT}/.mulle/share/env/libexec"/*-bash-completion.sh
       do
          . "${FILENAME}"
       done
@@ -86,13 +86,13 @@ case "${MULLE_SHELL_MODE}" in
       #
       if [ -z "${NO_MOTD}" ]
       then
-         if [ -f "${MULLE_VIRTUAL_ROOT}/.mulle-env/etc/motd" ]
+         if [ -f "${MULLE_VIRTUAL_ROOT}/.mulle/etc/env/motd" ]
          then
-            cat "${MULLE_VIRTUAL_ROOT}/.mulle-env/etc/motd"
+            cat "${MULLE_VIRTUAL_ROOT}/.mulle/etc/env/motd"
          else
-            if [ -f "${MULLE_VIRTUAL_ROOT}/.mulle-env/share/motd" ]
+            if [ -f "${MULLE_VIRTUAL_ROOT}/.mulle/share/env/motd" ]
             then
-               cat "${MULLE_VIRTUAL_ROOT}/.mulle-env/share/motd"
+               cat "${MULLE_VIRTUAL_ROOT}/.mulle/share/env/motd"
             fi
          fi
       else
