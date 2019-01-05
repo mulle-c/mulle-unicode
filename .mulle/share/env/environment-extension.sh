@@ -14,9 +14,3 @@ export MULLE_MATCH_PATH="${PROJECT_SOURCE_DIR}:CMakeLists.txt:cmake"
 export MULLE_MATCH_IGNORE_PATH=
 
 
-#
-#
-#
-export MULLE_SDE_INSTALLED_VERSION="0.34.0"
-
-

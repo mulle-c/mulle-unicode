@@ -29,11 +29,17 @@
 #   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 #   POSSIBILITY OF SUCH DAMAGE.
 #
-cmake_source_update_task_run()
+
+#
+# overwrite inherited task and add mulle-mulle-sourcetree-to-c
+# it would be nice to inherit this properly instead of clobbering it
+#
+sourcetree_task_run()
 {
-   log_entry "mulle-sde/cmake::cmake_source_update_task_run" "$@"
+   log_entry "mulle-sde/c-cmake::sourcetree_task_run" "$@"
 
-   log_info "Updating ${C_MAGENTA}${C_BOLD}${PROJECT_NAME}${C_INFO} source"
+   log_info "Updating ${C_MAGENTA}${C_BOLD}${PROJECT_NAME}${C_INFO} sourcetree"
 
-   exekutor cmake-source-update ${CMAKE_SOURCE_UPDATE_FLAGS} "$@"
+   exekutor mulle-sourcetree-to-cmake ${MULLE_SOURCETREE_TO_CMAKE_FLAGS} "$@" &&
+   exekutor mulle-sourcetree-to-c ${MULLE_SOURCETREE_TO_C_FLAGS} "$@"
 }

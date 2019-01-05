@@ -29,14 +29,9 @@
 #   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 #   POSSIBILITY OF SUCH DAMAGE.
 #
-#
-#
-# OPTIONS are tricky, because we are running in mulle-monitor and
-# we do not have values from MULLE_SDE here
-#
 craft_task_run()
 {
-   log_entry "craft_task_run" "$@"
+   log_entry "mulle-sde/sde:: craft_task_run" "$@"
 
    log_fluff "==> Craft"
 
@@ -49,9 +44,10 @@ craft_task_run()
       remove_task_job "test"
    fi
 
-   if ! eval_exekutor mulle-sde "${MULLE_SDE_CRAFT_TASK_FLAGS}" \
-                      craft "$@" \
-                      "${MULLE_SDE_CRAFT_TASK_ARGS}"
+   if ! eval_exekutor mulle-sde "${MULLE_TECHNICAL_FLAGS}" \
+                                "${MULLE_CRAFT_TASK_FLAGS}" \
+                        craft "$@" \
+                           "${MULLE_CRAFT_TASK_ARGS}"
    then
       return 1
    fi

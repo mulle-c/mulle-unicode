@@ -2,13 +2,13 @@
    echo "Your script needs to setup MULLE_VIRTUAL_ROOT \
 and MULLE_UNAME properly" >&2  && exit 1
 
-MULLE_ENV_SHARE_DIR="${MULLE_VIRTUAL_ROOT}/.mulle-env/share"
-MULLE_ENV_ETC_DIR="${MULLE_VIRTUAL_ROOT}/.mulle-env/etc"
+MULLE_ENV_SHARE_DIR="${MULLE_VIRTUAL_ROOT}/.mulle/share/env"
+MULLE_ENV_ETC_DIR="${MULLE_VIRTUAL_ROOT}/.mulle/etc/env"
 # Top/down order of inclusion. Left overrides right if present.
 # Keep these files (except environment-custom.sh) clean off manual edits so
 # that mulle-env can read and set environment variables.
 #
-# .mulle-env/etc                        | .mulle-env/share
+# .mulle/etc/env                        | .mulle/share/env
 # --------------------------------------|--------------------
 #                                       | environment-plugin.sh
 #                                       | environment-plugin-os-${MULLE_UNAME}.sh
