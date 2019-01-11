@@ -7,7 +7,7 @@ endif()
 
 set( INCLUDE_DIRS
 src
-) 
+)
 
 set( PRIVATE_HEADERS
 src/include-private.h
@@ -87,5 +87,5 @@ src/unicode/totitlecase-utf16.inc
 src/unicode/totitlecase-utf32.inc
 src/unicode/toupper-utf16.inc
 src/unicode/toupper-utf32.inc
-) 
+)
 
