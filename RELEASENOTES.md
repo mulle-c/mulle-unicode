@@ -1,3 +1,8 @@
+### 2.0.11
+
+* modernized mulle-sde
+* Added a check for NULL pointer input
+
 ### 2.0.10
 
 * modernized to mulle-sde with .mulle folder
