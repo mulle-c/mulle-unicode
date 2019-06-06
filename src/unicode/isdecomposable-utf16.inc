@@ -2077,6 +2077,7 @@
    case 0x32fc :
    case 0x32fd :
    case 0x32fe :
+   case 0x32ff :
    case 0x3300 :
    case 0x3301 :
    case 0x3302 :

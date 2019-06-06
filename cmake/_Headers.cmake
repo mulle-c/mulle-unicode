@@ -30,6 +30,7 @@ src/mulle-utf-is-capitalized.h
 src/mulle-utf-is-control.h
 src/mulle-utf-is-decimaldigit.h
 src/mulle-utf-is-decomposable.h
+src/mulle-utf-is-legalcharacter.h
 src/mulle-utf-is-letter.h
 src/mulle-utf-is-lowercase.h
 src/mulle-utf-is-newline.h
@@ -63,6 +64,8 @@ src/unicode/isdecomposable-utf16.inc
 src/unicode/isdecomposable-utf32.inc
 src/unicode/isdigit-utf16.inc
 src/unicode/isdigit-utf32.inc
+src/unicode/islegal-utf16.inc
+src/unicode/islegal-utf32.inc
 src/unicode/isletter-utf16-inv.inc
 src/unicode/isletter-utf32-inv.inc
 src/unicode/islowercase-utf16.inc

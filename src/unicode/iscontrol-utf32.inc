@@ -1,4 +1,14 @@
    case 0x110BD :
+   case 0x110CD :
+   case 0x13430 :
+   case 0x13431 :
+   case 0x13432 :
+   case 0x13433 :
+   case 0x13434 :
+   case 0x13435 :
+   case 0x13436 :
+   case 0x13437 :
+   case 0x13438 :
    case 0x1BCA0 :
    case 0x1BCA1 :
    case 0x1BCA2 :

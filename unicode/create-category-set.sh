@@ -21,7 +21,7 @@ fi
 
 # Normative Categories
 
- # Description
+# Description
 # Lu    Letter, Uppercase
 # Ll    Letter, Lowercase
 # Lt    Letter, Titlecase

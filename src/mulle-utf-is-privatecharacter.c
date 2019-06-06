@@ -25,8 +25,8 @@ int   mulle_utf16_is_privatecharacter( mulle_utf16_t c)
 
 int   mulle_utf32_is_privatecharacter( mulle_utf32_t c)
 {
-   if( mulle_utf16_is_privatecharacter( (mulle_utf16_t) c))
-      return( 1);
+   if( c <= 0xFFFF)
+      return( mulle_utf16_is_privatecharacter( (mulle_utf16_t) c));
 
    if( c >= 0xF0000 && c <= 0xFFFFD)
       return( 1);

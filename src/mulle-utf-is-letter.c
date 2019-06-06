@@ -9,16 +9,20 @@
 //
 
 #include "mulle-utf-is-letter.h"
+#include "mulle-utf-is-noncharacter.h"
 
 
 int   mulle_utf16_is_letter( mulle_utf16_t c)
 {
+   if( ! c)
+      return( 0);
+
    switch( c)
    {
 #include "unicode/isletter-utf16-inv.inc"
       return( 0);
    }
-   return( 1);
+   return( mulle_utf16_is_noncharacter( c) ? 0 : 1);
 }
 
 
@@ -27,12 +31,15 @@ int   mulle_utf32_is_letter( mulle_utf32_t c)
    if( c <= 0xFFFF)
       return( mulle_utf16_is_letter( (mulle_utf16_t) c));
 
+   if( ! mulle_utf_is_letterplane( c >> 16))
+      return( 0);
+
    switch( c)
    {
 #include "unicode/isletter-utf32-inv.inc"
       return( 0);
    }
-   return( 1);
+   return( mulle_utf32_is_noncharacter( c) ? 0 : 1);
 }
 
 

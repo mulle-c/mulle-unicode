@@ -35,6 +35,11 @@
    case 0x10B9A :
    case 0x10B9B :
    case 0x10B9C :
+   case 0x10F55 :
+   case 0x10F56 :
+   case 0x10F57 :
+   case 0x10F58 :
+   case 0x10F59 :
    case 0x11047 :
    case 0x11048 :
    case 0x11049 :
@@ -58,7 +63,6 @@
    case 0x111C6 :
    case 0x111C7 :
    case 0x111C8 :
-   case 0x111C9 :
    case 0x111CD :
    case 0x111DB :
    case 0x111DD :
@@ -71,6 +75,13 @@
    case 0x1123C :
    case 0x1123D :
    case 0x112A9 :
+   case 0x1144B :
+   case 0x1144C :
+   case 0x1144D :
+   case 0x1144E :
+   case 0x1144F :
+   case 0x1145B :
+   case 0x1145D :
    case 0x114C6 :
    case 0x115C1 :
    case 0x115C2 :
@@ -98,9 +109,50 @@
    case 0x11641 :
    case 0x11642 :
    case 0x11643 :
+   case 0x11660 :
+   case 0x11661 :
+   case 0x11662 :
+   case 0x11663 :
+   case 0x11664 :
+   case 0x11665 :
+   case 0x11666 :
+   case 0x11667 :
+   case 0x11668 :
+   case 0x11669 :
+   case 0x1166A :
+   case 0x1166B :
+   case 0x1166C :
    case 0x1173C :
    case 0x1173D :
    case 0x1173E :
+   case 0x1183B :
+   case 0x119E2 :
+   case 0x11A3F :
+   case 0x11A40 :
+   case 0x11A41 :
+   case 0x11A42 :
+   case 0x11A43 :
+   case 0x11A44 :
+   case 0x11A45 :
+   case 0x11A46 :
+   case 0x11A9A :
+   case 0x11A9B :
+   case 0x11A9C :
+   case 0x11A9E :
+   case 0x11A9F :
+   case 0x11AA0 :
+   case 0x11AA1 :
+   case 0x11AA2 :
+   case 0x11C41 :
+   case 0x11C42 :
+   case 0x11C43 :
+   case 0x11C44 :
+   case 0x11C45 :
+   case 0x11C70 :
+   case 0x11C71 :
+   case 0x11EF7 :
+   case 0x11EF8 :
+   case 0x11FFF :
    case 0x12470 :
    case 0x12471 :
    case 0x12472 :
@@ -115,9 +167,16 @@
    case 0x16B3A :
    case 0x16B3B :
    case 0x16B44 :
+   case 0x16E97 :
+   case 0x16E98 :
+   case 0x16E99 :
+   case 0x16E9A :
+   case 0x16FE2 :
    case 0x1BC9F :
    case 0x1DA87 :
    case 0x1DA88 :
    case 0x1DA89 :
    case 0x1DA8A :
    case 0x1DA8B :
+   case 0x1E95E :
+   case 0x1E95F :
