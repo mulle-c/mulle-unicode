@@ -27,17 +27,18 @@ int   mulle_utf32_is_decomposable( mulle_utf32_t c)
    if( c <= 0xFFFF)
       return( mulle_utf16_is_decomposable( (mulle_utf16_t) c));
 
-   if( c < 0x1109a)
-      return( 0);
-
-   if( c > 0x2fa1d)
-      return( 0);
-
    switch( c)
    {
-#include "unicode/isdecomposable-utf16.inc"
+#include "unicode/isdecomposable-utf32.inc"
       return( 1);
    }
+
+//   if( c < 0x1109a)
+//      return( 0);
+//
+//   if( c > 0x2fa1d)
+//      return( 0);
+
    return( 0);
 }
 

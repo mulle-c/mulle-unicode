@@ -31,7 +31,9 @@ int   mulle_utf16_is_whitespaceornewline( mulle_utf16_t c)
 
 int   mulle_utf32_is_whitespaceornewline( mulle_utf32_t c)
 {
-  return( mulle_utf16_is_whitespaceornewline( (mulle_utf16_t) c));
+   if( c <= 0xFFFF)
+      return( mulle_utf16_is_whitespaceornewline( (mulle_utf16_t) c));
+   return( 0);
 }
 
 

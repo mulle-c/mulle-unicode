@@ -1236,6 +1236,7 @@
    case 0x1f14f :
    case 0x1f16a :
    case 0x1f16b :
+   case 0x1f16c :
    case 0x1f190 :
    case 0x1f200 :
    case 0x1f201 :
@@ -1283,6 +1284,7 @@
    case 0x1f238 :
    case 0x1f239 :
    case 0x1f23a :
+   case 0x1f23b :
    case 0x1f240 :
    case 0x1f241 :
    case 0x1f242 :

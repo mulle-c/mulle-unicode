@@ -26,16 +26,13 @@ int   mulle_utf16_is_whitespace( mulle_utf16_t c)
 
 int   mulle_utf32_is_whitespace( mulle_utf32_t c)
 {
-   return( mulle_utf16_is_whitespace( (mulle_utf16_t) c));
+   if( c <= 0xFFFF)
+      return( mulle_utf16_is_whitespace( (mulle_utf16_t) c));
+   return( 0);
 }
 
 
 int   mulle_utf_is_whitespaceplane( unsigned int plane)
 {
-   switch( plane)
-   {
-   case 0 :
-      return( 1);
-   }
-   return( 0);
+   return( plane == 0);
 }

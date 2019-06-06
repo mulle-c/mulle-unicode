@@ -268,6 +268,7 @@
    case 0x07F1 :
    case 0x07F2 :
    case 0x07F3 :
+   case 0x07FD :
    case 0x0816 :
    case 0x0817 :
    case 0x0818 :
@@ -292,6 +293,21 @@
    case 0x0859 :
    case 0x085A :
    case 0x085B :
+   case 0x08D3 :
+   case 0x08D4 :
+   case 0x08D5 :
+   case 0x08D6 :
+   case 0x08D7 :
+   case 0x08D8 :
+   case 0x08D9 :
+   case 0x08DA :
+   case 0x08DB :
+   case 0x08DC :
+   case 0x08DD :
+   case 0x08DE :
+   case 0x08DF :
+   case 0x08E0 :
+   case 0x08E1 :
    case 0x08E3 :
    case 0x08E4 :
    case 0x08E5 :
@@ -374,6 +390,7 @@
    case 0x09D7 :
    case 0x09E2 :
    case 0x09E3 :
+   case 0x09FE :
    case 0x0A01 :
    case 0x0A02 :
    case 0x0A03 :
@@ -412,6 +429,12 @@
    case 0x0ACD :
    case 0x0AE2 :
    case 0x0AE3 :
+   case 0x0AFA :
+   case 0x0AFB :
+   case 0x0AFC :
+   case 0x0AFD :
+   case 0x0AFE :
+   case 0x0AFF :
    case 0x0B01 :
    case 0x0B02 :
    case 0x0B03 :
@@ -450,6 +473,7 @@
    case 0x0C01 :
    case 0x0C02 :
    case 0x0C03 :
+   case 0x0C04 :
    case 0x0C3E :
    case 0x0C3F :
    case 0x0C40 :
@@ -490,9 +514,12 @@
    case 0x0CD6 :
    case 0x0CE2 :
    case 0x0CE3 :
+   case 0x0D00 :
    case 0x0D01 :
    case 0x0D02 :
    case 0x0D03 :
+   case 0x0D3B :
+   case 0x0D3C :
    case 0x0D3E :
    case 0x0D3F :
    case 0x0D40 :
@@ -553,6 +580,7 @@
    case 0x0EB7 :
    case 0x0EB8 :
    case 0x0EB9 :
+   case 0x0EBA :
    case 0x0EBB :
    case 0x0EBC :
    case 0x0EC8 :
@@ -745,6 +773,8 @@
    case 0x180B :
    case 0x180C :
    case 0x180D :
+   case 0x1885 :
+   case 0x1886 :
    case 0x18A9 :
    case 0x1920 :
    case 0x1921 :
@@ -936,9 +966,8 @@
    case 0x1CE7 :
    case 0x1CE8 :
    case 0x1CED :
-   case 0x1CF2 :
-   case 0x1CF3 :
    case 0x1CF4 :
+   case 0x1CF7 :
    case 0x1CF8 :
    case 0x1CF9 :
    case 0x1DC0 :
@@ -995,6 +1024,11 @@
    case 0x1DF3 :
    case 0x1DF4 :
    case 0x1DF5 :
+   case 0x1DF6 :
+   case 0x1DF7 :
+   case 0x1DF8 :
+   case 0x1DF9 :
+   case 0x1DFB :
    case 0x1DFC :
    case 0x1DFD :
    case 0x1DFE :
@@ -1121,6 +1155,7 @@
    case 0xA8C2 :
    case 0xA8C3 :
    case 0xA8C4 :
+   case 0xA8C5 :
    case 0xA8E0 :
    case 0xA8E1 :
    case 0xA8E2 :
@@ -1139,6 +1174,7 @@
    case 0xA8EF :
    case 0xA8F0 :
    case 0xA8F1 :
+   case 0xA8FF :
    case 0xA926 :
    case 0xA927 :
    case 0xA928 :

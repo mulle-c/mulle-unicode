@@ -1,4 +1,3 @@
-   case 0x0000 :
    case 0x0001 :
    case 0x0002 :
    case 0x0003 :
@@ -73,6 +72,7 @@
    case 0x061C :
    case 0x06DD :
    case 0x070F :
+   case 0x08E2 :
    case 0x180E :
    case 0x200B :
    case 0x200C :

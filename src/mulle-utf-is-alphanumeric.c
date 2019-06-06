@@ -9,8 +9,10 @@
 //
 
 #include "mulle-utf-is-alphanumeric.h"
+#include "mulle-utf-is-noncharacter.h"
 
 
+// TODO: make this a bitmap
 int   mulle_utf16_is_alphanumeric( mulle_utf16_t c)
 {
    if( c < 0x0030)
@@ -24,8 +26,8 @@ int   mulle_utf16_is_alphanumeric( mulle_utf16_t c)
 #include "unicode/isalphanumeric-utf16-inv.inc"
       return( 0);
    }
-   return( 1);
 
+   return( mulle_utf16_is_noncharacter( c) ? 0 : 1);
 }
 
 
@@ -34,7 +36,7 @@ int   mulle_utf32_is_alphanumeric( mulle_utf32_t c)
    if( c <= 0xFFFF)
       return( mulle_utf16_is_alphanumeric( (mulle_utf16_t) c));
 
-   if( c > 0xe01ef)
+   if( ! mulle_utf_is_alphanumericplane( c >> 16))
       return( 0);
 
    switch( c)
@@ -42,8 +44,7 @@ int   mulle_utf32_is_alphanumeric( mulle_utf32_t c)
 #include "unicode/isalphanumeric-utf32-inv.inc"
       return( 0);
    }
-   return( 1);
-
+   return( mulle_utf32_is_noncharacter( c) ? 0 : 1);
 }
 
 
