@@ -14,7 +14,6 @@ if( NOT LIBRARY_SOURCES)
    set( LIBRARY_SOURCES "${SOURCES}")
 endif()
 
-
 include( PreLibrary OPTIONAL)
 
 if( NOT LIBRARY_SOURCES)
@@ -129,6 +128,14 @@ if( LINK_PHASE)
       "${LIBRARY_NAME}"
       ${INSTALL_LIBRARY_TARGETS}
    )
+
+   if( LIBRARY_RESOURCES)
+      set( INSTALL_${LIBRARY_NAME}_RESOURCES ${LIBRARY_RESOURCES})
+   else()
+      if( RESOURCES)
+         set( INSTALL_${LIBRARY_NAME}_RESOURCES ${RESOURCES})
+      endif()
+   endif()
 
    include( PostLibrary OPTIONAL)
 endif()
