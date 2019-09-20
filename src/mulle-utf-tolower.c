@@ -11,6 +11,18 @@
 #include "mulle-utf-tolower.h"
 
 
+mulle_utf16_t   mulle_utf16_nop( mulle_utf16_t c)
+{
+   return( c);
+}
+
+
+mulle_utf32_t   mulle_utf32_nop( mulle_utf32_t c)
+{
+   return( c);
+}
+
+
 mulle_utf16_t   mulle_utf16_tolower( mulle_utf16_t c)
 {
    switch( c)
