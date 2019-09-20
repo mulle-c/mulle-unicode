@@ -62,8 +62,8 @@ if( LINK_PHASE)
       if( ALL_LOAD_DEPENDENCY_LIBRARIES)
          message( FATAL_ERROR "ALL_LOAD_DEPENDENCY_LIBRARIES \
 \"${ALL_LOAD_DEPENDENCY_LIBRARIES}\" are not linked to ${EXECUTABLE_NAME}.
-If these are C libraries, be sure, that they are marked as \"no-all-load\" in
-the sourcetree and inherited sourcetrees.
+If these are regular C libraries, be sure, that they are marked as
+\"no-all-load\" in the sourcetree and inherited sourcetrees.
 
   mulle-sde dependency unmark <name> all-load
 ")
@@ -72,11 +72,8 @@ the sourcetree and inherited sourcetrees.
       if( STARTUP_ALL_LOAD_DEPENDENCY_LIBRARIES)
          message( FATAL_ERROR "STARTUP_ALL_LOAD_DEPENDENCY_LIBRARIES \
 \"${STARTUP_ALL_LOAD_DEPENDENCY_LIBRARIES}\" are not linked to ${EXECUTABLE_NAME}.
-If these are C libraries, be sure, that they are marked as \"no-all-load\" in
-the sourcetree and inherited sourcetrees.
-
-  mulle-sde dependency unmark <name> all-load
-")
+STARTUP_ALL_LOAD_DEPENDENCY_LIBRARIES is an Objective-C feature, but this
+project is seemingly not setup for Objective-C.")
 
       endif()
 
