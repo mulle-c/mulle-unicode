@@ -11,7 +11,8 @@ tmp/
 var/
 stacktrace/
 malloc-error/
-
+research/
+unicode/ 
 
 environment-os-*.sh
 environment-host-*.sh
