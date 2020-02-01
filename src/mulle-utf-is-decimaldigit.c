@@ -36,15 +36,3 @@ int   mulle_utf32_is_decimaldigit( mulle_utf32_t c)
    return( 0);
 
 }
-
-
-int   mulle_utf_is_decimaldigitplane( unsigned int plane)
-{
-   switch( plane)
-   {
-   case 0 :
-   case 1 :
-      return( 1);
-   }
-   return( 0);
-}

@@ -56,5 +56,8 @@
 #include "mulle-utf-tolower.h"
 #include "mulle-utf-toupper.h"
 
+#include "mulle-utf-rover.h"
+#include "mulle-utf-scan.h"
+
 
 #endif /* mulle_utf_h */
