@@ -50,6 +50,8 @@ src/mulle-utf-is-validurlscheme.h
 src/mulle-utf-is-validurluser.h
 src/mulle-utf-is-whitespace.h
 src/mulle-utf-is-whitespaceornewline.h
+src/mulle-utf-rover.h
+src/mulle-utf-scan.h
 src/mulle-utf-tolower.h
 src/mulle-utf-toupper.h
 src/mulle-utf-type.h
