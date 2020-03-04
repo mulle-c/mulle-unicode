@@ -1,0 +1,4 @@
+*.inc       linguist-language=C
+.mulle/**   linguist-generated
+.vscode/**  linguist-generated
+cmake/**    linguist-generated
