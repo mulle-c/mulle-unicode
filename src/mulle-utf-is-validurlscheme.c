@@ -13,6 +13,8 @@
 
 int   mulle_utf16_is_validurlscheme( mulle_utf16_t c)
 {
+   // scheme      = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
+
    if( c < 0x002b)
       return( 0);
 
