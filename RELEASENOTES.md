@@ -1,3 +1,10 @@
+## 2.2.0
+
+* added ``mulle_utf8_strnstr`,` ``mulle_utf8_strnchr`,` ``mulle_utf8_strnspn`,` ``mulle_utf8_strncspn``
+* add rover functionality to step through UTF strings
+* added a longlong ascii conversion
+
+
 ## 2.1.0
 
 * added `mulle_utf…_nop` functions for nop callbacks
