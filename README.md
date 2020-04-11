@@ -15,32 +15,6 @@ Build Status | Release Version
 [![Build Status](https://travis-ci.org/mulle-c/mulle-utf.svg?branch=release)](https://travis-ci.org/mulle-c/mulle-utf) | ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-c/mulle-utf.svg) [![Build Status](https://travis-ci.org/mulle-c/mulle-utf.svg?branch=release)](https://travis-ci.org/mulle-c/mulle-utf)
 
 
-## Install
-
-Install the prerequisites first:
-
-| Prerequisites                                           |
-|---------------------------------------------------------|
-| [mulle-allocator](//github.com/mulle-c/mulle-allocator) |
-
-
-Install into /usr/local:
-
-```
-mkdir build 2> /dev/null
-(
-   cd build ;
-   cmake -DCMAKE_INSTALL_PREFIX=/usr/local \
-         -DCMAKE_PREFIX_PATH=/usr/local \
-         -DCMAKE_BUILD_TYPE=Release .. ;
-   make install
-)
-```
-
-
-Or let [mulle-sde](//github.com/mulle-sde) do it all for you.
-
-
 ## Encode strings as integers
 
 * **mulle_char5** is a compression scheme, that uses a set of 31 characters
@@ -70,7 +44,49 @@ File                                    | Description
 [`Ctype`](dox/API_CTYPE.md)             | `<ctype.h>` like functionality for UTF32 and UTF16 strings
 
 
-### Platforms and Compilers
+## Add 
+
+Use [mulle-sde](//github.com/mulle-sde) to add mulle-utf to your project:
+
+```
+mulle-sde dependency add --c --github mulle-c mulle-utf
+```
+
+## Install
+
+### mulle-sde
+
+Use [mulle-sde](//github.com/mulle-sde) to build and install mulle-utf and all dependencies:
+
+```
+mulle-sde install --prefix /usr/local \
+   https://github.com/mulle-c/mulle-utf/archive/latest.tar.gz
+```
+
+### Manual Installation
+
+
+Install the requirements:
+
+Requirements                                             | Description
+---------------------------------------------------------|-----------------------
+[mulle-allocator](//github.com/mulle-c/mulle-allocator)  | Memory allocation wrapper
+
+
+Install into `/usr/local`:
+
+```
+mkdir build 2> /dev/null
+(
+   cd build ;
+   cmake -DCMAKE_INSTALL_PREFIX=/usr/local \
+         -DCMAKE_PREFIX_PATH=/usr/local \
+         -DCMAKE_BUILD_TYPE=Release .. ;
+   make install
+)
+```
+
+## Platforms and Compilers
 
 All platforms and compilers supported by
 [mulle-c11](//github.com/mulle-c/mulle-c11) and
