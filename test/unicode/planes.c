@@ -1,15 +1,15 @@
-#include <mulle-utf/mulle-utf.h>
+#include <mulle-unicode/mulle-unicode.h>
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 
 
 static void  test( char *name,
-                   int (*member_f)( mulle_utf32_t),
+                   int (*member_f)( int32_t),
                    int (*plane_f)( unsigned int))
 {
-   mulle_utf32_t   c;
+   int32_t         c;
    unsigned int    planes[ 0x11];
    unsigned int    i;
    unsigned int    expect;
@@ -40,31 +40,31 @@ static void  test( char *name,
 
 int  main()
 {
-   test( "alphanumeric", mulle_utf32_is_alphanumeric, mulle_utf_is_alphanumericplane);
-   test( "capitalized", mulle_utf32_is_capitalized, mulle_utf_is_capitalizedplane);
-   test( "control", mulle_utf32_is_control, mulle_utf_is_controlplane);
-   test( "decimaldigit", mulle_utf32_is_decimaldigit, mulle_utf_is_decimaldigitplane);
-   test( "decomposable", mulle_utf32_is_decomposable, mulle_utf_is_decomposableplane);
-   test( "legalcharacter", mulle_utf32_is_legalcharacter, mulle_utf_is_legalcharacterplane);
-   test( "letter", mulle_utf32_is_letter, mulle_utf_is_letterplane);
-   test( "lowercase", mulle_utf32_is_lowercase, mulle_utf_is_lowercaseplane);
-   test( "newline", mulle_utf32_is_newline, mulle_utf_is_newlineplane);
-   test( "nonbase", mulle_utf32_is_nonbase, mulle_utf_is_nonbaseplane);
-   test( "noncharacter", mulle_utf32_is_noncharacter, mulle_utf_is_noncharacterplane);
-   test( "nonpercentescape", mulle_utf32_is_nonpercentescape, mulle_utf_is_nonpercentescapeplane);
-   test( "privatecharacter", mulle_utf32_is_privatecharacter, mulle_utf_is_privatecharacterplane);
-   test( "punctuation", mulle_utf32_is_punctuation, mulle_utf_is_punctuationplane);
-   test( "symbol", mulle_utf32_is_symbol, mulle_utf_is_symbolplane);
-   test( "uppercase", mulle_utf32_is_uppercase, mulle_utf_is_uppercaseplane);
-   test( "validurlfragment", mulle_utf32_is_validurlfragment, mulle_utf_is_validurlfragmentplane);
-   test( "validurlhost", mulle_utf32_is_validurlhost, mulle_utf_is_validurlhostplane);
-   test( "validurlpassword", mulle_utf32_is_validurlpassword, mulle_utf_is_validurlpasswordplane);
-   test( "validurlpath", mulle_utf32_is_validurlpath, mulle_utf_is_validurlpathplane);
-   test( "validurlquery", mulle_utf32_is_validurlquery, mulle_utf_is_validurlqueryplane);
-   test( "validurlscheme", mulle_utf32_is_validurlscheme, mulle_utf_is_validurlschemeplane);
-   test( "validurluser", mulle_utf32_is_validurluser, mulle_utf_is_validurluserplane);
-   test( "whitespace", mulle_utf32_is_whitespace, mulle_utf_is_whitespaceplane);
-   test( "whitespaceornewline", mulle_utf32_is_whitespaceornewline, mulle_utf_is_whitespaceornewlineplane);
+   test( "alphanumeric", mulle_unicode_is_alphanumeric, mulle_unicode_is_alphanumericplane);
+   test( "capitalized", mulle_unicode_is_capitalized, mulle_unicode_is_capitalizedplane);
+   test( "control", mulle_unicode_is_control, mulle_unicode_is_controlplane);
+   test( "decimaldigit", mulle_unicode_is_decimaldigit, mulle_unicode_is_decimaldigitplane);
+   test( "decomposable", mulle_unicode_is_decomposable, mulle_unicode_is_decomposableplane);
+   test( "legalcharacter", mulle_unicode_is_legalcharacter, mulle_unicode_is_legalcharacterplane);
+   test( "letter", mulle_unicode_is_letter, mulle_unicode_is_letterplane);
+   test( "lowercase", mulle_unicode_is_lowercase, mulle_unicode_is_lowercaseplane);
+   test( "newline", mulle_unicode_is_newline, mulle_unicode_is_newlineplane);
+   test( "nonbase", mulle_unicode_is_nonbase, mulle_unicode_is_nonbaseplane);
+   test( "noncharacter", mulle_unicode_is_noncharacter, mulle_unicode_is_noncharacterplane);
+   test( "nonpercentescape", mulle_unicode_is_nonpercentescape, mulle_unicode_is_nonpercentescapeplane);
+   test( "privatecharacter", mulle_unicode_is_privatecharacter, mulle_unicode_is_privatecharacterplane);
+   test( "punctuation", mulle_unicode_is_punctuation, mulle_unicode_is_punctuationplane);
+   test( "symbol", mulle_unicode_is_symbol, mulle_unicode_is_symbolplane);
+   test( "uppercase", mulle_unicode_is_uppercase, mulle_unicode_is_uppercaseplane);
+   test( "validurlfragment", mulle_unicode_is_validurlfragment, mulle_unicode_is_validurlfragmentplane);
+   test( "validurlhost", mulle_unicode_is_validurlhost, mulle_unicode_is_validurlhostplane);
+   test( "validurlpassword", mulle_unicode_is_validurlpassword, mulle_unicode_is_validurlpasswordplane);
+   test( "validurlpath", mulle_unicode_is_validurlpath, mulle_unicode_is_validurlpathplane);
+   test( "validurlquery", mulle_unicode_is_validurlquery, mulle_unicode_is_validurlqueryplane);
+   test( "validurlscheme", mulle_unicode_is_validurlscheme, mulle_unicode_is_validurlschemeplane);
+   test( "validurluser", mulle_unicode_is_validurluser, mulle_unicode_is_validurluserplane);
+   test( "whitespace", mulle_unicode_is_whitespace, mulle_unicode_is_whitespaceplane);
+   test( "whitespaceornewline", mulle_unicode_is_whitespaceornewline, mulle_unicode_is_whitespaceornewlineplane);
    return( 0);
 }
 

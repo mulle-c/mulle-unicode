@@ -1,5 +1,5 @@
-#ifndef mulle_utf_include_h__
-#define mulle_utf_include_h__
+#ifndef mulle_unicode_include_h__
+#define mulle_unicode_include_h__
 
 /* This is a central include file to keep dependencies out of the library
    C files. It is usally included by .h files only.
@@ -8,7 +8,7 @@
    be moved to other projects and don't need to be edited. Also less typing...
 
    Therefore it is important that this file is called "include.h" and
-   not "mulle-utf-include.h" to keep the #include statements in the
+   not "mulle-unicode-include.h" to keep the #include statements in the
    library code uniform.
 
    The C-compiler will pick up the nearest one.
@@ -19,7 +19,7 @@
    sourcetree, then you don't need it.
  */
 
-#include "_mulle-utf-include.h"
+#include "_mulle-unicode-include.h"
 
 /* You can add some more include statements here */
 

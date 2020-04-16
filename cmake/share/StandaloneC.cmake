@@ -31,7 +31,7 @@ if( STANDALONE)
    endif()
 
    if( NOT STANDALONE_DEFINITIONS)
-      set( STANDALONE_DEFINITIONS ${mulle_utf_DEFINITIONS})
+      set( STANDALONE_DEFINITIONS ${mulle_unicode_DEFINITIONS})
    endif()
 
    #
@@ -70,7 +70,7 @@ if( STANDALONE)
       if( NOT STANDALONE_SOURCES)
          message( FATAL_ERROR "You need to define STANDALONE_SOURCES. Add a file
 ${STANDALONE_LIBRARY_NAME}.c with contents like this to it:
-int  ___mulle_utf_unused__;
+int  ___mulle_unicode_unused__;
 and everybody will be happy")
       endif()
 

@@ -1,4 +1,4 @@
-#include <mulle-utf/mulle-utf.h>
+#include <mulle-unicode/mulle-unicode.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,7 +6,7 @@
 
 
 static void  test( char *name,
-                   int (*member_f)( mulle_utf32_t))
+                   int (*member_f)( int32_t))
 {
    printf( "%s zero %s member\n", name, (*member_f)( 0) ? "IS" : "is not");
 }
@@ -14,31 +14,31 @@ static void  test( char *name,
 
 int  main()
 {
-   test( "alphanumeric", mulle_utf32_is_alphanumeric);
-   test( "capitalized", mulle_utf32_is_capitalized);
-   test( "control", mulle_utf32_is_control);
-   test( "decimaldigit", mulle_utf32_is_decimaldigit);
-   test( "decomposable", mulle_utf32_is_decomposable);
-   test( "legalcharacter", mulle_utf32_is_legalcharacter);
-   test( "letter", mulle_utf32_is_letter);
-   test( "lowercase", mulle_utf32_is_lowercase);
-   test( "newline", mulle_utf32_is_newline);
-   test( "nonbase", mulle_utf32_is_nonbase);
-   test( "noncharacter", mulle_utf32_is_noncharacter);
-   test( "nonpercentescape", mulle_utf32_is_nonpercentescape);
-   test( "privatecharacter", mulle_utf32_is_privatecharacter);
-   test( "punctuation", mulle_utf32_is_punctuation);
-   test( "symbol", mulle_utf32_is_symbol);
-   test( "uppercase", mulle_utf32_is_uppercase);
-   test( "validurlfragment", mulle_utf32_is_validurlfragment);
-   test( "validurlhost", mulle_utf32_is_validurlhost);
-   test( "validurlpassword", mulle_utf32_is_validurlpassword);
-   test( "validurlpath", mulle_utf32_is_validurlpath);
-   test( "validurlquery", mulle_utf32_is_validurlquery);
-   test( "validurlscheme", mulle_utf32_is_validurlscheme);
-   test( "validurluser", mulle_utf32_is_validurluser);
-   test( "whitespace", mulle_utf32_is_whitespace);
-   test( "whitespaceornewline", mulle_utf32_is_whitespaceornewline);
+   test( "alphanumeric", mulle_unicode_is_alphanumeric);
+   test( "capitalized", mulle_unicode_is_capitalized);
+   test( "control", mulle_unicode_is_control);
+   test( "decimaldigit", mulle_unicode_is_decimaldigit);
+   test( "decomposable", mulle_unicode_is_decomposable);
+   test( "legalcharacter", mulle_unicode_is_legalcharacter);
+   test( "letter", mulle_unicode_is_letter);
+   test( "lowercase", mulle_unicode_is_lowercase);
+   test( "newline", mulle_unicode_is_newline);
+   test( "nonbase", mulle_unicode_is_nonbase);
+   test( "noncharacter", mulle_unicode_is_noncharacter);
+   test( "nonpercentescape", mulle_unicode_is_nonpercentescape);
+   test( "privatecharacter", mulle_unicode_is_privatecharacter);
+   test( "punctuation", mulle_unicode_is_punctuation);
+   test( "symbol", mulle_unicode_is_symbol);
+   test( "uppercase", mulle_unicode_is_uppercase);
+   test( "validurlfragment", mulle_unicode_is_validurlfragment);
+   test( "validurlhost", mulle_unicode_is_validurlhost);
+   test( "validurlpassword", mulle_unicode_is_validurlpassword);
+   test( "validurlpath", mulle_unicode_is_validurlpath);
+   test( "validurlquery", mulle_unicode_is_validurlquery);
+   test( "validurlscheme", mulle_unicode_is_validurlscheme);
+   test( "validurluser", mulle_unicode_is_validurluser);
+   test( "whitespace", mulle_unicode_is_whitespace);
+   test( "whitespaceornewline", mulle_unicode_is_whitespaceornewline);
    return( 0);
 }
 
