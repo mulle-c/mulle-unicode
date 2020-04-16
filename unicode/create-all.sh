@@ -36,6 +36,11 @@ create_set_files()
    suffix="$2"
    inverse="$3"
 
+   if [ -z "${inverse}" ]
+   then
+      ./create-zero.sh "${file}" > "${SETSDIR}/iszerodigit${suffix}.inc"
+   fi
+
    # all defined characters
    ./create-set.sh 1 "${file}" "${inverse}" > "${SETSDIR}/islegal${suffix}.inc"
 

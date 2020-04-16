@@ -1,25 +1,25 @@
 #
 #
 #
-export PROJECT_NAME="mulle-utf"
+export PROJECT_NAME="mulle-unicode"
 
 
 #
 #
 #
-export PROJECT_IDENTIFIER="mulle_utf"
+export PROJECT_IDENTIFIER="mulle_unicode"
 
 
 #
 #
 #
-export PROJECT_DOWNCASE_IDENTIFIER="mulle_utf"
+export PROJECT_DOWNCASE_IDENTIFIER="mulle_unicode"
 
 
 #
 #
 #
-export PROJECT_UPCASE_IDENTIFIER="MULLE_UTF"
+export PROJECT_UPCASE_IDENTIFIER="mulle_unicode"
 
 
 #
