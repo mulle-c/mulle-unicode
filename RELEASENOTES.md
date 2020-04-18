@@ -1,3 +1,7 @@
+### 2.3.1
+
+* add missing inc files, don't install inc files though
+
 ## 2.2.0
 
 * added ``mulle_unicode8_strnstr`,` ``mulle_unicode8_strnchr`,` ``mulle_unicode8_strnspn`,` ``mulle_unicode8_strncspn``
