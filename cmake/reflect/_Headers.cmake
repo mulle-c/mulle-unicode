@@ -37,7 +37,6 @@ src/mulle-unicode-is-lowercase.h
 src/mulle-unicode-is-newline.h
 src/mulle-unicode-is-nonbase.h
 src/mulle-unicode-is-noncharacter.h
-src/mulle-unicode-is-privatecharacter.h
 src/mulle-unicode-is-punctuation.h
 src/mulle-unicode-is-symbol.h
 src/mulle-unicode-is-uppercase.h

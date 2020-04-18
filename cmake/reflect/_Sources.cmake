@@ -17,7 +17,6 @@ src/mulle-unicode-is-lowercase.c
 src/mulle-unicode-is-newline.c
 src/mulle-unicode-is-nonbase.c
 src/mulle-unicode-is-noncharacter.c
-src/mulle-unicode-is-privatecharacter.c
 src/mulle-unicode-is-punctuation.c
 src/mulle-unicode-is-symbol.c
 src/mulle-unicode-is-uppercase.c
