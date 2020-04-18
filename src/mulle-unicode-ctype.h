@@ -23,7 +23,6 @@
 #include "mulle-unicode-is-noncharacter.h"
 #include "mulle-unicode-is-nonbase.h"
 #include "mulle-unicode-is-punctuation.h"
-#include "mulle-unicode-is-privatecharacter.h"
 #include "mulle-unicode-is-symbol.h"
 #include "mulle-unicode-is-uppercase.h"
 #include "mulle-unicode-is-validurlfragment.h"
