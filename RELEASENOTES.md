@@ -1,3 +1,7 @@
+### 2.3.2
+
+* sent privatecharacter back to mulle-utf
+
 ### 2.3.1
 
 * add missing inc files, don't install inc files though
