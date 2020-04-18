@@ -25,18 +25,10 @@ int  main()
    test( "newline", mulle_unicode_is_newline);
    test( "nonbase", mulle_unicode_is_nonbase);
    test( "noncharacter", mulle_unicode_is_noncharacter);
-   test( "nonpercentescape", mulle_unicode_is_nonpercentescape);
    test( "privatecharacter", mulle_unicode_is_privatecharacter);
    test( "punctuation", mulle_unicode_is_punctuation);
    test( "symbol", mulle_unicode_is_symbol);
    test( "uppercase", mulle_unicode_is_uppercase);
-   test( "validurlfragment", mulle_unicode_is_validurlfragment);
-   test( "validurlhost", mulle_unicode_is_validurlhost);
-   test( "validurlpassword", mulle_unicode_is_validurlpassword);
-   test( "validurlpath", mulle_unicode_is_validurlpath);
-   test( "validurlquery", mulle_unicode_is_validurlquery);
-   test( "validurlscheme", mulle_unicode_is_validurlscheme);
-   test( "validurluser", mulle_unicode_is_validurluser);
    test( "whitespace", mulle_unicode_is_whitespace);
    test( "whitespaceornewline", mulle_unicode_is_whitespaceornewline);
    return( 0);

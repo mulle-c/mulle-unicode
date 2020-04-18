@@ -51,18 +51,10 @@ int  main()
    test( "newline", mulle_unicode_is_newline, mulle_unicode_is_newlineplane);
    test( "nonbase", mulle_unicode_is_nonbase, mulle_unicode_is_nonbaseplane);
    test( "noncharacter", mulle_unicode_is_noncharacter, mulle_unicode_is_noncharacterplane);
-   test( "nonpercentescape", mulle_unicode_is_nonpercentescape, mulle_unicode_is_nonpercentescapeplane);
    test( "privatecharacter", mulle_unicode_is_privatecharacter, mulle_unicode_is_privatecharacterplane);
    test( "punctuation", mulle_unicode_is_punctuation, mulle_unicode_is_punctuationplane);
    test( "symbol", mulle_unicode_is_symbol, mulle_unicode_is_symbolplane);
    test( "uppercase", mulle_unicode_is_uppercase, mulle_unicode_is_uppercaseplane);
-   test( "validurlfragment", mulle_unicode_is_validurlfragment, mulle_unicode_is_validurlfragmentplane);
-   test( "validurlhost", mulle_unicode_is_validurlhost, mulle_unicode_is_validurlhostplane);
-   test( "validurlpassword", mulle_unicode_is_validurlpassword, mulle_unicode_is_validurlpasswordplane);
-   test( "validurlpath", mulle_unicode_is_validurlpath, mulle_unicode_is_validurlpathplane);
-   test( "validurlquery", mulle_unicode_is_validurlquery, mulle_unicode_is_validurlqueryplane);
-   test( "validurlscheme", mulle_unicode_is_validurlscheme, mulle_unicode_is_validurlschemeplane);
-   test( "validurluser", mulle_unicode_is_validurluser, mulle_unicode_is_validurluserplane);
    test( "whitespace", mulle_unicode_is_whitespace, mulle_unicode_is_whitespaceplane);
    test( "whitespaceornewline", mulle_unicode_is_whitespaceornewline, mulle_unicode_is_whitespaceornewlineplane);
    return( 0);
