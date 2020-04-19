@@ -51,7 +51,6 @@ int  main()
    test( "newline", mulle_unicode_is_newline, mulle_unicode_is_newlineplane);
    test( "nonbase", mulle_unicode_is_nonbase, mulle_unicode_is_nonbaseplane);
    test( "noncharacter", mulle_unicode_is_noncharacter, mulle_unicode_is_noncharacterplane);
-   test( "privatecharacter", mulle_unicode_is_privatecharacter, mulle_unicode_is_privatecharacterplane);
    test( "punctuation", mulle_unicode_is_punctuation, mulle_unicode_is_punctuationplane);
    test( "symbol", mulle_unicode_is_symbol, mulle_unicode_is_symbolplane);
    test( "uppercase", mulle_unicode_is_uppercase, mulle_unicode_is_uppercaseplane);
