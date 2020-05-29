@@ -10,6 +10,8 @@
 
 #include "mulle-unicode-toupper.h"
 
+#include <ctype.h>
+
 
 uint16_t   mulle_unicode16_toupper( uint16_t c)
 {
@@ -23,6 +25,13 @@ uint16_t   mulle_unicode16_toupper( uint16_t c)
 
 int32_t   mulle_unicode_toupper( int32_t c)
 {
+   if( c <= 0x7F)
+   {
+      if( c >= 'a' && c <= 'z')
+         return( c - 'a' + 'A');
+      return( c);
+   }
+
    if( c <= 0xFFFF)
       return( mulle_unicode16_toupper( (uint16_t) c));
 

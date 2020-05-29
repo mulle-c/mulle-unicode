@@ -25,6 +25,9 @@ int   mulle_unicode16_is_decimaldigit( uint16_t c)
 
 int   mulle_unicode_is_decimaldigit( int32_t c)
 {
+   if( c <= 0x7F)
+      return( c >= '0' && c <= '9');
+
    if( c <= 0xFFFF)
       return( mulle_unicode16_is_decimaldigit( (uint16_t) c));
 

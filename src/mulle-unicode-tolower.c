@@ -10,6 +10,7 @@
 
 #include "mulle-unicode-tolower.h"
 
+#include <ctype.h>
 
 uint16_t   mulle_unicode16_nop( uint16_t c)
 {
@@ -35,6 +36,13 @@ uint16_t   mulle_unicode16_tolower( uint16_t c)
 
 int32_t   mulle_unicode_tolower( int32_t c)
 {
+   if( c <= 0x7F)
+   {
+      if( c >= 'A' && c <= 'Z')
+         return( c - 'A' + 'a');
+      return( c);
+   }
+
    if( c <= 0xFFFF)
       return( mulle_unicode16_tolower( (uint16_t) c));
 
