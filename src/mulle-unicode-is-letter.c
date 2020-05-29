@@ -28,6 +28,9 @@ int   mulle_unicode16_is_letter( uint16_t c)
 
 int   mulle_unicode_is_letter( int32_t c)
 {
+   if( c <= 0x7F)
+      return( (c >='a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+
    if( c <= 0xFFFF)
       return( mulle_unicode16_is_letter( (uint16_t) c));
 

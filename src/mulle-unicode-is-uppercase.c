@@ -13,10 +13,6 @@
 
 int   mulle_unicode16_is_uppercase( uint16_t c)
 {
-   // common shortcut
-   if( c <= 127)
-      return( c >= 'A' && c <= 'Z');
-
    switch( c)
    {
 #include "unicode/isuppercase-utf16.inc"
@@ -28,6 +24,10 @@ int   mulle_unicode16_is_uppercase( uint16_t c)
 
 int   mulle_unicode_is_uppercase( int32_t c)
 {
+   // common shortcut
+   if( c <= 0x7F)
+      return( c >= 'A' && c <= 'Z');
+
    if( c <= 0xFFFF)
       return( mulle_unicode16_is_uppercase( (uint16_t) c));
 

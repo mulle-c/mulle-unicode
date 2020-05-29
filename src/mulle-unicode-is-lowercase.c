@@ -13,10 +13,6 @@
 
 int   mulle_unicode16_is_lowercase( uint16_t c)
 {
-   // common shortcut
-   if( c <= 127)
-      return( c >= 'a' && c <= 'z');
-
    switch( c)
    {
 #include "unicode/islowercase-utf16.inc"
@@ -29,6 +25,10 @@ int   mulle_unicode16_is_lowercase( uint16_t c)
 
 int   mulle_unicode_is_lowercase( int32_t c)
 {
+   // common shortcut
+   if( c <= 0x7F)
+      return( c >= 'a' && c <= 'z');
+
    if( c <= 0xFFFF)
       return( mulle_unicode16_is_lowercase( (uint16_t) c));
 

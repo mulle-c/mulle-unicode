@@ -10,6 +10,7 @@
 
 #include "mulle-unicode-is-punctuation.h"
 
+#include <ctype.h>
 
 int   mulle_unicode16_is_punctuation( uint16_t c)
 {
