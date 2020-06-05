@@ -9,52 +9,27 @@
 //
 
 #include "mulle-unicode-is-letter.h"
-#include "mulle-unicode-is-noncharacter.h"
 
+#include "unicode/miniplane.h"
 
-int   mulle_unicode16_is_letter( uint16_t c)
-{
-   if( ! c)
-      return( 0);
-
-   switch( c)
-   {
-#include "unicode/isletter-utf16-inv.inc"
-      return( 0);
-   }
-   return( mulle_unicode16_is_noncharacter( c) ? 0 : 1);
-}
+#include "unicode/isletter-bitmap.inc"
 
 
 int   mulle_unicode_is_letter( int32_t c)
 {
-   if( c <= 0x7F)
-      return( (c >='a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+   return( is_member_of_planes( planes, c));
+}
 
-   if( c <= 0xFFFF)
-      return( mulle_unicode16_is_letter( (uint16_t) c));
 
-   if( ! mulle_unicode_is_letterplane( c >> 16))
-      return( 0);
-
-   switch( c)
-   {
-#include "unicode/isletter-utf32-inv.inc"
-      return( 0);
-   }
-   return( mulle_unicode_is_noncharacter( c) ? 0 : 1);
+int   mulle_unicode16_is_letter( uint16_t c)
+{
+   return( mulle_unicode_is_letter( c));
 }
 
 
 int   mulle_unicode_is_letterplane( unsigned int plane)
 {
-   switch( plane)
-   {
-   case 0 :
-   case 1 :
-   case 2 :
-   case 14 :
-      return( 1);
-   }
-   return( 0);
+   if( plane >= 0x11)
+      return( 0);
+   return( planes[ plane] != _PLANE_NULL);
 }

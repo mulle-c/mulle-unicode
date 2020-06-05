@@ -12,7 +12,7 @@ var/
 stacktrace/
 malloc-error/
 research/
-unicode/ 
+/unicode/ 
 
 environment-os-*.sh
 environment-host-*.sh
