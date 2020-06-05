@@ -10,43 +10,26 @@
 
 #include "mulle-unicode-is-symbol.h"
 
+#include "unicode/miniplane.h"
 
-int   mulle_unicode16_is_symbol( uint16_t c)
-{
-   if( c < 0x0024)
-      return( 0);
-
-   switch( c)
-   {
-#include "unicode/issymbol-utf16.inc"
-      return( 1);
-   }
-   return( 0);
-
-}
+#include "unicode/issymbol-bitmap.inc"
 
 
 int   mulle_unicode_is_symbol( int32_t c)
 {
-   if( c <= 0xFFFF)
-      return( mulle_unicode16_is_symbol( (uint16_t) c));
+   return( is_member_of_planes( planes, c));
+}
 
-   switch( c)
-   {
-#include "unicode/issymbol-utf32.inc"
-      return( 1);
-   }
-   return( 0);
+
+int   mulle_unicode16_is_symbol( uint16_t c)
+{
+   return( mulle_unicode_is_symbol( c));
 }
 
 
 int   mulle_unicode_is_symbolplane( unsigned int plane)
 {
-   switch( plane)
-   {
-   case 0 :
-   case 1 :
-      return( 1);
-   }
-   return( 0);
+   if( plane >= 0x11)
+      return( 0);
+   return( planes[ plane] != _PLANE_NULL);
 }

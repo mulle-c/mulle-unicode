@@ -9,54 +9,28 @@
 //
 
 #include "mulle-unicode-is-alphanumeric.h"
-#include "mulle-unicode-is-noncharacter.h"
 
+#include "unicode/miniplane.h"
 
-// TODO: make this a bitmap
-int   mulle_unicode16_is_alphanumeric( uint16_t c)
-{
-   if( c < 0x0030)
-      return( 0);
-
-   if( c > 0xffdc)
-      return( 0);
-
-   switch( c)
-   {
-#include "unicode/isalphanumeric-utf16-inv.inc"
-      return( 0);
-   }
-
-   return( mulle_unicode16_is_noncharacter( c) ? 0 : 1);
-}
+#include "unicode/isalphanumeric-bitmap.inc"
 
 
 int   mulle_unicode_is_alphanumeric( int32_t c)
 {
-   if( c <= 0xFFFF)
-      return( mulle_unicode16_is_alphanumeric( (uint16_t) c));
+   return( is_member_of_planes( planes, c));
+}
 
-   if( ! mulle_unicode_is_alphanumericplane( c >> 16))
-      return( 0);
 
-   switch( c)
-   {
-#include "unicode/isalphanumeric-utf32-inv.inc"
-      return( 0);
-   }
-   return( mulle_unicode_is_noncharacter( c) ? 0 : 1);
+int   mulle_unicode16_is_alphanumeric( uint16_t c)
+{
+   return( mulle_unicode_is_alphanumeric( c));
 }
 
 
 int   mulle_unicode_is_alphanumericplane( unsigned int plane)
 {
-   switch( plane)
-   {
-   case 0 :
-   case 1 :
-   case 2 :
-   case 14 :
-      return( 1);
-   }
-   return( 0);
+   if( plane >= 0x11)
+      return( 0);
+   return( planes[ plane] != _PLANE_NULL);
 }
+

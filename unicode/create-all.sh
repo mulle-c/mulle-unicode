@@ -2,6 +2,7 @@
 
 MAPSDIR="${1:-maps}"
 SETSDIR="${2:-sets}"
+BITMAPSDIR="${3:-bitmaps}"
 FILE="${3:-UnicodeData.txt}"
 
 
@@ -9,6 +10,7 @@ create_dirs()
 {
    mkdir -p "${MAPSDIR}" 2> /dev/null
    mkdir -p "${SETSDIR}" 2> /dev/null
+   mkdir -p "${BITMAPSDIR}" 2> /dev/null
 }
 
 
@@ -76,6 +78,21 @@ create_set_files()
 }
 
 
+create_bitmap_files()
+{
+   ./create-bitmap.sh 'isalphanumeric' "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'iscapitalized'  "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'isdecomposable' "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'islegal'        "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'isletter'       "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'islowercase'    "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'isnonbase'      "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'ispunctuation'  "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'issymbol'       "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'isuppercase'    "${SETSDIR}" "${BITMAPSDIR}"
+}
+
+
 UTF16FILE=utf16.txt
 UTF32FILE=utf32.txt
 
@@ -91,8 +108,16 @@ create_map_files "${UTF32FILE}" "-utf32"
 
 create_set_files "${UTF16FILE}" "-utf16"
 create_set_files "${UTF32FILE}" "-utf32"
-create_set_files "${UTF16FILE}" "-utf16-inv" "YES"
-create_set_files "${UTF32FILE}" "-utf32-inv" "YES"
+
+#
+# not doing inverses anymore, the produced some questionable content
+# and in general have been superseded by bitmaps
+#
+
+# create_set_files "${UTF16FILE}" "-utf16-inv" "YES"
+# create_set_files "${UTF32FILE}" "-utf32-inv" "YES"
+
+create_bitmap_files
 
 rm "${UTF16FILE}" "${UTF32FILE}"
 

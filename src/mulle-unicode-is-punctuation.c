@@ -10,41 +10,26 @@
 
 #include "mulle-unicode-is-punctuation.h"
 
-#include <ctype.h>
+#include "unicode/miniplane.h"
 
-int   mulle_unicode16_is_punctuation( uint16_t c)
-{
-   switch( c)
-   {
-#include "unicode/ispunctuation-utf16.inc"
-      return( 1);
-   }
-   return( 0);
-
-}
+#include "unicode/ispunctuation-bitmap.inc"
 
 
 int   mulle_unicode_is_punctuation( int32_t c)
 {
-   if( c <= 0xFFFF)
-      return( mulle_unicode16_is_punctuation( (uint16_t) c));
+   return( is_member_of_planes( planes, c));
+}
 
-   switch( c)
-   {
-#include "unicode/ispunctuation-utf32.inc"
-      return( 1);
-   }
-   return( 0);
+
+int   mulle_unicode16_is_punctuation( uint16_t c)
+{
+   return( mulle_unicode_is_punctuation( c));
 }
 
 
 int   mulle_unicode_is_punctuationplane( unsigned int plane)
 {
-   switch( plane)
-   {
-   case 0 :
-   case 1 :
-      return( 1);
-   }
-   return( 0);
+   if( plane >= 0x11)
+      return( 0);
+   return( planes[ plane] != _PLANE_NULL);
 }

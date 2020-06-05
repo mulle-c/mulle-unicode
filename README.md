@@ -2,13 +2,12 @@
 
 🈚 Unicode ctype like library
 
-a C (C99) library to convert unicode strings. And it contains some
-fairly extensive `<ctype.h>` functionality for UTF16 and UTF32 based on the
+a C (C99) library to classify and convert unicode characters, based on the
 Unicode 3.0.0 specification.
 
 The library uses the Unicode specification data to create C code.
-
-It extends **NSCharacterSet**.
+mulle-unicode is fairly compact for what it does, compiling down to around
+256KB.
 
 
 Build Status | Release Version
@@ -19,9 +18,9 @@ Build Status | Release Version
 
 ## API
 
-File                                    | Description
---------------------------------------- | ----------------------------------------
-[`Ctype`](dox/API_CTYPE.md)             | `<ctype.h>` like functionality for UTF32 and UTF16 strings
+File                        | Description
+----------------------------| ----------------------------------------
+[`Ctype`](dox/API_CTYPE.md) | `<ctype.h>` like functionality for UTF32 and UTF16 strings
 
 
 ## Add
