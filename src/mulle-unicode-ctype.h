@@ -25,17 +25,9 @@
 #include "mulle-unicode-is-punctuation.h"
 #include "mulle-unicode-is-symbol.h"
 #include "mulle-unicode-is-uppercase.h"
-#include "mulle-unicode-is-validurlfragment.h"
-#include "mulle-unicode-is-validurlhost.h"
-#include "mulle-unicode-is-validurlpassword.h"
-#include "mulle-unicode-is-validurlpath.h"
-#include "mulle-unicode-is-validurlquery.h"
-#include "mulle-unicode-is-validurlscheme.h"
-#include "mulle-unicode-is-validurluser.h"
 #include "mulle-unicode-is-whitespace.h"
 #include "mulle-unicode-is-whitespaceornewline.h"
 #include "mulle-unicode-is-zerodigit.h"
-#include <assert.h>
 
 
 #endif /* mulle_unicode_ctype_h */
