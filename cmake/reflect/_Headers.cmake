@@ -40,13 +40,6 @@ src/mulle-unicode-is-noncharacter.h
 src/mulle-unicode-is-punctuation.h
 src/mulle-unicode-is-symbol.h
 src/mulle-unicode-is-uppercase.h
-src/mulle-unicode-is-validurlfragment.h
-src/mulle-unicode-is-validurlhost.h
-src/mulle-unicode-is-validurlpassword.h
-src/mulle-unicode-is-validurlpath.h
-src/mulle-unicode-is-validurlquery.h
-src/mulle-unicode-is-validurlscheme.h
-src/mulle-unicode-is-validurluser.h
 src/mulle-unicode-is-whitespace.h
 src/mulle-unicode-is-whitespaceornewline.h
 src/mulle-unicode-is-zerodigit.h

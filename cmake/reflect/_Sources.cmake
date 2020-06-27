@@ -20,13 +20,6 @@ src/mulle-unicode-is-noncharacter.c
 src/mulle-unicode-is-punctuation.c
 src/mulle-unicode-is-symbol.c
 src/mulle-unicode-is-uppercase.c
-src/mulle-unicode-is-validurlfragment.c
-src/mulle-unicode-is-validurlhost.c
-src/mulle-unicode-is-validurlpassword.c
-src/mulle-unicode-is-validurlpath.c
-src/mulle-unicode-is-validurlquery.c
-src/mulle-unicode-is-validurlscheme.c
-src/mulle-unicode-is-validurluser.c
 src/mulle-unicode-is-whitespace.c
 src/mulle-unicode-is-whitespaceornewline.c
 src/mulle-unicode-is-zerodigit.c
