@@ -10,8 +10,6 @@
 
 #include "mulle-unicode-toupper.h"
 
-#include <ctype.h>
-
 
 uint16_t   mulle_unicode16_toupper( uint16_t c)
 {

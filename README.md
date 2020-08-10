@@ -1,6 +1,6 @@
 # mulle-unicode
 
-🈚 Unicode ctype like library
+#### 🈚 Unicode ctype like library
 
 a C (C99) library to classify and convert unicode characters, based on the
 Unicode 3.0.0 specification.
@@ -59,9 +59,7 @@ mkdir build 2> /dev/null
 
 ## Platforms and Compilers
 
-All platforms and compilers supported by
-[mulle-c11](//github.com/mulle-c/mulle-c11) and
-[mulle-thread](//github.com/mulle-c/mulle-thread).
+If your platform has the `<stdint.h>` header (C99) you should be fine.
 
 
 ## Author

@@ -10,7 +10,6 @@
 
 #include "mulle-unicode-tolower.h"
 
-#include <ctype.h>
 
 uint16_t   mulle_unicode16_nop( uint16_t c)
 {
