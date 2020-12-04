@@ -17,7 +17,7 @@ Here is an example how to convert a UTF8 string into UTF32 using a
                                       (size_t) -1,
                                       &buffer,
                                       mulle_buffer_add_bytes);
-   s = mulle_buffer_extract( &buffer);
+   s = mulle_buffer_extract_string( &buffer);
    mulle_buffer_done( &buffer);
    mulle_free( s);
 ```
