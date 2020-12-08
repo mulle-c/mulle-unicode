@@ -10,9 +10,9 @@ mulle-unicode is fairly compact for what it does, compiling down to around
 256KB.
 
 
-Build Status | Release Version
--------------|-----------------------------------
-[![Build Status](https://travis-ci.org/mulle-c/mulle-unicode.svg?branch=release)](https://travis-ci.org/mulle-c/mulle-unicode) | ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-c/mulle-unicode.svg) [![Build Status](https://travis-ci.org/mulle-c/mulle-unicode.svg?branch=release)](https://travis-ci.org/mulle-c/mulle-unicode)
+| Release Version
+|-----------------------------------
+| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-c/mulle-unicode.svg?branch=release) [![Build Status](https://github.com/mulle-c/mulle-unicode/workflows/CI/badge.svg?branch=release)](https://github.com/mulle-c/mulle-unicode/actions)
 
 
 
@@ -25,11 +25,19 @@ File                        | Description
 
 ## Add
 
-Use [mulle-sde](//github.com/mulle-sde) to add mulle-unicode to your project:
+### Either: link library
+
+Use [mulle-sde](//github.com/mulle-sde) to add mulle-buffer to your project:
 
 ```
-mulle-sde dependency add --c --github mulle-c mulle-unicode
+mulle-sde dependency add --c --github mulle-c mulle-buffer
 ```
+
+### Or: add Sources
+
+Alternatively you can read [STEAL.md](//github.com/mulle-c11/dox/STEAL.md) on
+how to add mulle-c source code into your own projects.
+
 
 ## Install
 

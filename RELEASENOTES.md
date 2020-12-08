@@ -1,3 +1,12 @@
+## 2.4.0
+
+* updated project for github actions etc.
+* move http validation functions to mulle-http
+* remove files belonging to mulle-url now
+* improve library binary size and speed, by replacing large cases with bitmaps
+* speed up some functions for ASCII greatly, with relative little cost for the rest of unicode
+
+
 ### 2.3.3
 
 * remove files belonging to mulle-url now
