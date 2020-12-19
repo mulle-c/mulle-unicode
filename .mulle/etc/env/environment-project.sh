@@ -49,6 +49,6 @@ export PROJECT_DOWNCASE_IDENTIFIER="mulle_unicode"
 #
 #
 #
-export PROJECT_UPCASE_IDENTIFIER="mulle_unicode"
+export PROJECT_UPCASE_IDENTIFIER="MULLE_UNICODE"
 
 
