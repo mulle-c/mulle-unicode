@@ -37,14 +37,12 @@
 #ifndef mulle_unicode_h__
 #define mulle_unicode_h__
 
-#define MULLE_UNICODE_VERSION  ((2 << 20) | (4 << 8) | 0)
+#define MULLE_UNICODE_VERSION  ((2 << 20) | (4 << 8) | 1)
 
 #include "include.h"
 
 #include <stdint.h>
 
-#include "mulle-unicode-ctype.h"
-#include "mulle-unicode-tolower.h"
-#include "mulle-unicode-toupper.h"
+#include "_mulle-unicode-provide.h"
 
 #endif /* mulle_unicode_h */
