@@ -1,3 +1,7 @@
+### 2.4.1
+
+* Various small improvements
+
 ## 2.4.0
 
 * updated project for github actions etc.
