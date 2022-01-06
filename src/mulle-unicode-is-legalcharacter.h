@@ -11,12 +11,16 @@
 #ifndef mulle_unicode_is_legalcharacter_h__
 #define mulle_unicode_is_legalcharacter_h__
 
+#include "include.h"
 #include <stdint.h>
 
 // all characters defined in the unicode standard
 
+MULLE_UNICODE_EXTERN_GLOBAL
 int   mulle_unicode16_is_legalcharacter( uint16_t c);
+MULLE_UNICODE_EXTERN_GLOBAL
 int   mulle_unicode_is_legalcharacter( int32_t c);
+MULLE_UNICODE_EXTERN_GLOBAL
 int   mulle_unicode_is_legalcharacterplane( unsigned int plane);
 
 #endif /* mulle_unicode_is_alphanumeric_h */

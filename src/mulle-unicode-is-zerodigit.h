@@ -37,11 +37,14 @@
 #ifndef mulle_unicode_is_zerodigit_h__
 #define mulle_unicode_is_zerodigit_h__
 
+#include "include.h"
 #include <stdint.h>
 #include <assert.h>
 
 
+MULLE_UNICODE_EXTERN_GLOBAL
 int   mulle_unicode16_is_zerodigit( uint16_t c);
+MULLE_UNICODE_EXTERN_GLOBAL
 int   mulle_unicode_is_zerodigit( int32_t c);
 
 
@@ -50,7 +53,8 @@ int   mulle_unicode_is_zerodigit( int32_t c);
 // will not show subscripted/superscripted 0
 // picks only those marked "DECIMAL DIGIT" in the Unicode file
 //
-static inline int   mulle_unicode_is_zerodigitplane( unsigned int plane)
+static inline
+int   mulle_unicode_is_zerodigitplane( unsigned int plane)
 {
    switch( plane)
    {

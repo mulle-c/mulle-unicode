@@ -11,15 +11,19 @@
 #ifndef mulle_unicode_is_decimaldigit_h__
 #define mulle_unicode_is_decimaldigit_h__
 
+#include "include.h"
 #include <stdint.h>
 #include <assert.h>
 
 
+MULLE_UNICODE_EXTERN_GLOBAL
 int   mulle_unicode16_is_decimaldigit( uint16_t c);
+MULLE_UNICODE_EXTERN_GLOBAL
 int   mulle_unicode_is_decimaldigit( int32_t c);
 
 
-static inline int   mulle_unicode_is_decimaldigitplane( unsigned int plane)
+static inline
+int   mulle_unicode_is_decimaldigitplane( unsigned int plane)
 {
    switch( plane)
    {

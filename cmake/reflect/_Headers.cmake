@@ -13,6 +13,7 @@ endif()
 set( INCLUDE_DIRS
 src
 src/reflect
+src/unicode
 )
 
 #
@@ -34,7 +35,7 @@ src/include-private.h
 #
 set( PUBLIC_GENERATED_HEADERS
 src/reflect/_mulle-unicode-include.h
-src/reflect/_mulle-unicode-provide.h
+src/reflect/_mulle-unicode-versioncheck.h
 )
 
 #
@@ -69,5 +70,51 @@ src/mulle-unicode-is-whitespaceornewline.h
 src/mulle-unicode-is-zerodigit.h
 src/mulle-unicode-tolower.h
 src/mulle-unicode-toupper.h
+src/unicode/isalphanumeric-bitmap.inc
+src/unicode/iscapitalized-bitmap.inc
+src/unicode/iscapitalized-utf16.inc
+src/unicode/iscontrol-utf16.inc
+src/unicode/iscontrol-utf32.inc
+src/unicode/isdecimaldigit-utf16.inc
+src/unicode/isdecimaldigit-utf32.inc
+src/unicode/isdecomposable-bitmap.inc
+src/unicode/isdecomposable-utf16.inc
+src/unicode/isdecomposable-utf32.inc
+src/unicode/isdigit-utf16.inc
+src/unicode/isdigit-utf32.inc
+src/unicode/islegal-bitmap.inc
+src/unicode/islegal-utf16.inc
+src/unicode/islegal-utf32.inc
+src/unicode/isletter-bitmap.inc
+src/unicode/islowercase-bitmap.inc
+src/unicode/islowercase-utf16.inc
+src/unicode/islowercase-utf32.inc
+src/unicode/isnonbase-bitmap.inc
+src/unicode/isnonbase-utf16.inc
+src/unicode/isnonbase-utf32.inc
+src/unicode/isnumeric-utf16.inc
+src/unicode/isnumeric-utf32.inc
+src/unicode/isprivate-utf16.inc
+src/unicode/isprivate-utf32.inc
+src/unicode/ispunctuation-bitmap.inc
+src/unicode/ispunctuation-utf16.inc
+src/unicode/ispunctuation-utf32.inc
+src/unicode/isseparator-utf16.inc
+src/unicode/issymbol-bitmap.inc
+src/unicode/issymbol-utf16.inc
+src/unicode/issymbol-utf32.inc
+src/unicode/isuppercase-bitmap.inc
+src/unicode/isuppercase-utf16.inc
+src/unicode/isuppercase-utf32.inc
+src/unicode/iswhitespace-utf16.inc
+src/unicode/iszerodigit-utf16.inc
+src/unicode/iszerodigit-utf32.inc
+src/unicode/miniplane.h
+src/unicode/tolower-utf16.inc
+src/unicode/tolower-utf32.inc
+src/unicode/totitlecase-utf16.inc
+src/unicode/totitlecase-utf32.inc
+src/unicode/toupper-utf16.inc
+src/unicode/toupper-utf32.inc
 )
 
