@@ -11,14 +11,19 @@
 #ifndef mulle_unicode_tolower_h__
 #define mulle_unicode_tolower_h__
 
+#include "include.h"
 #include <stdint.h>
 
+MULLE_UNICODE_EXTERN_GLOBAL
 uint16_t   mulle_unicode16_tolower( uint16_t c);
+MULLE_UNICODE_EXTERN_GLOBAL
 int32_t    mulle_unicode_tolower( int32_t c);
 
 
 // sometimes useful for callbacks, returns c unchanged
+MULLE_UNICODE_EXTERN_GLOBAL
 uint16_t   mulle_unicode16_nop( uint16_t c);
+MULLE_UNICODE_EXTERN_GLOBAL
 int32_t    mulle_unicode_nop( int32_t c);
 
 

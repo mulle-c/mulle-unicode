@@ -11,10 +11,14 @@
 #ifndef mulle_unicode_is_control_h__
 #define mulle_unicode_is_control_h__
 
+#include "include.h"
 #include <stdint.h>
 
+MULLE_UNICODE_EXTERN_GLOBAL
 int   mulle_unicode16_is_control( uint16_t c);
+MULLE_UNICODE_EXTERN_GLOBAL
 int   mulle_unicode_is_control( int32_t c);
+MULLE_UNICODE_EXTERN_GLOBAL
 int   mulle_unicode_is_controlplane( unsigned int plane);
 
 #endif /* mulle_unicode_is_control_h */

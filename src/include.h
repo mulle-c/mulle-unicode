@@ -21,6 +21,11 @@
 
 #include "_mulle-unicode-include.h"
 
+#ifndef MULLE_UNICODE_EXTERN_GLOBAL
+# define MULLE_UNICODE_EXTERN_GLOBAL MULLE_C_EXTERN_GLOBAL
+#endif
+
+
 /* You can add some more include statements here */
 
 #endif

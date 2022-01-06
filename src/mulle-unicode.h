@@ -37,12 +37,43 @@
 #ifndef mulle_unicode_h__
 #define mulle_unicode_h__
 
-#define MULLE_UNICODE_VERSION  ((2 << 20) | (4 << 8) | 1)
+#define MULLE_UNICODE_VERSION  ((2 << 20) | (4 << 8) | 3)
 
 #include "include.h"
 
 #include <stdint.h>
 
-#include "_mulle-unicode-provide.h"
+// #include "_mulle-unicode-provide.h"
+
+// manual inclusion of headers, because we don't want to expose all the
+// .inc files
+
+#include "mulle-unicode-ctype.h"
+#include "mulle-unicode-is-alphanumeric.h"
+#include "mulle-unicode-is-capitalized.h"
+#include "mulle-unicode-is-control.h"
+#include "mulle-unicode-is-decimaldigit.h"
+#include "mulle-unicode-is-decomposable.h"
+#include "mulle-unicode-is-legalcharacter.h"
+#include "mulle-unicode-is-letter.h"
+#include "mulle-unicode-is-lowercase.h"
+#include "mulle-unicode-is-newline.h"
+#include "mulle-unicode-is-nonbase.h"
+#include "mulle-unicode-is-noncharacter.h"
+#include "mulle-unicode-is-punctuation.h"
+#include "mulle-unicode-is-symbol.h"
+#include "mulle-unicode-is-uppercase.h"
+#include "mulle-unicode-is-whitespace.h"
+#include "mulle-unicode-is-whitespaceornewline.h"
+#include "mulle-unicode-is-zerodigit.h"
+#include "mulle-unicode-tolower.h"
+#include "mulle-unicode-toupper.h"
+
+#ifdef __has_include
+# if __has_include( "_mulle-unicode-versioncheck.h")
+#  include "_mulle-unicode-versioncheck.h"
+# endif
+#endif
+
 
 #endif /* mulle_unicode_h */
