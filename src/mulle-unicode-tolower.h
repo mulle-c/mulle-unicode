@@ -14,16 +14,16 @@
 #include "include.h"
 #include <stdint.h>
 
-MULLE_UNICODE_EXTERN_GLOBAL
+MULLE_UNICODE_GLOBAL
 uint16_t   mulle_unicode16_tolower( uint16_t c);
-MULLE_UNICODE_EXTERN_GLOBAL
+MULLE_UNICODE_GLOBAL
 int32_t    mulle_unicode_tolower( int32_t c);
 
 
 // sometimes useful for callbacks, returns c unchanged
-MULLE_UNICODE_EXTERN_GLOBAL
+MULLE_UNICODE_GLOBAL
 uint16_t   mulle_unicode16_nop( uint16_t c);
-MULLE_UNICODE_EXTERN_GLOBAL
+MULLE_UNICODE_GLOBAL
 int32_t    mulle_unicode_nop( int32_t c);
 
 
