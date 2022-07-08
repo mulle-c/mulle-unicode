@@ -12,7 +12,7 @@ mulle-unicode is fairly compact for what it does, compiling down to around
 
 | Release Version
 |-----------------------------------
-| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-c/mulle-unicode.svg?branch=release) [![Build Status](https://github.com/mulle-c/mulle-unicode/workflows/CI/badge.svg?branch=release)](https://github.com/mulle-c/mulle-unicode/actions)
+| ![Mulle kybernetiK tag](//img.shields.io/github/tag/mulle-c/mulle-unicode.svg?branch=release) [![Build Status](//github.com/mulle-c/mulle-unicode/workflows/CI/badge.svg?branch=release)](//github.com/mulle-c/mulle-unicode/actions)
 
 
 ## API
@@ -52,7 +52,7 @@ Use [mulle-sde](//github.com/mulle-sde) to build and install mulle-unicode and a
 
 ```
 mulle-sde install --linkorder --prefix /usr/local \
-   https://github.com/mulle-c/mulle-unicode/archive/latest.tar.gz
+   //github.com/mulle-c/mulle-unicode/archive/latest.tar.gz
 ```
 
 ### Manual Installation
