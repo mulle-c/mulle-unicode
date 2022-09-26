@@ -1,3 +1,7 @@
+### 2.4.5
+
+* Various small improvements
+
 ### 2.4.4
 
 * GLOBAL change for Windows
