@@ -1,6 +1,6 @@
 {
    "name" : "mulle-unicode",
-   "version" : "2.4.0",
+   "version" : "2.4.5",
    "description" : "🈚 Unicode ctype like library",
    "homepage" : "https://github.com/mulle-c/mulle-unicode",
    "bugs" : "https://github.com/mulle-c/mulle-unicode/issues",
@@ -11,5 +11,6 @@
       "url" : "mulle-c/mulle-unicode"
    },
    "dependencies" : {
+      "mulle-c11" : "git://github.com/mulle-c/mulle-c11"
    }
 }
