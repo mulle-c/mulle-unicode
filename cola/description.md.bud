@@ -1,0 +1,6 @@
+a C (C99) library to classify and convert unicode characters, based on the
+Unicode 3.0.0 specification.
+The library uses the Unicode specification data to create C code.
+mulle-unicode is fairly compact for what it does, compiling down to around
+256KB.
+

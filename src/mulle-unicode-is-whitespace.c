@@ -16,7 +16,7 @@ int   mulle_unicode16_is_whitespace( uint16_t c)
    switch( c)
    {
    case 0x0009 :
-#include "unicode/iswhitespace-utf16.inc"
+#include "iswhitespace-utf16.inc"
       return( 1);
    }
    return( 0);

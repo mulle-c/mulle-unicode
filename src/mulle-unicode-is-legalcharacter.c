@@ -10,9 +10,9 @@
 
 #include "mulle-unicode-is-legalcharacter.h"
 
-#include "unicode/miniplane.h"
+#include "miniplane.h"
 
-#include "unicode/islegal-bitmap.inc"
+#include "islegal-bitmap.inc"
 
 
 int   mulle_unicode_is_legalcharacter( int32_t c)

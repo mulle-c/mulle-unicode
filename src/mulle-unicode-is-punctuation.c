@@ -10,9 +10,9 @@
 
 #include "mulle-unicode-is-punctuation.h"
 
-#include "unicode/miniplane.h"
+#include "miniplane.h"
 
-#include "unicode/ispunctuation-bitmap.inc"
+#include "ispunctuation-bitmap.inc"
 
 
 int   mulle_unicode_is_punctuation( int32_t c)

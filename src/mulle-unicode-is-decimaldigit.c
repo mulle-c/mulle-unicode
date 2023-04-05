@@ -15,7 +15,7 @@ int   mulle_unicode16_is_decimaldigit( uint16_t c)
 {
    switch( c)
    {
-#include "unicode/isdecimaldigit-utf16.inc"
+#include "isdecimaldigit-utf16.inc"
       return( 1);
    }
    return( 0);
@@ -33,7 +33,7 @@ int   mulle_unicode_is_decimaldigit( int32_t c)
 
    switch( c)
    {
-#include "unicode/isdecimaldigit-utf32.inc"
+#include "isdecimaldigit-utf32.inc"
       return( 1);
    }
    return( 0);

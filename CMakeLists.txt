@@ -21,8 +21,8 @@ include( Files)
 
 if( HEADERS_PHASE)
    install( FILES ${INSTALL_PUBLIC_HEADERS}  DESTINATION "include/mulle-unicode")
-   install( FILES ${INSTALL_PRIVATE_HEADERS} DESTINATION "include/mulle-unicode/private")
-   install( FILES ${CMAKE_INCLUDES}          DESTINATION "include/mulle-unicode/cmake")
+   install( FILES ${INSTALL_PRIVATE_HEADERS} DESTINATION "include/mulle-unicode")
+   install( FILES ${INSTALL_CMAKE_INCLUDES}          DESTINATION "include/mulle-unicode/cmake")
 
    # short cut out
    if( NOT COMPILE_PHASE AND NOT LINK_PHASE)

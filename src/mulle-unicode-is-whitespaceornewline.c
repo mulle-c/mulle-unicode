@@ -21,7 +21,7 @@ int   mulle_unicode16_is_whitespaceornewline( uint16_t c)
    case 0x000c :
    case 0x000d :
    case 0x0085 :
-#include "unicode/iswhitespace-utf16.inc"
+#include "iswhitespace-utf16.inc"
       return( 1);
    }
    return( 0);

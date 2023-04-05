@@ -27,7 +27,7 @@ uint16_t   mulle_unicode16_tolower( uint16_t c)
 {
    switch( c)
    {
-#include "unicode/tolower-utf16.inc"
+#include "tolower-utf16.inc"
    }
    return( c);
 }
@@ -47,7 +47,7 @@ int32_t   mulle_unicode_tolower( int32_t c)
 
    switch( c)
    {
-#include "unicode/tolower-utf32.inc"
+#include "tolower-utf32.inc"
    }
    return( c);
 }

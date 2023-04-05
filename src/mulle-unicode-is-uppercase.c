@@ -10,9 +10,9 @@
 
 #include "mulle-unicode-is-uppercase.h"
 
-#include "unicode/miniplane.h"
+#include "miniplane.h"
 
-#include "unicode/isuppercase-bitmap.inc"
+#include "isuppercase-bitmap.inc"
 
 
 int   mulle_unicode_is_uppercase( int32_t c)

@@ -10,9 +10,9 @@
 
 #include "mulle-unicode-is-decomposable.h"
 
-#include "unicode/miniplane.h"
+#include "miniplane.h"
 
-#include "unicode/isdecomposable-bitmap.inc"
+#include "isdecomposable-bitmap.inc"
 
 
 int   mulle_unicode_is_decomposable( int32_t c)

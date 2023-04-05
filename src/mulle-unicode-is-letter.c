@@ -10,9 +10,9 @@
 
 #include "mulle-unicode-is-letter.h"
 
-#include "unicode/miniplane.h"
+#include "miniplane.h"
 
-#include "unicode/isletter-bitmap.inc"
+#include "isletter-bitmap.inc"
 
 
 int   mulle_unicode_is_letter( int32_t c)

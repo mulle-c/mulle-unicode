@@ -11,9 +11,9 @@
 #include "mulle-unicode-is-nonbase.h"
 
 
-#include "unicode/miniplane.h"
+#include "miniplane.h"
 
-#include "unicode/isnonbase-bitmap.inc"
+#include "isnonbase-bitmap.inc"
 
 
 int   mulle_unicode_is_nonbase( int32_t c)

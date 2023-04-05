@@ -15,7 +15,7 @@ uint16_t   mulle_unicode16_toupper( uint16_t c)
 {
    switch( c)
    {
-#include "unicode/toupper-utf16.inc"
+#include "toupper-utf16.inc"
    }
    return( c);
 }
@@ -35,7 +35,7 @@ int32_t   mulle_unicode_toupper( int32_t c)
 
    switch( c)
    {
-#include "unicode/toupper-utf32.inc"
+#include "toupper-utf32.inc"
    }
    return( c);
 }

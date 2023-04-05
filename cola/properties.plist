@@ -1,0 +1,20 @@
+{
+   project =
+   {
+      description="🈚 Unicode ctype like library";
+      domain="github";
+      name="mulle-unicode";
+      user="mulle-c";
+      repo="mulle-unicode";
+      homepage="https://github.com/mulle-c/mulle-unicode";
+      license="BSD-3-Clause"
+   };
+   dependencies =
+   (
+      {
+         name="mulle-c11";
+         url="https://github.com/mulle-c/mulle-c11";
+         description="🔀 Cross-platform C compiler glue (and some cpp conveniences)";
+      }
+   )
+}

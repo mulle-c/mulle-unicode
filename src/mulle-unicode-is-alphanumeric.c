@@ -10,9 +10,9 @@
 
 #include "mulle-unicode-is-alphanumeric.h"
 
-#include "unicode/miniplane.h"
+#include "miniplane.h"
 
-#include "unicode/isalphanumeric-bitmap.inc"
+#include "isalphanumeric-bitmap.inc"
 
 
 int   mulle_unicode_is_alphanumeric( int32_t c)

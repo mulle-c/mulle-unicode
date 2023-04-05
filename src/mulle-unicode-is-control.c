@@ -15,7 +15,7 @@ int   mulle_unicode16_is_control( uint16_t c)
 {
    switch( c)
    {
-#include "unicode/iscontrol-utf16.inc"
+#include "iscontrol-utf16.inc"
       return( 1);
    }
    return( 0);
@@ -30,7 +30,7 @@ int   mulle_unicode_is_control( int32_t c)
 
    switch( c)
    {
-#include "unicode/iscontrol-utf32.inc"
+#include "iscontrol-utf32.inc"
       return( 1);
    }
 

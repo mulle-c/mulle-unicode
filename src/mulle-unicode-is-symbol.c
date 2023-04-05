@@ -10,9 +10,9 @@
 
 #include "mulle-unicode-is-symbol.h"
 
-#include "unicode/miniplane.h"
+#include "miniplane.h"
 
-#include "unicode/issymbol-bitmap.inc"
+#include "issymbol-bitmap.inc"
 
 
 int   mulle_unicode_is_symbol( int32_t c)
