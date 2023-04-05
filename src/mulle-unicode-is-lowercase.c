@@ -10,9 +10,9 @@
 
 #include "mulle-unicode-is-lowercase.h"
 
-#include "unicode/miniplane.h"
+#include "miniplane.h"
 
-#include "unicode/islowercase-bitmap.inc"
+#include "islowercase-bitmap.inc"
 
 
 int   mulle_unicode_is_lowercase( int32_t c)

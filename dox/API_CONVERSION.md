@@ -8,7 +8,7 @@ in conjunction with [mulle-buffer](//github.com/mulle-nat/mulle-buffer).
 Here is an example how to convert a UTF8 string into UTF32 using a
 `mulle_buffer`:
 
-```
+``` c
    struct mulle_buffer   buffer;
    mulle_utf32_t         *s;
 
@@ -39,7 +39,7 @@ you should run `mulle_utf8_information` before conversion to catch errors.
 ### `mulle_utf8_bufferconvert_to_utf16`
 
 
-```
+``` c
 void   mulle_utf8_bufferconvert_to_utf16( mulle_utf8_t *src,
                                           size_t len,
                                           void *buffer,
@@ -56,7 +56,7 @@ There will be NO trailing 0 character.
 Example: A conversion of a single character string "A" would result in a
 call to `addbytes` like this:
 
-```
+``` c
 mulle_utf16_t   c;
 
 c = 'A';
@@ -66,7 +66,7 @@ c = 'A';
 
 Also available:
 
-```
+``` c
 void  mulle_utf8_bufferconvert_to_utf32( mulle_utf8_t *src,
                                          size_t len,
                                          void *buffer,
@@ -104,7 +104,7 @@ string that is returned.
 
 ### `mulle_utf8_convert_to_utf16_string`
 
-```
+``` c
 mulle_utf16_t  *mulle_utf8_convert_to_utf16_string( mulle_utf8_t *src,
                                              size_t len,
                                              struct mulle_allocator *allocator);
@@ -121,7 +121,7 @@ a proper UTF8 string.
 
 Also available:
 
-```
+``` c
 mulle_utf32_t  *mulle_utf8_convert_to_utf32_string( mulle_utf8_t *src,
                                              size_t len,
 mulle_utf8_t   *mulle_utf16_convert_to_utf8_string( mulle_utf16_t *src,

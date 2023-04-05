@@ -43,7 +43,7 @@ int   mulle_unicode16_is_zerodigit( uint16_t c)
 {
    switch( c)
    {
-#include "unicode/iszerodigit-utf16.inc"
+#include "iszerodigit-utf16.inc"
       return( 1);
    }
    return( 0);
@@ -58,7 +58,7 @@ int   mulle_unicode_is_zerodigit( int32_t c)
 
    switch( c)
    {
-#include "unicode/iszerodigit-utf32.inc"
+#include "iszerodigit-utf32.inc"
       return( 1);
    }
    return( 0);

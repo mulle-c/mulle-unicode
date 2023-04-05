@@ -11,9 +11,9 @@
 #include "mulle-unicode-is-capitalized.h"
 
 
-#include "unicode/miniplane.h"
+#include "miniplane.h"
 
-#include "unicode/iscapitalized-bitmap.inc"
+#include "iscapitalized-bitmap.inc"
 
 
 int   mulle_unicode_is_capitalized( int32_t c)

@@ -1,0 +1,6 @@
+## API
+
+| File                             | Description
+|----------------------------------| ----------------------------------------
+| [`Ctype`](dox/API_CTYPE.md)      | `<ctype.h>` like functionality for UTF32 and UTF16 strings
+| [`Conversion`](dox/API_CTYPE.md) | Converting strings back and forth
