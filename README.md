@@ -2,16 +2,12 @@
 
 #### 🈚 Unicode ctype like library
 
-# mulle-unicode
-#### 🈚 Unicode ctype like library
 a C (C99) library to classify and convert unicode characters, based on the
 Unicode 3.0.0 specification.
 The library uses the Unicode specification data to create C code.
 mulle-unicode is fairly compact for what it does, compiling down to around
 256KB.
-| Release Version
-|-----------------------------------
-| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-c/mulle-unicode.svg?branch=release) [![Build Status](https://github.com/mulle-c/mulle-unicode/workflows/CI/badge.svg?branch=release)](//github.com/mulle-c/mulle-unicode/actions)
+
 
 | Release Version                                       | Release Notes
 |-------------------------------------------------------|--------------
@@ -19,9 +15,18 @@ mulle-unicode is fairly compact for what it does, compiling down to around
 
 
 ## API
-File                        | Description
-----------------------------| ----------------------------------------
-[`Ctype`](dox/API_CTYPE.md) | `<ctype.h>` like functionality for UTF32 and UTF16 strings
+
+| File                             | Description
+|----------------------------------| ----------------------------------------
+| [`Ctype`](dox/API_CTYPE.md)      | `<ctype.h>` like functionality for UTF32 and UTF16 strings
+| [`Conversion`](dox/API_CTYPE.md) | Converting strings back and forth
+
+
+
+
+### You are here
+
+![Overview](overview.dot.svg)
 
 
 
@@ -76,9 +81,10 @@ cmake --build build --config Release &&
 cmake --install build --config Release
 ```
 
+
 ## Author
-[Nat!](//www.mulle-kybernetik.com/weblog) for
-[Mulle kybernetiK](//www.mulle-kybernetik.com) and
-[Codeon GmbH](//www.codeon.de)
+
+[Nat!](https://mulle-kybernetik.com/weblog) for Mulle kybernetiK
+
 
 
