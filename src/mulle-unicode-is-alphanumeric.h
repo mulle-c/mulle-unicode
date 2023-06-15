@@ -14,11 +14,11 @@
 #include "include.h"
 #include <stdint.h>
 
-MULLE_UNICODE_GLOBAL
+MULLE__UNICODE_GLOBAL
 int   mulle_unicode16_is_alphanumeric( uint16_t c);
-MULLE_UNICODE_GLOBAL
+MULLE__UNICODE_GLOBAL
 int   mulle_unicode_is_alphanumeric( int32_t c);
-MULLE_UNICODE_GLOBAL
+MULLE__UNICODE_GLOBAL
 int   mulle_unicode_is_alphanumericplane( unsigned int plane);
 
 #endif /* mulle_unicode_is_alphanumeric_h */

@@ -16,9 +16,9 @@
 #include <assert.h>
 
 
-MULLE_UNICODE_GLOBAL
+MULLE__UNICODE_GLOBAL
 int   mulle_unicode16_is_decimaldigit( uint16_t c);
-MULLE_UNICODE_GLOBAL
+MULLE__UNICODE_GLOBAL
 int   mulle_unicode_is_decimaldigit( int32_t c);
 
 

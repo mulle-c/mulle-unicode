@@ -14,11 +14,11 @@
 #include "include.h"
 #include <stdint.h>
 
-MULLE_UNICODE_GLOBAL
+MULLE__UNICODE_GLOBAL
 int   mulle_unicode16_is_whitespaceornewline( uint16_t c);
-MULLE_UNICODE_GLOBAL
+MULLE__UNICODE_GLOBAL
 int   mulle_unicode_is_whitespaceornewline( int32_t c);
-MULLE_UNICODE_GLOBAL
+MULLE__UNICODE_GLOBAL
 int   mulle_unicode_is_whitespaceornewlineplane( unsigned int plane);
 
 #endif /* mulle_unicode_is_whitespaceornewline_h */
