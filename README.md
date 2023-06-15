@@ -9,6 +9,7 @@ mulle-unicode is fairly compact for what it does, compiling down to around
 256KB.
 
 
+
 | Release Version                                       | Release Notes
 |-------------------------------------------------------|--------------
 | ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-c/mulle-unicode.svg?branch=release) [![Build Status](https://github.com/mulle-c/mulle-unicode/workflows/CI/badge.svg?branch=release)](//github.com/mulle-c/mulle-unicode/actions)| [RELEASENOTES](RELEASENOTES.md) |
@@ -33,6 +34,13 @@ mulle-unicode is fairly compact for what it does, compiling down to around
 
 
 ## Add
+
+**This project is a component of the [mulle-core](//github.com/mulle-core/mulle-core) library. As such you usually will *not* add or install it
+individually, unless you specifically do not want to link against
+`mulle-core`.**
+
+
+### Add as an individual component
 
 Use [mulle-sde](//github.com/mulle-sde) to add mulle-unicode to your project:
 

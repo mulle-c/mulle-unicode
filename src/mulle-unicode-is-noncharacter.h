@@ -15,11 +15,11 @@
 #include <stdint.h>
 
 
-MULLE_UNICODE_GLOBAL
+MULLE__UNICODE_GLOBAL
 int   mulle_unicode16_is_noncharacter( uint16_t c);
-MULLE_UNICODE_GLOBAL
+MULLE__UNICODE_GLOBAL
 int   mulle_unicode_is_noncharacter( int32_t c);
-MULLE_UNICODE_GLOBAL
+MULLE__UNICODE_GLOBAL
 int   mulle_unicode_is_noncharacterplane( unsigned int plane);
 
 #endif /* mulle_unicode_is_alphanumeric_h */

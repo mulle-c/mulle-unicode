@@ -21,13 +21,13 @@
 
 #include "_mulle-unicode-include.h"
 
-#ifdef MULLE_UNICODE_BUILD
-# define MULLE_UNICODE_GLOBAL    MULLE_C_GLOBAL
+#ifdef MULLE__UNICODE_BUILD
+# define MULLE__UNICODE_GLOBAL    MULLE_C_GLOBAL
 #else
 # if defined( MULLE_UNICODE_INCLUDE_DYNAMIC) || (defined( MULLE_INCLUDE_DYNAMIC) && ! defined( MULLE_UNICODE_INCLUDE_STATIC))
-#  define MULLE_UNICODE_GLOBAL   MULLE_C_EXTERN_GLOBAL
+#  define MULLE__UNICODE_GLOBAL   MULLE_C_EXTERN_GLOBAL
 # else
-#  define MULLE_UNICODE_GLOBAL   extern
+#  define MULLE__UNICODE_GLOBAL   extern
 # endif
 #endif
 
