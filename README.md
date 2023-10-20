@@ -78,6 +78,8 @@ Install the requirements:
 |----------------------------------------------|-----------------------
 | [mulle-c11](https://github.com/mulle-c/mulle-c11)             | 🔀 Cross-platform C compiler glue (and some cpp conveniences)
 
+Download the latest [tar](https://github.com/mulle-c/mulle-unicode/archive/refs/tags/latest.tar.gz) or [zip](https://github.com/mulle-c/mulle-unicode/archive/refs/tags/latest.zip) archive and unpack it.
+
 Install **mulle-unicode** into `/usr/local` with [cmake](https://cmake.org):
 
 ``` sh
