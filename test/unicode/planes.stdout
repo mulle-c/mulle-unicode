@@ -15,6 +15,7 @@ alphanumeric plane #13 : pass
 alphanumeric plane #14 : pass
 alphanumeric plane #15 : pass
 alphanumeric plane #16 : pass
+alphanumeric plane #17 : pass
 capitalized plane #0 : pass
 capitalized plane #1 : pass
 capitalized plane #2 : pass
@@ -32,6 +33,7 @@ capitalized plane #13 : pass
 capitalized plane #14 : pass
 capitalized plane #15 : pass
 capitalized plane #16 : pass
+capitalized plane #17 : pass
 control plane #0 : pass
 control plane #1 : pass
 control plane #2 : pass
@@ -49,6 +51,7 @@ control plane #13 : pass
 control plane #14 : pass
 control plane #15 : pass
 control plane #16 : pass
+control plane #17 : pass
 decimaldigit plane #0 : pass
 decimaldigit plane #1 : pass
 decimaldigit plane #2 : pass
@@ -66,6 +69,7 @@ decimaldigit plane #13 : pass
 decimaldigit plane #14 : pass
 decimaldigit plane #15 : pass
 decimaldigit plane #16 : pass
+decimaldigit plane #17 : pass
 decomposable plane #0 : pass
 decomposable plane #1 : pass
 decomposable plane #2 : pass
@@ -83,6 +87,7 @@ decomposable plane #13 : pass
 decomposable plane #14 : pass
 decomposable plane #15 : pass
 decomposable plane #16 : pass
+decomposable plane #17 : pass
 legalcharacter plane #0 : pass
 legalcharacter plane #1 : pass
 legalcharacter plane #2 : pass
@@ -100,6 +105,7 @@ legalcharacter plane #13 : pass
 legalcharacter plane #14 : pass
 legalcharacter plane #15 : pass
 legalcharacter plane #16 : pass
+legalcharacter plane #17 : pass
 letter plane #0 : pass
 letter plane #1 : pass
 letter plane #2 : pass
@@ -117,6 +123,7 @@ letter plane #13 : pass
 letter plane #14 : pass
 letter plane #15 : pass
 letter plane #16 : pass
+letter plane #17 : pass
 lowercase plane #0 : pass
 lowercase plane #1 : pass
 lowercase plane #2 : pass
@@ -134,6 +141,7 @@ lowercase plane #13 : pass
 lowercase plane #14 : pass
 lowercase plane #15 : pass
 lowercase plane #16 : pass
+lowercase plane #17 : pass
 newline plane #0 : pass
 newline plane #1 : pass
 newline plane #2 : pass
@@ -151,6 +159,7 @@ newline plane #13 : pass
 newline plane #14 : pass
 newline plane #15 : pass
 newline plane #16 : pass
+newline plane #17 : pass
 nonbase plane #0 : pass
 nonbase plane #1 : pass
 nonbase plane #2 : pass
@@ -168,6 +177,7 @@ nonbase plane #13 : pass
 nonbase plane #14 : pass
 nonbase plane #15 : pass
 nonbase plane #16 : pass
+nonbase plane #17 : pass
 noncharacter plane #0 : pass
 noncharacter plane #1 : pass
 noncharacter plane #2 : pass
@@ -185,6 +195,7 @@ noncharacter plane #13 : pass
 noncharacter plane #14 : pass
 noncharacter plane #15 : pass
 noncharacter plane #16 : pass
+noncharacter plane #17 : pass
 punctuation plane #0 : pass
 punctuation plane #1 : pass
 punctuation plane #2 : pass
@@ -202,6 +213,7 @@ punctuation plane #13 : pass
 punctuation plane #14 : pass
 punctuation plane #15 : pass
 punctuation plane #16 : pass
+punctuation plane #17 : pass
 symbol plane #0 : pass
 symbol plane #1 : pass
 symbol plane #2 : pass
@@ -219,6 +231,7 @@ symbol plane #13 : pass
 symbol plane #14 : pass
 symbol plane #15 : pass
 symbol plane #16 : pass
+symbol plane #17 : pass
 uppercase plane #0 : pass
 uppercase plane #1 : pass
 uppercase plane #2 : pass
@@ -236,6 +249,7 @@ uppercase plane #13 : pass
 uppercase plane #14 : pass
 uppercase plane #15 : pass
 uppercase plane #16 : pass
+uppercase plane #17 : pass
 whitespace plane #0 : pass
 whitespace plane #1 : pass
 whitespace plane #2 : pass
@@ -253,6 +267,7 @@ whitespace plane #13 : pass
 whitespace plane #14 : pass
 whitespace plane #15 : pass
 whitespace plane #16 : pass
+whitespace plane #17 : pass
 whitespaceornewline plane #0 : pass
 whitespaceornewline plane #1 : pass
 whitespaceornewline plane #2 : pass
@@ -270,3 +285,20 @@ whitespaceornewline plane #13 : pass
 whitespaceornewline plane #14 : pass
 whitespaceornewline plane #15 : pass
 whitespaceornewline plane #16 : pass
+whitespaceornewline plane #17 : pass
+alphanumeric plane #0 : pass
+capitalized plane #0 : pass
+control plane #0 : pass
+decimaldigit plane #0 : pass
+decomposable plane #0 : pass
+legalcharacter plane #0 : pass
+letter plane #0 : pass
+lowercase plane #0 : pass
+newline plane #0 : pass
+nonbase plane #0 : pass
+noncharacter plane #0 : pass
+punctuation plane #0 : pass
+symbol plane #0 : pass
+uppercase plane #0 : pass
+whitespace plane #0 : pass
+whitespaceornewline plane #0 : pass
