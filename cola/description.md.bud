@@ -4,3 +4,4 @@ The library uses the Unicode specification data to create C code.
 mulle-unicode is fairly compact for what it does, compiling down to around
 256KB.
 
+`𓀀𓋹𓂻𓆑`

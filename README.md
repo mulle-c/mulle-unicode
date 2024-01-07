@@ -8,6 +8,7 @@ The library uses the Unicode specification data to create C code.
 mulle-unicode is fairly compact for what it does, compiling down to around
 256KB.
 
+`𓀀𓋹𓂻𓆑`
 
 
 
@@ -95,7 +96,7 @@ cmake --install build --config Release
 
 ## Author
 
-[Nat!](https://mulle-kybernetik.com/weblog) for Mulle kybernetiK
+[Nat!](https://mulle-kybernetik.com/weblog) for Mulle kybernetiK  
 
 
 

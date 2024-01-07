@@ -75,21 +75,55 @@ create_set_files()
    ./create-category-set.sh 'Co'     "${file}" "${inverse}" > "${SETSDIR}/isprivate${suffix}.inc"
 
    ./create-category-set.sh 'Z[slp]' "${file}" "${inverse}" > "${SETSDIR}/isseparator${suffix}.inc"
+
+   # characters as identifier starters
+   # https://www.unicode.org/Public/UCD/latest/ucd/DerivedCoreProperties.txt
+   # Derived Property: ID_Start
+   #  Characters that can start an identifier.
+   #  Generated from:
+   #      Lu + Ll + Lt + Lm + Lo + Nl
+   #    + Other_ID_Start
+   #    - Pattern_Syntax
+   #    - Pattern_White_Space
+   #  NOTE: See UAX #31 for more information
+   #
+   # Lu: Uppercase Letter
+   # Ll: Lowercase Letter
+   # Lt: Titlecase Letter
+   # Lm: Modifier Letter
+   # Lo: Other Letter
+   # Nl: Letter Number (like: Roman numerals: I, V, X, L, C, D, M) ??
+
+   ./create-category-set.sh 'L[ultmol]'  "${file}" "${inverse}" > "${SETSDIR}/isidentifierstart${suffix}.inc"
+
+   # i don't see any "weird" characters being added, so the subtraction must
+   # me more conceptual than anything
+   #    ID_Start
+   #    Mn + Mc + Nd + Pc
+   #
+   #  Mn: Nonspacing Mark
+   #  Mc: Spacing Mark
+   #  Nd: Decimal Number
+   #  Pc: Connector Punctuation
+
+   ./create-category-set.sh 'L[ultmol]|M[nc]|Nd|Pc'  "${file}" "${inverse}" > "${SETSDIR}/isidentifiercontinuation${suffix}.inc"
 }
 
 
 create_bitmap_files()
 {
-   ./create-bitmap.sh 'isalphanumeric' "${SETSDIR}" "${BITMAPSDIR}"
-   ./create-bitmap.sh 'iscapitalized'  "${SETSDIR}" "${BITMAPSDIR}"
-   ./create-bitmap.sh 'isdecomposable' "${SETSDIR}" "${BITMAPSDIR}"
-   ./create-bitmap.sh 'islegal'        "${SETSDIR}" "${BITMAPSDIR}"
-   ./create-bitmap.sh 'isletter'       "${SETSDIR}" "${BITMAPSDIR}"
-   ./create-bitmap.sh 'islowercase'    "${SETSDIR}" "${BITMAPSDIR}"
-   ./create-bitmap.sh 'isnonbase'      "${SETSDIR}" "${BITMAPSDIR}"
-   ./create-bitmap.sh 'ispunctuation'  "${SETSDIR}" "${BITMAPSDIR}"
-   ./create-bitmap.sh 'issymbol'       "${SETSDIR}" "${BITMAPSDIR}"
-   ./create-bitmap.sh 'isuppercase'    "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'isalphanumeric'           "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'iscapitalized'            "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'isdecomposable'           "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'islegal'                  "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'isletter'                 "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'islowercase'              "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'isnonbase'                "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'ispunctuation'            "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'issymbol'                 "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'isuppercase'              "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'isidentifierstart'        "${SETSDIR}" "${BITMAPSDIR}"
+   ./create-bitmap.sh 'isidentifiercontinuation' "${SETSDIR}" "${BITMAPSDIR}"
 }
 
 
@@ -110,7 +144,7 @@ create_set_files "${UTF16FILE}" "-utf16"
 create_set_files "${UTF32FILE}" "-utf32"
 
 #
-# not doing inverses anymore, the produced some questionable content
+# not doing inverses anymore, they produced some questionable content
 # and in general have been superseded by bitmaps
 #
 

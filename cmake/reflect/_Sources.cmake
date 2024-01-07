@@ -16,6 +16,8 @@ src/mulle-unicode-is-capitalized.c
 src/mulle-unicode-is-control.c
 src/mulle-unicode-is-decimaldigit.c
 src/mulle-unicode-is-decomposable.c
+src/mulle-unicode-is-identifiercontinuation.c
+src/mulle-unicode-is-identifierstart.c
 src/mulle-unicode-is-legalcharacter.c
 src/mulle-unicode-is-letter.c
 src/mulle-unicode-is-lowercase.c

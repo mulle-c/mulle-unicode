@@ -33,6 +33,12 @@ src/unicode/isdecomposable-utf16.inc
 src/unicode/isdecomposable-utf32.inc
 src/unicode/isdigit-utf16.inc
 src/unicode/isdigit-utf32.inc
+src/unicode/isidentifiercontinuation-bitmap.inc
+src/unicode/isidentifiercontinuation-utf16.inc
+src/unicode/isidentifiercontinuation-utf32.inc
+src/unicode/isidentifierstart-bitmap.inc
+src/unicode/isidentifierstart-utf16.inc
+src/unicode/isidentifierstart-utf32.inc
 src/unicode/islegal-bitmap.inc
 src/unicode/islegal-utf16.inc
 src/unicode/islegal-utf32.inc
@@ -108,6 +114,8 @@ src/mulle-unicode-is-capitalized.h
 src/mulle-unicode-is-control.h
 src/mulle-unicode-is-decimaldigit.h
 src/mulle-unicode-is-decomposable.h
+src/mulle-unicode-is-identifiercontinuation.h
+src/mulle-unicode-is-identifierstart.h
 src/mulle-unicode-is-legalcharacter.h
 src/mulle-unicode-is-letter.h
 src/mulle-unicode-is-lowercase.h

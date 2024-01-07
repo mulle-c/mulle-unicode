@@ -37,7 +37,7 @@
 #ifndef mulle_unicode_h__
 #define mulle_unicode_h__
 
-#define MULLE__UNICODE_VERSION  ((2 << 20) | (4 << 8) | 7)
+#define MULLE__UNICODE_VERSION  ((2UL << 20) | (4 << 8) | 7)
 
 #include "include.h"
 
@@ -54,6 +54,8 @@
 #include "mulle-unicode-is-control.h"
 #include "mulle-unicode-is-decimaldigit.h"
 #include "mulle-unicode-is-decomposable.h"
+#include "mulle-unicode-is-identifierstart.h"
+#include "mulle-unicode-is-identifiercontinuation.h"
 #include "mulle-unicode-is-legalcharacter.h"
 #include "mulle-unicode-is-letter.h"
 #include "mulle-unicode-is-lowercase.h"
