@@ -60,5 +60,5 @@ fi
 # 13 is just the inverse of 12, as field 13 is not specified ?
 
 cut '-d;' -f 1,3 "${FILE}" | \
-grep ${INVERSE} ";${CATEGORY}" |
+grep -E ${INVERSE} ";${CATEGORY}" |
 sed 's/\(.*\);.*/   case 0x\1 :/'

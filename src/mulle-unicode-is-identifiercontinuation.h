@@ -1,10 +1,8 @@
 //
-//  mulle-unicode.h
+//  mulle-unicode-is-identifiercontinuation.c
 //  mulle-unicode
 //
-//  Created by Nat! on 18.03.16.
-//  Copyright © 2016 Mulle kybernetiK.
-//  Copyright (c) 2016 Codeon GmbH.
+//  Copyright (c) 2023 Nat! - Mulle kybernetiK.
 //  All rights reserved.
 //
 //
@@ -34,48 +32,19 @@
 //  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 //  POSSIBILITY OF SUCH DAMAGE.
 //
-#ifndef mulle_unicode_h__
-#define mulle_unicode_h__
-
-#define MULLE__UNICODE_VERSION  ((2UL << 20) | (4 << 8) | 7)
+#ifndef mulle_unicode_is_identifiercontinuation_h__
+#define mulle_unicode_is_identifiercontinuation_h__
 
 #include "include.h"
-
 #include <stdint.h>
 
-// #include "_mulle-unicode-provide.h"
+MULLE__UNICODE_GLOBAL
+int   mulle_unicode_is_identifiercontinuation( int32_t c);
 
-// manual inclusion of headers, because we don't want to expose all the
-// .inc files
+MULLE__UNICODE_GLOBAL
+int   mulle_unicode16_is_identifiercontinuation( uint16_t c);
 
-#include "mulle-unicode-ctype.h"
-#include "mulle-unicode-is-alphanumeric.h"
-#include "mulle-unicode-is-capitalized.h"
-#include "mulle-unicode-is-control.h"
-#include "mulle-unicode-is-decimaldigit.h"
-#include "mulle-unicode-is-decomposable.h"
-#include "mulle-unicode-is-identifierstart.h"
-#include "mulle-unicode-is-identifiercontinuation.h"
-#include "mulle-unicode-is-legalcharacter.h"
-#include "mulle-unicode-is-letter.h"
-#include "mulle-unicode-is-lowercase.h"
-#include "mulle-unicode-is-newline.h"
-#include "mulle-unicode-is-nonbase.h"
-#include "mulle-unicode-is-noncharacter.h"
-#include "mulle-unicode-is-punctuation.h"
-#include "mulle-unicode-is-symbol.h"
-#include "mulle-unicode-is-uppercase.h"
-#include "mulle-unicode-is-whitespace.h"
-#include "mulle-unicode-is-whitespaceornewline.h"
-#include "mulle-unicode-is-zerodigit.h"
-#include "mulle-unicode-tolower.h"
-#include "mulle-unicode-toupper.h"
+MULLE__UNICODE_GLOBAL
+int   mulle_unicode_is_identifiercontinuationplane( unsigned int plane);
 
-#ifdef __has_include
-# if __has_include( "_mulle-unicode-versioncheck.h")
-#  include "_mulle-unicode-versioncheck.h"
-# endif
 #endif
-
-
-#endif /* mulle_unicode_h */
