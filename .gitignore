@@ -61,3 +61,4 @@ coverage*.html
 *.gcda
 *.gcno
 cola/wilted/
+cola/coverage.json
