@@ -62,3 +62,4 @@ coverage*.html
 *.gcno
 cola/wilted/
 cola/coverage.json
+cmake-build-*/
