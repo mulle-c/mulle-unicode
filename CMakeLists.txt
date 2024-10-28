@@ -1,6 +1,6 @@
 cmake_minimum_required( VERSION 3.1)
 
-project( mulle-unicode C)
+project( mulle-unicode VERSION 2.4.8 LANGUAGES C)
 
 add_definitions( -DMULLE_UNICODE_EXTERN_GLOBAL=extern)
 
@@ -9,9 +9,9 @@ add_definitions( -DMULLE_UNICODE_EXTERN_GLOBAL=extern)
 ### mulle-sde environment
 
 # add cmake module paths to search path
-list( INSERT CMAKE_MODULE_PATH 0 "${PROJECT_SOURCE_DIR}/cmake/share")
-list( INSERT CMAKE_MODULE_PATH 0 "${PROJECT_SOURCE_DIR}/cmake/reflect")
-list( INSERT CMAKE_MODULE_PATH 0 "${PROJECT_SOURCE_DIR}/cmake")
+list( INSERT CMAKE_MODULE_PATH 0 "${CMAKE_CURRENT_SOURCE_DIR}/cmake/share")
+list( INSERT CMAKE_MODULE_PATH 0 "${CMAKE_CURRENT_SOURCE_DIR}/cmake/reflect")
+list( INSERT CMAKE_MODULE_PATH 0 "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 include( Environment)
 
@@ -49,4 +49,10 @@ if( LINK_PHASE)
 endif()
 
 include( InstallLibrary)
+
+if( LINK_PHASE)
+   include( InstallCMakeInclude)
+   include( InstallCMakePackage)
+endif() 
+
 include( FinalOutput OPTIONAL)
