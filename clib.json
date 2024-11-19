@@ -1,6 +1,6 @@
 {
    "name" : "mulle-unicode",
-   "version" : "2.4.7",
+   "version" : "2.4.8",
    "description" : "🈚 Unicode ctype like library",
    "keywords" : [],
    "license" : "BSD-3-Clause",
