@@ -1,3 +1,7 @@
+### 2.4.8
+
+Various small improvements
+
 ### 2.4.7
 
 * added isidentifiercontinuation and isidentifierstart queries to parse unicode identifiers
