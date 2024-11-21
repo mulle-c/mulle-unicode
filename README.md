@@ -14,7 +14,7 @@ mulle-unicode is fairly compact for what it does, compiling down to around
 
 | Release Version                                       | Release Notes
 |-------------------------------------------------------|--------------
-| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-c/mulle-unicode.svg?branch=release) [![Build Status](https://github.com/mulle-c/mulle-unicode/workflows/CI/badge.svg?branch=release)](//github.com/mulle-c/mulle-unicode/actions) ![Coverage](https://img.shields.io/badge/coverage-100%25%C2%A0-2acf49) | [RELEASENOTES](RELEASENOTES.md) |
+| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-c/mulle-unicode.svg?branch=master) [![Build Status](https://github.com/mulle-c/mulle-unicode/workflows/CI/badge.svg?branch=master)](//github.com/mulle-c/mulle-unicode/actions) ![Coverage](https://img.shields.io/badge/coverage-100%25%C2%A0-2acf49) | [RELEASENOTES](RELEASENOTES.md) |
 
 
 ## API
