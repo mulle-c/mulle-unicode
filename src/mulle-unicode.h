@@ -37,7 +37,7 @@
 #ifndef mulle_unicode_h__
 #define mulle_unicode_h__
 
-#define MULLE__UNICODE_VERSION  ((2UL << 20) | (4 << 8) | 9)
+#define MULLE__UNICODE_VERSION  ((2UL << 20) | (4 << 8) | 10)
 
 #include "include.h"
 
