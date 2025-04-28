@@ -28,7 +28,7 @@ int   mulle_unicode16_is_noncharacter( uint16_t c)
    if( c >= 0xFDD0 && c <= 0xFDEF)
       return( 1);
 
-   if( c >= 0xfffe && c <= 0xffff)
+   if( c >= 0xfffe /*&& c <= 0xffff*/)
       return( 1);
    return( 0);
 }
