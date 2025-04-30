@@ -64,5 +64,7 @@ int   mulle_unicode_is_noncharacter( int32_t c)
 
 int   mulle_unicode_is_noncharacterplane( unsigned int plane)
 {
+   MULLE_C_UNUSED( plane);
+
    return( 1);
 }
