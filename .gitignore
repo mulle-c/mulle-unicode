@@ -12,7 +12,7 @@ var/
 stacktrace/
 malloc-error/
 research/
-/unicode/ 
+/unicode
 
 environment-os-*.sh
 environment-host-*.sh
@@ -66,3 +66,9 @@ cmake-build-*/
 CMakeLists.txt.bak
 .mulle/etc/make/build-dir
 vgcore.*
+test*/**/*.test.*
+/*.md
+!/AGENTS.md
+!/README.md
+build-*/
+environment-user-*.sh
