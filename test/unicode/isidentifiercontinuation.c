@@ -14,7 +14,7 @@ int  main()
    {
       if( mulle_unicode_is_identifiercontinuation( c))
       {
-         mulle_printf( "'%.1lS'", &c);
+         mulle_printf( "'%.1S'", &c);
 
          if( column == 10)
             mulle_printf( "  | ");

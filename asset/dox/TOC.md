@@ -1,4 +1,5 @@
 # mulle-unicode Library Documentation for AI
+<!-- Keywords: unicode, character-classification -->
 
 ## 1. Introduction & Purpose
 

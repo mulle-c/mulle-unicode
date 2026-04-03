@@ -20,7 +20,7 @@ int  main()
             mulle_printf( "\n");
          }
 
-         mulle_printf( "%.1lS", &c);
+         mulle_printf( "%.1S", &c);
       }
    }
    mulle_printf( "\n");

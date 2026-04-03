@@ -72,3 +72,6 @@ test*/**/*.test.*
 !/README.md
 build-*/
 environment-user-*.sh
+.kiro/settings/lsp.json
+.roam
+.graveyard
