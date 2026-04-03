@@ -21,7 +21,7 @@
 
 #include "_mulle-unicode-include.h"
 
-#ifdef MULLE__UNICODE_BUILD
+#if defined( MULLE__UNICODE_BUILD) || defined( MULLE__CORE_BUILD)
 # define MULLE__UNICODE_GLOBAL    MULLE_C_GLOBAL
 #else
 # if defined( MULLE_UNICODE_INCLUDE_DYNAMIC) || (defined( MULLE_INCLUDE_DYNAMIC) && ! defined( MULLE_UNICODE_INCLUDE_STATIC))
