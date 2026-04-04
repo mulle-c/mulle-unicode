@@ -1,10 +1,11 @@
-### 2.4.11
-
-
-* added vibecoding activation step to quickstart workflow
-* clarified that quickstart users should skip the Add section
+### 2.4.12
 
 
 
-* new quickstart section in README with mulle-sde setup instructions
-* comprehensive AI documentation TOC for library API reference
+
+
+
+
+
+* `MULLE__UNICODE_GLOBAL` is now defined when building with `MULLE__CORE_BUILD` so unicode symbols are exported correctly
+* fix test printf format in isidentifierstart to use %.1S for correct wide-string output

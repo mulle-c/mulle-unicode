@@ -75,3 +75,4 @@ environment-user-*.sh
 .kiro/settings/lsp.json
 .roam
 .graveyard
+*.tmp.*
