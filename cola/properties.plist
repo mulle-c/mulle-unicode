@@ -8,7 +8,7 @@
       repo="mulle-unicode";
       homepage="https://github.com/mulle-c/mulle-unicode";
       license="BSD-3-Clause";
-      version="2.4.12";
+      version="2.4.13";
    };
    dependencies =
    (
