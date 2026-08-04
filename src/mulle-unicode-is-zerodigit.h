@@ -1,5 +1,5 @@
 //
-//  mulle-unicode-is-zerodigit.c
+//  mulle-unicode-is-zerodigit.h
 //  mulle-unicode
 //
 //  Copyright (c) 2020 Nat! - Mulle kybernetiK.
@@ -33,7 +33,6 @@
 //  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 //  POSSIBILITY OF SUCH DAMAGE.
 //
-
 #ifndef mulle_unicode_is_zerodigit_h__
 #define mulle_unicode_is_zerodigit_h__
 
