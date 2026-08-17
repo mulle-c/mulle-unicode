@@ -1,0 +1,281 @@
+#! /usr/bin/env mulle-bash
+#
+#   Copyright (c) 2024 Nat! - Mulle kybernetiK
+#   All rights reserved.
+#
+#   Redistribution and use in source and binary forms, with or without
+#   modification, are permitted provided that the following conditions are met:
+#
+#   Redistributions of source code must retain the above copyright notice, this
+#   list of conditions and the following disclaimer.
+#
+#   Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+#
+#   Neither the name of Mulle kybernetiK nor the names of its contributors
+#   may be used to endorse or promote products derived from this software
+#   without specific prior written permission.
+#
+#   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+#   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+#   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+#   ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+#   LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+#   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+#   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+#   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+#   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+#   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+#   POSSIBILITY OF SUCH DAMAGE.
+#
+
+[ "${TRACE}" = 'YES' ] && set -x
+
+if [ -z "${MULLE_BASHFUNCTIONS_LIBEXEC_DIR}" ]
+then
+   MULLE_BASHFUNCTIONS_LIBEXEC_DIR="`mulle-bashfunctions libexec-dir 2> /dev/null`"
+fi
+. "${MULLE_BASHFUNCTIONS_LIBEXEC_DIR}/mulle-bashfunctions.sh" || exit 1
+
+
+fuzz::usage()
+{
+   [ "$#" -ne 0 ] && log_error "$*"
+
+   cat <<EOF >&2
+Usage:
+   ${NODE_NAME} [options] <command>
+
+   Fuzzing tool for mulle-unicode.
+
+Commands:
+   build [target...]    : Build fuzzer targets
+   run [target...]      : Run fuzzer targets
+   replay <target> <in> : Replay a specific input
+   clean                : Remove build artifacts
+   list                 : List available targets
+
+Options:
+   -t <seconds>         : Time to run each target (default 60)
+   --max-total-time <s> : Total time budget across all targets
+   -v                   : Increase verbosity
+EOF
+   exit 1
+}
+
+
+fuzz::get_include_path()
+{
+   local path
+
+   path="`mulle-sde dependency-dir 2> /dev/null`"
+   if [ -n "${path}" -a -d "${path}/include" ]
+   then
+      echo "${path}/include"
+      return
+   fi
+
+   path="`mulle-sde addiction-dir 2> /dev/null`"
+   if [ -n "${path}" -a -d "${path}/include" ]
+   then
+      echo "${path}/include"
+      return
+   fi
+
+   log_warning "Could not find dependency include path. Fuzzing might fail."
+   echo "dependency/include"
+}
+
+
+fuzz::get_targets()
+{
+   local dir="fuzz/src"
+   local target
+
+   if [ ! -d "${dir}" ]
+   then
+      return
+   fi
+
+   (
+      cd "${dir}"
+      for target in fuzz-*.c
+      do
+         [ -e "${target}" ] || continue
+         echo "${target%.c}"
+      done
+   )
+}
+
+
+fuzz::build()
+{
+   local targets="$@"
+   [ -z "${targets}" ] && targets=`fuzz::get_targets`
+
+   local incpath=`fuzz::get_include_path`
+   local builddir="fuzz/build"
+
+   mkdir -p "${builddir}" || exit 1
+
+   local src_files=`ls src/*.c | grep -v "mulle-unicode-standalone.c"`
+
+   local target
+   for target in ${targets}
+   do
+      log_info "Building ${target}..."
+      clang -g -O1 -std=c99 \
+            -fsanitize=fuzzer,address,undefined \
+            -fno-sanitize-recover=undefined \
+            -DMULLE__UNICODE_BUILD \
+            -I src -I src/generic -I src/reflect -I src/unicode \
+            -I "${incpath}" \
+            ${src_files} "fuzz/src/${target}.c" \
+            -o "${builddir}/${target}" || exit 1
+   done
+}
+
+
+fuzz::run()
+{
+   local time_limit="${OPTION_TIME_LIMIT:-60}"
+   local max_total_time="${OPTION_MAX_TOTAL_TIME}"
+   local targets="$@"
+   [ -z "${targets}" ] && targets=`fuzz::get_targets`
+
+   local builddir="fuzz/build"
+   local target
+   local actual_time
+
+   if [ -n "${max_total_time}" ]
+   then
+      local n_targets
+      n_targets=`echo ${targets} | wc -w`
+      if [ "${n_targets}" -gt 0 ]
+      then
+         actual_time=$(( max_total_time / n_targets ))
+      else
+         actual_time="${time_limit}"
+      fi
+   else
+      actual_time="${time_limit}"
+   fi
+
+   for target in ${targets}
+   do
+      if [ ! -x "${builddir}/${target}" ]
+      then
+         log_warning "${target} not built, building..."
+         fuzz::build "${target}"
+      fi
+
+      if [ ! -x "${builddir}/${target}" ]
+      then
+         log_error "${target} build failed, skipping."
+         continue
+      fi
+
+      log_info "Running ${target} for ${actual_time}s..."
+      mkdir -p "fuzz/corpus/${target}"
+      mkdir -p "fuzz/crashes/${target}"
+
+      "${builddir}/${target}" \
+         "fuzz/corpus/${target}" \
+         -artifact_prefix="fuzz/crashes/${target}/" \
+         -max_total_time="${actual_time}" \
+         -print_final_stats=1 \
+         2>&1 | tail -20
+
+      if [ -n "`ls fuzz/crashes/${target}/* 2>/dev/null`" ]
+      then
+         log_error "CRASHES found in ${target}!"
+         ls fuzz/crashes/${target}/
+      else
+         log_info "${target}: no crashes found."
+      fi
+   done
+}
+
+
+fuzz::replay()
+{
+   local target="$1"
+   local input="$2"
+
+   if [ -z "${target}" -o -z "${input}" ]
+   then
+      fuzz::usage "replay requires <target> and <input>"
+   fi
+
+   local builddir="fuzz/build"
+   "${builddir}/${target}" "${input}"
+}
+
+
+fuzz::clean()
+{
+   rm -rf fuzz/build
+   log_info "Build artifacts removed."
+}
+
+
+fuzz::main()
+{
+   local OPTION_TIME_LIMIT=60
+   local OPTION_MAX_TOTAL_TIME=""
+
+   while [ $# -ne 0 ]
+   do
+      case "$1" in
+         -h|--help)
+            fuzz::usage
+         ;;
+         -t)
+            shift
+            OPTION_TIME_LIMIT="$1"
+         ;;
+         --max-total-time)
+            shift
+            OPTION_MAX_TOTAL_TIME="$1"
+         ;;
+         -v)
+            MULLE_FLAG_LOG_VERBOSE='YES'
+         ;;
+         -*)
+            fuzz::usage "Unknown option: $1"
+         ;;
+         *)
+            break
+         ;;
+      esac
+      shift
+   done
+
+   local cmd="${1:-run}"
+   shift 2>/dev/null
+
+   case "${cmd}" in
+      build)
+         fuzz::build "$@"
+      ;;
+      run)
+         fuzz::run "$@"
+      ;;
+      replay)
+         fuzz::replay "$@"
+      ;;
+      clean)
+         fuzz::clean
+      ;;
+      list)
+         fuzz::get_targets
+      ;;
+      *)
+         fuzz::usage "Unknown command: ${cmd}"
+      ;;
+   esac
+}
+
+
+fuzz::main "$@"

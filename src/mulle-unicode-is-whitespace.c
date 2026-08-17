@@ -51,10 +51,7 @@ int   mulle_unicode16_is_whitespace( uint16_t c)
 
 int   mulle_unicode_is_whitespace( int32_t c)
 {
-   if( c <= 0x7F)
-      return( c == ' ');  // amusingly \t is not in unicode whitespace
-
-   if( c <= 0xFFFF)
+   if( (uint32_t) c <= 0xFFFF)
       return( mulle_unicode16_is_whitespace( (uint16_t) c));
    return( 0);
 }

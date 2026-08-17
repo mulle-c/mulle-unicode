@@ -66,31 +66,33 @@ int32_t   mulle_unicode_toupper( int32_t c)
 }
 
 
-// diff with to upper
 uint16_t   mulle_unicode16_totitlecase( uint16_t c)
 {
    switch( c)
    {
-   case 0x01c4 : return( 0x01c5);
-   case 0x01c5 : return( 0x01c5);
-   case 0x01c6 : return( 0x01c5);
-   case 0x01c7 : return( 0x01c8);
-   case 0x01c8 : return( 0x01c8);
-   case 0x01c9 : return( 0x01c8);
-   case 0x01ca : return( 0x01cb);
-   case 0x01cb : return( 0x01cb);
-   case 0x01cc : return( 0x01cb);
-   case 0x01f1 : return( 0x01f2);
-   case 0x01f2 : return( 0x01f2);
-   case 0x01f3 : return( 0x01f2);
+#include "totitlecase-utf16.inc"
    }
-   return( mulle_unicode16_toupper( c));
+   return( c);
 }
 
 
 int32_t   mulle_unicode_totitlecase( int32_t c)
 {
-   return( mulle_unicode16_totitlecase( (uint16_t) c));
+   if( c <= 0x7F)
+   {
+      if( c >= 'a' && c <= 'z')
+         return( c - 'a' + 'A');
+      return( c);
+   }
+
+   if( c <= 0xFFFF)
+      return( mulle_unicode16_totitlecase( (uint16_t) c));
+
+   switch( c)
+   {
+#include "totitlecase-utf32.inc"
+   }
+   return( c);
 }
 
 

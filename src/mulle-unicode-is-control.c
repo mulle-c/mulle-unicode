@@ -50,7 +50,7 @@ int   mulle_unicode16_is_control( uint16_t c)
 
 int   mulle_unicode_is_control( int32_t c)
 {
-   if( c <= 0xFFFF)
+   if( (uint32_t) c <= 0xFFFF)
       return( mulle_unicode16_is_control( (uint16_t) c));
 
    switch( c)

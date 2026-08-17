@@ -15106,12 +15106,6 @@
    case 0xd7f9 :
    case 0xd7fa :
    case 0xd7fb :
-   case 0xd800 :
-   case 0xdb7f :
-   case 0xdb80 :
-   case 0xdbff :
-   case 0xdc00 :
-   case 0xdfff :
    case 0xe000 :
    case 0xf8ff :
    case 0xf900 :

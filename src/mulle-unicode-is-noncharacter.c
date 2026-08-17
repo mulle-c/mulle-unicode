@@ -60,22 +60,28 @@ int   mulle_unicode16_is_noncharacter( uint16_t c)
 
 
 // Q: Which code points are noncharacters?
+// Noncharacters are the 66 code points defined by the Unicode standard as
+// permanently reserved and never to be used for characters:
+//   U+FDD0..U+FDEF (32 in the BMP)
+//   U+xFFFE and U+xFFFF for each plane 0..16 (34 total)
+// Surrogates (U+D800..U+DFFF) are a separate concept — see mulle_utf32_is_surrogatecharacter.
+// Out-of-range values (negative or > 0x10FFFF) return 0 — they are not
+// Unicode code points at all, and "noncharacter" is a Unicode concept.
+//
 int   mulle_unicode_is_noncharacter( int32_t c)
 {
+   if( c < 0 || c > 0x10FFFF)
+      return( 0);
+
    if( c < 0x10000)
    {
       if( c < 0x0FFF)
         return( 0);
-      if( mulle_unicode16_is_noncharacter( (uint16_t) c))
-         return( 1);
+      return( mulle_unicode16_is_noncharacter( (uint16_t) c));
    }
 
-   // above 0x10FFFF is not unicode
-   if( c > 0x10FFFF)
-      return( 1);
-
-   // the last two code points of the BMP, U+FFFE and U+FFFF
-   // the last two code points of each of the 16 supplementary planes: U+1FFFE, U+1FFFF, U+2FFFE, U+2FFFF, ... U+10FFFE, U+10FFFF
+   // the last two code points of each of the 16 supplementary planes:
+   // U+1FFFE, U+1FFFF, U+2FFFE, U+2FFFF, ... U+10FFFE, U+10FFFF
    switch( c & 0xffff)
    {
    case 0xfffe  :

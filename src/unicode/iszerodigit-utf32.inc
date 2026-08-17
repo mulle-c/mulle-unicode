@@ -5,7 +5,6 @@
    case 0x11136 :
    case 0x111D0 :
    case 0x112F0 :
-   case 0x11366 :
    case 0x11450 :
    case 0x114D0 :
    case 0x11650 :
@@ -17,7 +16,6 @@
    case 0x11DA0 :
    case 0x16A60 :
    case 0x16B50 :
-   case 0x16E80 :
    case 0x1D7CE :
    case 0x1D7D8 :
    case 0x1D7E2 :
@@ -26,8 +24,3 @@
    case 0x1E140 :
    case 0x1E2F0 :
    case 0x1E950 :
-   case 0x1F100 :
-   case 0x1F101 :
-   case 0x1F10B :
-   case 0x1F10C :
-   case 0xE0030 :
