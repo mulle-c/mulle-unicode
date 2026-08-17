@@ -43,8 +43,10 @@ create_set_files()
       ./create-zero.sh "${file}" > "${SETSDIR}/iszerodigit${suffix}.inc"
    fi
 
-   # all defined characters
-   ./create-set.sh 1 "${file}" "${inverse}" > "${SETSDIR}/islegal${suffix}.inc"
+   # all defined characters, excluding surrogates (category Cs, U+D800..U+DFFF)
+   # Surrogates are encoding artefacts, not scalar values.
+   ./create-set.sh 1 "${file}" "${inverse}" | \
+      grep -v -E 'case 0x0*d[89a-f][0-9a-f]{2}' > "${SETSDIR}/islegal${suffix}.inc"
 
    ./create-set.sh 5 "${file}" "${inverse}" > "${SETSDIR}/isdecomposable${suffix}.inc"
    ./create-set.sh 6 "${file}" "${inverse}" > "${SETSDIR}/isdecimaldigit${suffix}.inc"

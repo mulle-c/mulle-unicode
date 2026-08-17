@@ -52,7 +52,7 @@ int   mulle_unicode16_is_zerodigit( uint16_t c)
 
 int   mulle_unicode_is_zerodigit( int32_t c)
 {
-   if( c <= 0xFFFF)
+   if( (uint32_t) c <= 0xFFFF)
       return( mulle_unicode16_is_zerodigit( (uint16_t) c));
 
    switch( c)
