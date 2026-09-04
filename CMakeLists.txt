@@ -1,6 +1,6 @@
 cmake_minimum_required( VERSION 3.13...99.99)
 
-project( mulle-unicode VERSION 2.4.13 LANGUAGES C)
+project( mulle-unicode VERSION 2.4.14 LANGUAGES C)
 
 add_definitions( -DMULLE_UNICODE_EXTERN_GLOBAL=extern)
 
