@@ -1,383 +1,442 @@
 # mulle-unicode Library Documentation for AI
-<!-- Keywords: unicode, character-classification -->
+<!-- Keywords: unicode, ctype, classification, case-conversion, utf16, table-driven -->
 
 ## 1. Introduction & Purpose
 
-mulle-unicode is a comprehensive Unicode character classification and conversion library for C99, based on Unicode 3.0.0 specification. It provides ctype-like functionality for classifying characters (letters, digits, punctuation, etc.) and converting between cases (uppercase, lowercase, titlecase) for the full Unicode range (0x0 to 0x10FFFF). The library uses efficient table-based lookups compiled from official Unicode data, enabling fast single-character operations without external dependencies. This is a foundational utility in the mulle-c ecosystem for text processing and Unicode-aware applications.
+`mulle-unicode` is a compact C99 library that provides `<ctype.h>`-style
+character classification and simple (1:1) case conversion for the **full
+Unicode range** (U+0000–U+10FFFF). It is a component of the
+`mulle-core` ecosystem (a dependency of `mulle-core`), and can also be used
+standalone via `clib` or `mulle-sde`.
+
+- The predicate and conversion data tables are generated from
+  `UnicodeData.txt` (currently Unicode 12.1, see `src/unicode/README.md`)
+  by the scripts in `unicode/`.
+- Version 2.4.14 (`MULLE__UNICODE_VERSION`). Since 2.4.14 the predicates
+  were hardened: all `is_*` predicates return `0` for inputs outside
+  U+0000–U+10FFFF (negative or > U+10FFFF no longer wrap or misreport),
+  `is_legalcharacter` now rejects surrogates (U+D800–U+DFFF), and
+  `totitlecase` now covers the full 32-bit code-point range including
+  supplementary planes.
+- The library compiles to roughly 256KB and has no runtime allocations or
+  global state; all functions are pure.
 
 ## 2. Key Concepts & Design Philosophy
 
-**Design Principles:**
-
-- **Unicode Specification Compliance:** Data derives from official Unicode 3.0.0 character database; properties follow Unicode standard definitions.
-
-- **Dual-Width Support:** Provides separate functions for UTF-16 (uint16_t) and UTF-32 (int32_t) characters, enabling efficient processing of different Unicode representations.
-
-- **Table-Driven Classification:** Character properties are stored in efficient lookup tables, enabling O(1) classification regardless of character code point.
-
-- **Plane-Based Organization:** Characters are organized by Unicode planes; plane query functions enable optimization and validation.
-
-- **Compact Binary:** Despite comprehensive Unicode support, the library compiles to ~256KB binary size through efficient table compression.
-
-- **No External Dependencies:** Pure C99, depends only on mulle-c11 for compatibility macros; minimal external dependencies.
-
-- **Stateless Functions:** All functions are pure; no global state or side effects enable safe concurrent use.
+- **Unicode-coddle, table-driven:** Character properties are encoded either as
+  generated three-level sparse-trie bitmaps (`*-bitmap.inc`) or as flat
+  generated `switch` statements (`is*-utf16.inc`, `is*-utf32.inc`,
+  `tolower-*.inc`, `toupper-*.inc`, `totitlecase-*.inc`). Lookups are O(1) for
+  any code point.
+- **Three variants per predicate:** each predicate exists as
+  `mulle_unicode_is_X( int32_t)` (full range), `mulle_unicode16_is_X( uint16_t)`
+  (BMP only), and `mulle_unicode_is_Xplane( unsigned int)` (per-plane quick
+  reject, planes 0–16).
+- **Strict input contract:** the `int32_t` predicates accept the full
+  `int32_t` domain; anything outside U+0000–U+10FFFF returns `0` (it is not a
+  Unicode code point). Surrogates U+D800–U+DFFF are accepted as inputs but are
+  only classified as `is_noncharacter`.
+- **Simple (1:1) case mapping:** conversions map one code point to one code
+  point; multi-character mappings, context-dependent and locale-dependent
+  rules are not handled.
+- **Pure and thread-safe:** no globals are written; functions can be called
+  concurrently from any thread.
 
 ## 3. Core API & Data Structures
 
-### 3.1 Character Classification Functions
-
-All classification functions return `int` (0 for false, non-zero for true).
-
-#### `mulle-unicode-is-letter.h`
-
-**`int mulle_unicode_is_letter(int32_t c)`**
-- **Purpose:** Test if character is a letter (L* categories in Unicode).
-- **Parameters:** `c`: UTF-32 character code.
-- **Returns:** Non-zero if letter, 0 otherwise.
-
-**`int mulle_unicode16_is_letter(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character is a letter.
-- **Parameters:** `c`: UTF-16 character code.
-
-**`int mulle_unicode_is_letterplane(unsigned int plane)`**
-- **Purpose:** Query if a Unicode plane contains letters.
-- **Parameters:** `plane`: Plane number (0-16).
-- **Returns:** Non-zero if plane contains letters.
-
-#### `mulle-unicode-is-uppercase.h`
-
-**`int mulle_unicode_is_uppercase(int32_t c)`**
-- **Purpose:** Test if character is uppercase.
-- **Parameters:** `c`: UTF-32 character code.
-
-**`int mulle_unicode16_is_uppercase(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character is uppercase.
-
-#### `mulle-unicode-is-lowercase.h`
-
-**`int mulle_unicode_is_lowercase(int32_t c)`**
-- **Purpose:** Test if character is lowercase.
-- **Parameters:** `c`: UTF-32 character code.
-
-**`int mulle_unicode16_is_lowercase(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character is lowercase.
-
-#### `mulle-unicode-is-capitalized.h`
-
-**`int mulle_unicode_is_capitalized(int32_t c)`**
-- **Purpose:** Test if character is capitalized (titlecase).
-- **Parameters:** `c`: UTF-32 character code.
-
-**`int mulle_unicode16_is_capitalized(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character is capitalized.
-
-#### `mulle-unicode-is-alphanumeric.h`
-
-**`int mulle_unicode_is_alphanumeric(int32_t c)`**
-- **Purpose:** Test if character is alphanumeric (letter or digit).
-- **Parameters:** `c`: UTF-32 character code.
-
-**`int mulle_unicode16_is_alphanumeric(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character is alphanumeric.
-
-#### `mulle-unicode-is-decimaldigit.h`
-
-**`int mulle_unicode_is_decimaldigit(int32_t c)`**
-- **Purpose:** Test if character is a decimal digit (0-9 equivalent).
-- **Parameters:** `c`: UTF-32 character code.
-
-**`int mulle_unicode16_is_decimaldigit(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character is decimal digit.
-
-#### `mulle-unicode-is-zerodigit.h`
-
-**`int mulle_unicode_is_zerodigit(int32_t c)`**
-- **Purpose:** Test if character is zero-like (U+0030 '0', U+FF10 '０', etc.).
-- **Parameters:** `c`: UTF-32 character code.
-
-**`int mulle_unicode16_is_zerodigit(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character is zero-like.
-
-#### `mulle-unicode-is-whitespace.h`
-
-**`int mulle_unicode_is_whitespace(int32_t c)`**
-- **Purpose:** Test if character is whitespace (space separators).
-- **Parameters:** `c`: UTF-32 character code.
-- **Includes:** Space, tab, and other space separators, excluding newlines.
-
-**`int mulle_unicode16_is_whitespace(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character is whitespace.
-
-#### `mulle-unicode-is-whitespaceornewline.h`
-
-**`int mulle_unicode_is_whitespaceornewline(int32_t c)`**
-- **Purpose:** Test if character is whitespace or newline.
-- **Parameters:** `c`: UTF-32 character code.
-
-**`int mulle_unicode16_is_whitespaceornewline(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character is whitespace or newline.
-
-#### `mulle-unicode-is-newline.h`
-
-**`int mulle_unicode_is_newline(int32_t c)`**
-- **Purpose:** Test if character is a newline/line-break character.
-- **Parameters:** `c`: UTF-32 character code.
-
-**`int mulle_unicode16_is_newline(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character is newline.
-
-#### `mulle-unicode-is-punctuation.h`
-
-**`int mulle_unicode_is_punctuation(int32_t c)`**
-- **Purpose:** Test if character is punctuation (P* categories).
-- **Parameters:** `c`: UTF-32 character code.
-
-**`int mulle_unicode16_is_punctuation(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character is punctuation.
-
-#### `mulle-unicode-is-symbol.h`
-
-**`int mulle_unicode_is_symbol(int32_t c)`**
-- **Purpose:** Test if character is a symbol (S* categories: math, currency, modifier, etc.).
-- **Parameters:** `c`: UTF-32 character code.
-
-**`int mulle_unicode16_is_symbol(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character is symbol.
-
-#### `mulle-unicode-is-control.h`
-
-**`int mulle_unicode_is_control(int32_t c)`**
-- **Purpose:** Test if character is control character (Cc category).
-- **Parameters:** `c`: UTF-32 character code.
-
-**`int mulle_unicode16_is_control(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character is control character.
-
-#### `mulle-unicode-is-nonbase.h`
-
-**`int mulle_unicode_is_nonbase(int32_t c)`**
-- **Purpose:** Test if character is combining/non-spacing mark.
-- **Parameters:** `c`: UTF-32 character code.
-
-**`int mulle_unicode16_is_nonbase(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character is non-base.
-
-#### `mulle-unicode-is-decomposable.h`
-
-**`int mulle_unicode_is_decomposable(int32_t c)`**
-- **Purpose:** Test if character can be decomposed into multiple characters.
-- **Parameters:** `c`: UTF-32 character code.
-
-**`int mulle_unicode16_is_decomposable(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character is decomposable.
-
-#### `mulle-unicode-is-legalcharacter.h`
-
-**`int mulle_unicode_is_legalcharacter(int32_t c)`**
-- **Purpose:** Test if character is legal/valid Unicode.
-- **Parameters:** `c`: UTF-32 character code.
-- **Note:** Distinguishes valid characters from reserved/undefined ones.
-
-**`int mulle_unicode16_is_legalcharacter(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character is legal.
-
-#### `mulle-unicode-is-noncharacter.h`
-
-**`int mulle_unicode_is_noncharacter(int32_t c)`**
-- **Purpose:** Test if character is designated non-character (Cn category).
-- **Parameters:** `c`: UTF-32 character code.
-
-**`int mulle_unicode16_is_noncharacter(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character is non-character.
-
-#### `mulle-unicode-is-identifierstart.h`
-
-**`int mulle_unicode_is_identifierstart(int32_t c)`**
-- **Purpose:** Test if character is valid identifier start (letters, underscore).
-- **Parameters:** `c`: UTF-32 character code.
-
-**`int mulle_unicode16_is_identifierstart(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character can start an identifier.
-
-#### `mulle-unicode-is-identifiercontinuation.h`
-
-**`int mulle_unicode_is_identifiercontinuation(int32_t c)`**
-- **Purpose:** Test if character is valid inside identifier (letters, digits, underscore, marks).
-- **Parameters:** `c`: UTF-32 character code.
-
-**`int mulle_unicode16_is_identifiercontinuation(uint16_t c)`**
-- **Purpose:** Test if UTF-16 character can continue an identifier.
-
-### 3.2 Character Conversion Functions
-
-#### `mulle-unicode-tolower.h`
-
-**`int32_t mulle_unicode_tolower(int32_t c)`**
-- **Purpose:** Convert character to lowercase.
-- **Parameters:** `c`: UTF-32 character code.
-- **Returns:** Lowercase equivalent (returns `c` unchanged if no lowercase form exists).
-
-**`uint16_t mulle_unicode16_tolower(uint16_t c)`**
-- **Purpose:** Convert UTF-16 character to lowercase.
-
-**`int32_t mulle_unicode_nop(int32_t c)`** / **`uint16_t mulle_unicode16_nop(uint16_t c)`**
-- **Purpose:** No-op conversion functions (return character unchanged). Useful as callback placeholders.
-
-#### `mulle-unicode-toupper.h`
-
-**`int32_t mulle_unicode_toupper(int32_t c)`**
-- **Purpose:** Convert character to uppercase.
-- **Parameters:** `c`: UTF-32 character code.
-- **Returns:** Uppercase equivalent (returns `c` unchanged if no uppercase form exists).
-
-**`uint16_t mulle_unicode16_toupper(uint16_t c)`**
-- **Purpose:** Convert UTF-16 character to uppercase.
-
-**`int32_t mulle_unicode_totitlecase(int32_t c)`**
-- **Purpose:** Convert character to titlecase (capitalized).
-- **Parameters:** `c`: UTF-32 character code.
-- **Returns:** Titlecase equivalent.
-
-**`uint16_t mulle_unicode16_totitlecase(uint16_t c)`**
-- **Purpose:** Convert UTF-16 character to titlecase.
+There are no public structs. Everything is a free function. The umbrella
+header `mulle-unicode.h` includes every public header; `mulle-unicode-ctype.h`
+includes only the `is_*` headers. The `MULLE__UNICODE_GLOBAL` macro prefix in
+the headers expands to `extern` (or an export/import specifier when built
+dynamically).
+
+### 3.1. `mulle-unicode.h`
+
+```
+#define MULLE__UNICODE_VERSION  ((2UL << 20) | (4 << 8) | 14)
+```
+- **Purpose:** umbrella header; declares the library version (2.4.14) and
+  includes all sub-headers below.
+
+### 3.2. Predicate headers (`mulle-unicode-ctype.h` and `mulle-unicode-is-*.h`)
+
+Every predicate header follows the identical pattern. Representative example
+from `mulle-unicode-is-letter.h`:
+
+```
+int   mulle_unicode16_is_letter( uint16_t c);
+int   mulle_unicode_is_letter( int32_t c);
+int   mulle_unicode_is_letterplane( unsigned int plane);
+```
+
+- The `int32_t` variant runs over the full Unicode range; the `uint16_t`
+  variant is the BMP-only equivalent; the `*plane` variant returns nonzero if
+  any code point in plane `plane` (0–16) satisfies the predicate (plane ≥ 17
+  returns 0, except `is_noncharacterplane`, which always returns 1).
+- All return `1` (true) or `0` (false). For the `int32_t` variants, values
+  `< 0` and `> 0x10FFFF` return `0`.
+
+#### Letters and identifiers
+
+`mulle-unicode-is-letter.h`
+```
+int   mulle_unicode16_is_letter( uint16_t c);
+int   mulle_unicode_is_letter( int32_t c);
+int   mulle_unicode_is_letterplane( unsigned int plane);
+```
+- **`mulle_unicode_is_letter`:** letters (general categories `L.`) **including**
+  combining marks / nonbase marks (`M.`). Empirically `is_letter(0x0301) == 1`.
+  Letter-numbers `Nl` (e.g. U+2160) are **not** letters.
+
+`mulle-unicode-is-uppercase.h`
+```
+int   mulle_unicode16_is_uppercase( uint16_t c);
+int   mulle_unicode_is_uppercase( int32_t c);
+int   mulle_unicode_is_uppercaseplane( unsigned int plane);
+```
+- **`mulle_unicode_is_uppercase`:** uppercase letters (`Lu`) **including**
+  titlecase letters (`Lt`, e.g. U+01C5 returns true).
+
+`mulle-unicode-is-lowercase.h`
+```
+int   mulle_unicode16_is_lowercase( uint16_t c);
+int   mulle_unicode_is_lowercase( int32_t c);
+int   mulle_unicode_is_lowercaseplane( unsigned int plane);
+```
+- **`mulle_unicode_is_lowercase`:** lowercase letters (`Ll`).
+
+`mulle-unicode-is-capitalized.h`
+```
+int   mulle_unicode16_is_capitalized( uint16_t c);
+int   mulle_unicode_is_capitalized( int32_t c);
+int   mulle_unicode_is_capitalizedplane( unsigned int plane);
+```
+- **`mulle_unicode_is_capitalized`:** titlecase letters only (`Lt`, e.g.
+  U+01C5 "Dž").
+
+`mulle-unicode-is-identifierstart.h`
+```
+int   mulle_unicode_is_identifierstart( int32_t c);
+int   mulle_unicode16_is_identifierstart( uint16_t c);
+int   mulle_unicode_is_identifierstartplane( unsigned int plane);
+```
+- **`mulle_unicode_is_identifierstart`:** letters (`L.`) only. Empirically
+  combining marks (U+0301) and underscore `_` (U+005F) are **not** identifier
+  starts.
+
+`mulle-unicode-is-identifiercontinuation.h`
+```
+int   mulle_unicode_is_identifiercontinuation( int32_t c);
+int   mulle_unicode16_is_identifiercontinuation( uint16_t c);
+int   mulle_unicode_is_identifiercontinuationplane( unsigned int plane);
+```
+- **`mulle_unicode_is_identifiercontinuation`:** letters (`L.`), combining
+  marks (`M.`), decimal digits (`Nd`), connector punctuation (`Pc`, e.g. `_`).
+  Letter-numbers (`Nl`, e.g. U+2160) and format chars such as ZWNJ (U+200C)
+  are empirically **excluded**.
+
+#### Numbers
+
+`mulle-unicode-is-decimaldigit.h`
+```
+int   mulle_unicode16_is_decimaldigit( uint16_t c);
+int   mulle_unicode_is_decimaldigit( int32_t c);
+
+static inline
+int   mulle_unicode_is_decimaldigitplane( unsigned int plane);
+```
+- **`mulle_unicode_is_decimaldigit`:** decimal-digit category `Nd` (characters
+  forming contiguous 0–9 runs in each script). `is_decimaldigitplane` is a
+  `static inline` that returns 1 for planes 0 and 1 only.
+
+`mulle-unicode-is-zerodigit.h`
+```
+int   mulle_unicode16_is_zerodigit( uint16_t c);
+int   mulle_unicode_is_zerodigit( int32_t c);
+
+static inline
+int   mulle_unicode_is_zerodigitplane( unsigned int plane);
+```
+- **`mulle_unicode_is_zerodigit`:** the "zero" character of a decimal run
+  (e.g. U+0030 '0', U+0660 '٠'). Use `digit - zerodigit` to get the
+  numeric value. `is_zerodigitplane` is `static inline`; returns 1 for planes
+  0, 1 and 14.
+
+#### Separators and whitespace
+
+`mulle-unicode-is-whitespace.h`
+```
+int   mulle_unicode16_is_whitespace( uint16_t c);
+int   mulle_unicode_is_whitespace( int32_t c);
+int   mulle_unicode_is_whitespaceplane( unsigned int plane);
+```
+- **`mulle_unicode_is_whitespace`:** space separators (`Zs`) plus U+0009 TAB.
+  Newlines like U+000A and U+2028 are **not** whitespace (use
+  `is_whitespaceornewline` / `is_newline`).
+
+`mulle-unicode-is-newline.h`
+```
+int   mulle_unicode16_is_newline( uint16_t c);
+int   mulle_unicode_is_newline( int32_t c);
+int   mulle_unicode_is_newlineplane( unsigned int plane);
+```
+- **`mulle_unicode_is_newline`:** line and paragraph terminators:
+  U+000A–U+000D, U+0085, U+2028, U+2029.
+
+`mulle-unicode-is-whitespaceornewline.h`
+```
+int   mulle_unicode16_is_whitespaceornewline( uint16_t c);
+int   mulle_unicode_is_whitespaceornewline( int32_t c);
+int   mulle_unicode_is_whitespaceornewlineplane( unsigned int plane);
+```
+- **`mulle_unicode_is_whitespaceornewline`:** union of `is_whitespace` and
+  `is_newline`.
+
+#### Other classes
+
+`mulle-unicode-is-alphanumeric.h`
+```
+int   mulle_unicode16_is_alphanumeric( uint16_t c);
+int   mulle_unicode_is_alphanumeric( int32_t c);
+int   mulle_unicode_is_alphanumericplane( unsigned int plane);
+```
+- **`mulle_unicode_is_alphanumeric`:** letters + marks + all numbers
+  (`L.`, `M.`, `N.`). Note it includes combining marks.
+
+`mulle-unicode-is-punctuation.h`
+```
+int   mulle_unicode16_is_punctuation( uint16_t c);
+int   mulle_unicode_is_punctuation( int32_t c);
+int   mulle_unicode_is_punctuationplane( unsigned int plane);
+```
+- **`mulle_unicode_is_punctuation`:** punctuation (`P.`).
+
+`mulle-unicode-is-symbol.h`
+```
+int   mulle_unicode16_is_symbol( uint16_t c);
+int   mulle_unicode_is_symbol( int32_t c);
+int   mulle_unicode_is_symbolplane( unsigned int plane);
+```
+- **`mulle_unicode_is_symbol`:** symbols (`S.`: math, currency, modifier,
+  letterlike, etc.).
+
+`mulle-unicode-is-control.h`
+```
+int   mulle_unicode16_is_control( uint16_t c);
+int   mulle_unicode_is_control( int32_t c);
+int   mulle_unicode_is_controlplane( unsigned int plane);
+```
+- **`mulle_unicode_is_control`:** control and format characters (C0 custom
+  U+0001–U+001F, C1 U+007F–U+009F, and various `Cf` such as U+00AD, U+200E,
+  U+2060). Empirically U+0000 (NUL) and U+2028 (`Zl`) are **not** classified
+  as control. `is_controlplane` returns 1 for planes 0, 1 and 14.
+
+`mulle-unicode-is-nonbase.h`
+```
+int   mulle_unicode16_is_nonbase( uint16_t c);
+int   mulle_unicode_is_nonbase( int32_t c);
+int   mulle_unicode_is_nonbaseplane( unsigned int plane);
+```
+- **`mulle_unicode_is_nonbase`:** combining (non-spacing/spacing/enclosing)
+  marks (`M.`).
+
+#### Validation
+
+`mulle-unicode-is-legalcharacter.h`
+```
+int   mulle_unicode16_is_legalcharacter( uint16_t c);
+int   mulle_unicode_is_legalcharacter( int32_t c);
+int   mulle_unicode_is_legalcharacterplane( unsigned int plane);
+```
+- **`mulle_unicode_is_legalcharacter`:** a code point is "legal" if it is
+  defined in the Unicode data, excluding surrogates and noncharacters.
+  Empirically U+D800, U+DFFF, U+10FFFF, and unassigned points like U+0378
+  return 0; U+0020 returns 1.
+
+`mulle-unicode-is-noncharacter.h`
+```
+int   mulle_unicode16_is_noncharacter( uint16_t c);
+int   mulle_unicode_is_noncharacter( int32_t c);
+int   mulle_unicode_is_noncharacterplane( unsigned int plane);
+```
+- **`mulle_unicode_is_noncharacter`:** the 66 permanently reserved
+  noncharacters: U+FDD0–U+FDEF and the last two code points of each plane
+  (U+xFFFE/U+xFFFF, planes 0–16). Surrogates U+D800–U+DFFF are also reported
+  as true. Returns 0 for inputs `< 0` or `> 0x10FFFF`.
+  `is_noncharacterplane` always returns 1.
+
+`mulle-unicode-is-decomposable.h`
+```
+int   mulle_unicode16_is_decomposable( uint16_t c);
+int   mulle_unicode_is_decomposable( int32_t c);
+int   mulle_unicode_is_decomposableplane( unsigned int plane);
+```
+- **`mulle_unicode_is_decomposable`:** the code point has a canonical or
+  compatibility decomposition (e.g. U+00E9 'é' is decomposable).
+
+### 3.3. Conversion functions
+
+`mulle-unicode-tolower.h`
+```
+uint16_t   mulle_unicode16_tolower( uint16_t c);
+int32_t    mulle_unicode_tolower( int32_t c);
+
+uint16_t   mulle_unicode16_nop( uint16_t c);
+int32_t    mulle_unicode_nop( int32_t c);
+```
+- **`mulle_unicode_tolower`:** simple lowercase mapping; returns `c` unchanged
+  when there is no mapping. Covers the full 32-bit range.
+- **`mulle_unicode_nop` / `mulle_unicode16_nop`:** identity functions
+  (useful as callback placeholders).
+
+`mulle-unicode-toupper.h`
+```
+uint16_t   mulle_unicode16_toupper( uint16_t c);
+int32_t    mulle_unicode_toupper( int32_t c);
+
+uint16_t   mulle_unicode16_totitlecase( uint16_t c);
+int32_t    mulle_unicode_totitlecase( int32_t c);
+```
+- **`mulle_unicode_toupper`:** simple uppercase mapping; unchanged if no
+  mapping. Covers the full 32-bit range (e.g. U+10428 → U+10400).
+- **`mulle_unicode_totitlecase`:** titlecase mapping. Since 2.4.14 this
+  handles the full 32-bit range including supplementary planes (previously
+  BMP-only). For most characters it equals uppercase; it differs for
+  digraph ligatures: U+01C6 'dž' → U+01C5 'Dž' (uppercase would give U+01C4).
+
+**Conversion semantics (important):** all mappings are *simple* (1:1). There
+is no case-expansion — e.g. U+00DF 'ß' stays U+00DF under `toupper`
+(no "SS"), and U+0130 'İ' maps to U+0069 'i' (losing the combining dot).
+Out-of-range inputs are returned unchanged (no crash, no wrap).
 
 ## 4. Performance Characteristics
 
-- **Classification Time:** O(1) table lookup per character, typically 1-2 CPU cycles.
-- **Conversion Time:** O(1) table lookup per character.
-- **Memory:** ~256KB total binary size for full Unicode support.
-- **Cache Efficiency:** Small lookup tables fit in L1/L2 cache for fast repeated access.
-- **Parallelization:** Functions are thread-safe (no global state modification).
-
-**Characteristics:**
-
-- No allocations; stack/register use only.
-- No conditional branches (table-driven).
-- Suitable for high-performance text processing.
+- **Classification:** O(1) per code point for every predicate. Bitmap-based
+  predicates (letter, uppercase, lowercase, capitalized, alphanumeric,
+  decomposable, legalcharacter, nonbase, punctuation, symbol,
+  identifierstart, identifiercontinuation) resolve through a generated
+  three-level sparse trie (plane → miniplane → byte/bit). Switch-based
+  predicates (control, newline, whitespace, whitespaceornewline, zerodigit,
+  decimaldigit) are small generated `switch` statements.
+- **Conversion:** O(1) generated `switch` lookups over the UTF-16 and UTF-32
+  tables.
+- **Input guards:** the 32-bit predicates add a cheap range check
+  (`< 0 || > 0x10FFFF → return 0`) before lookup; this does not change the
+  asymptotic cost.
+- **Memory:** the generated data (bitmaps + switch tables) is compact; the
+  whole library compiles to roughly 256KB.
+- **Concurrency:** all functions are pure and stateless — fully thread-safe,
+  no allocation, no global mutable state.
 
 ## 5. AI Usage Recommendations & Patterns
 
-### Best Practices:
+### Best Practices
 
-1. **Use UTF-32 for Full Unicode:** Use `int32_t` versions for complete Unicode support (0x0-0x10FFFF). UTF-16 functions handle BMP only.
+- Validate untrusted input with `mulle_unicode_is_legalcharacter` first; since
+  2.4.14 it accurately excludes surrogates and noncharacters.
+- Use the `int32_t` variants for anything that may contain supplementary
+  planes; the `uint16_t` variants cannot represent them (BMP only).
+- Use the `*plane( unsigned int)` functions as a fast pre-filter before doing
+  per-character lookups over a large block, e.g.
+  `if( mulle_unicode_is_letterplane( c >> 16))`.
+- For digit values use `c - mulle_unicode_is_zerodigit( zero)` after checking
+  both `is_zerodigit(zero)` and `is_decimaldigit(digit)`.
+- Use `is_identifierstart` + `is_identifiercontinuation` for identifier
+  validation rather than rolling your own with `is_letter`.
+- Use the `_nop` functions when a callback needs a case conversion that does
+  nothing.
+- Fuzz harnesses exist at `fuzz/fuzz-ctype` and `fuzz/fuzz-conversion` if you
+  want to validate your own assumptions against the data.
 
-2. **Validate Character Values:** Before processing unknown input, use `mulle_unicode_is_legalcharacter()` to exclude invalid codes.
+### Common Pitfalls
 
-3. **Cache Plane Information:** If processing large text with same plane, query plane properties first with `_plane` functions.
+- **No `is_digit` / `isprint` functions exist.** Use `is_decimaldigit`,
+  `is_zerodigit`, `is_control`, `is_symbol`, etc.
+- **`is_letter` includes combining marks** (`M.`), so "letter" is broader than
+  you may expect; `is_identifierstart` does **not** include marks.
+- **`is_noncharacter` returns 1 for surrogates** (U+D800–U+DFFF) whereas
+  `is_legalcharacter` returns 0 for them — do not treat the two as opposites.
+- **Simple case mapping only:** `toupper(U+00DF)` does not produce "SS";
+  `tolower(U+0130)` loses the dot. For case-insensitive comparison implement
+  proper case folding instead.
+- **`is_control` is not the complement of `isprint`:** U+0000 and U+2028 are
+  not classified as control.
+- **UTF-16 variants cannot express supplementary characters**; feeding a UTF-16
+  surrogate pair to `mulle_unicode16_*` is meaningless.
 
-4. **Identifier Validation:** Use dedicated identifier functions (`identifierstart`, `identifiercontinuation`) rather than generic letter/digit checks for parsing.
-
-5. **Batch Processing:** Process character-by-character through arrays of code points for optimal cache behavior.
-
-### Common Pitfalls:
-
-1. **UTF-16 Limitations:** UTF-16 functions only handle characters in the Basic Multilingual Plane (BMP); supplementary planes are truncated.
-
-2. **Assuming ASCII Equivalence:** Unicode character properties may differ from ASCII expectations (e.g., not all uppercase letters have lowercase).
-
-3. **Decomposition Expectations:** `is_decomposable()` indicates compatibility decomposition; don't assume canonical decomposition.
-
-4. **Case Conversion Expectations:** Case conversion is per-character; no context-aware handling (Turkish 'i', German 'ß' → 'ss').
-
-5. **Plane Overflow:** Passing values > 0x10FFFF to classification functions yields undefined behavior; validate input ranges.
-
-### Idiomatic Usage:
+### Idiomatic Usage
 
 ```c
-// Check if string can be identifier
-int is_valid_identifier(const int32_t *chars, size_t len) {
-    if (len == 0 || !mulle_unicode_is_identifierstart(chars[0]))
-        return 0;
-    for (size_t i = 1; i < len; i++)
-        if (!mulle_unicode_is_identifiercontinuation(chars[i]))
-            return 0;
-    return 1;
-}
+// classify one code point with a plane pre-check
+int   c;
+int   is_symbol;
 
-// Convert string to lowercase
-void to_lowercase(int32_t *chars, size_t len) {
-    for (size_t i = 0; i < len; i++)
-        chars[i] = mulle_unicode_tolower(chars[i]);
-}
-
-// Classify and process by type
-void process_text(const int32_t *chars, size_t len) {
-    for (size_t i = 0; i < len; i++) {
-        int32_t c = chars[i];
-        if (mulle_unicode_is_letter(c))
-            process_letter(c);
-        else if (mulle_unicode_is_digit(c))
-            process_digit(c);
-        else if (mulle_unicode_is_whitespace(c))
-            process_whitespace(c);
-        else if (mulle_unicode_is_punctuation(c))
-            process_punctuation(c);
-    }
-}
+c         = 0x1F600;   // 😀
+is_symbol = mulle_unicode_is_symbolplane( c >> 16)
+            && mulle_unicode_is_symbol( c);
 ```
 
 ## 6. Integration Examples
+
+Style follows the library: 3-space indent, Allman braces, aligned
+declarations, C89 variable rules, and `return( expr);`.
 
 ### Example 1: Character Classification Loop
 
 ```c
 #include <mulle-unicode/mulle-unicode.h>
 #include <stdio.h>
-#include <stdint.h>
 
-int main() {
-    int32_t chars[] = {
-        'A', 'a', '1', ' ', '@', '\n',
-        0x00C9,  // É
-        0x03B1,  // α (Greek alpha)
-        0x0E01,  // ก (Thai character)
-    };
-    
-    for (int i = 0; i < 9; i++) {
-        int32_t c = chars[i];
-        printf("U+%04X: ", c);
-        
-        if (mulle_unicode_is_letter(c))
-            printf("LETTER ");
-        if (mulle_unicode_is_digit(c))
-            printf("DIGIT ");
-        if (mulle_unicode_is_whitespace(c))
-            printf("WHITESPACE ");
-        if (mulle_unicode_is_control(c))
-            printf("CONTROL ");
-        if (mulle_unicode_is_punctuation(c))
-            printf("PUNCT ");
-        
-        printf("\n");
-    }
-    
-    return 0;
+
+int   main( void)
+{
+   int32_t   chars[ 6];
+   int32_t   c;
+   int       i;
+
+   chars[ 0] = 'A';
+   chars[ 1] = 'a';
+   chars[ 2] = '1';
+   chars[ 3] = ' ';
+   chars[ 4] = 0x00C9;   // É
+   chars[ 5] = 0x03B1;   // α Greek alpha
+
+   for( i = 0; i < 6; i++)
+   {
+      c = chars[ i];
+      printf( "U+%04X: ", c);
+      if( mulle_unicode_is_letter( c))
+         printf( "LETTER ");
+      if( mulle_unicode_is_decimaldigit( c))
+         printf( "DIGIT ");
+      if( mulle_unicode_is_whitespace( c))
+         printf( "WHITESPACE ");
+      if( mulle_unicode_is_punctuation( c))
+         printf( "PUNCT ");
+      printf( "\n");
+   }
+   return( 0);
 }
 ```
 
-### Example 2: Case Conversion
+### Example 2: Case Conversion Including Titlecase
 
 ```c
 #include <mulle-unicode/mulle-unicode.h>
 #include <stdio.h>
-#include <stdint.h>
-#include <string.h>
 
-void print_conversions(int32_t c) {
-    printf("U+%04X: ", c);
-    printf("Upper=%c, Lower=%c, Title=%c\n",
-           (char)mulle_unicode_toupper(c),
-           (char)mulle_unicode_tolower(c),
-           (char)mulle_unicode_totitlecase(c));
-}
 
-int main() {
-    print_conversions('a');
-    print_conversions('Z');
-    print_conversions('1');
-    
-    return 0;
+int   main( void)
+{
+   int32_t   d;
+
+   d = mulle_unicode_toupper( 'z');         // 'Z'
+   d = mulle_unicode_tolower( 0x1E9E);      // ẞ -> ß
+   d = mulle_unicode_totitlecase( 0x01C6);  // dž -> Dž (U+01C5)
+   d = mulle_unicode_toupper( 0x10428);     // Deseret small long i -> U+10400
+
+   printf( "%#x\n", d);
+   return( 0);
 }
 ```
 
@@ -386,172 +445,137 @@ int main() {
 ```c
 #include <mulle-unicode/mulle-unicode.h>
 #include <stdio.h>
-#include <stdint.h>
-#include <string.h>
 
-int is_valid_identifier(const int32_t *str, size_t len) {
-    if (len == 0)
-        return 0;
-    
-    if (!mulle_unicode_is_identifierstart(str[0]))
-        return 0;
-    
-    for (size_t i = 1; i < len; i++) {
-        if (!mulle_unicode_is_identifiercontinuation(str[i]))
-            return 0;
-    }
-    
-    return 1;
+
+static int   is_identifier( int32_t *chars, int len)
+{
+   int   i;
+
+   if( len <= 0)
+      return( 0);
+   if( ! mulle_unicode_is_identifierstart( chars[ 0]))
+      return( 0);
+   for( i = 1; i < len; i++)
+      if( ! mulle_unicode_is_identifiercontinuation( chars[ i]))
+         return( 0);
+   return( 1);
 }
 
-int main() {
-    int32_t id1[] = { '_', 'v', 'a', 'r', '1' };
-    int32_t id2[] = { '1', '_', 'v', 'a', 'r' };
-    int32_t id3[] = { 'm', 'y', '_', 'I', 'd' };
-    
-    printf("_var1: %s\n", is_valid_identifier(id1, 5) ? "valid" : "invalid");
-    printf("1_var: %s\n", is_valid_identifier(id2, 5) ? "valid" : "invalid");
-    printf("my_Id: %s\n", is_valid_identifier(id3, 5) ? "valid" : "invalid");
-    
-    return 0;
+
+int   main( void)
+{
+   int32_t   name[ 3];
+
+   name[ 0] = '_';   // underscore is NOT an identifier start
+   name[ 1] = 'v';
+   name[ 2] = '1';
+   printf( "_v1 %s valid\n", is_identifier( name, 3) ? "is" : "is not");
+
+   name[ 0] = 'v';
+   name[ 1] = '1';
+   printf( "v1 %s valid\n", is_identifier( name, 2) ? "is" : "is not");
+   return( 0);
 }
 ```
 
-### Example 4: Text Transformation Pipeline
+### Example 4: Digit Value Extraction with zerodigit
 
 ```c
 #include <mulle-unicode/mulle-unicode.h>
 #include <stdio.h>
-#include <stdint.h>
 
-void transform_text(int32_t *text, size_t len) {
-    for (size_t i = 0; i < len; i++) {
-        int32_t c = text[i];
-        
-        // Remove non-printing characters
-        if (!mulle_unicode_isprint(c)) {
-            text[i] = ' ';
-            continue;
-        }
-        
-        // Convert to lowercase
-        if (mulle_unicode_is_uppercase(c)) {
-            text[i] = mulle_unicode_tolower(c);
-        }
-    }
-}
 
-int main() {
-    int32_t text[] = {
-        'H', 'e', 'l', 'l', 'o', 0x0009, 'W', 'O', 'R', 'L', 'D'
-    };
-    
-    printf("Before transformation:\n");
-    for (int i = 0; i < 11; i++)
-        printf("%c", (char)text[i]);
-    printf("\n");
-    
-    transform_text(text, 11);
-    
-    printf("After transformation:\n");
-    for (int i = 0; i < 11; i++)
-        printf("%c", (char)text[i]);
-    printf("\n");
-    
-    return 0;
+int   main( void)
+{
+   int32_t   zero;
+   int32_t   digit;
+   int       value;
+
+   zero  = 0x0660;   // ٠ Arabic-Indic zero
+   digit = 0x0669;   // ٩ Arabic-Indic nine
+
+   if( mulle_unicode_is_zerodigit( zero) && mulle_unicode_is_decimaldigit( digit))
+   {
+      value = digit - zero;   // 9
+      printf( "value: %d\n", value);
+   }
+   return( 0);
 }
 ```
 
-### Example 5: Character Statistics
+### Example 5: Plane Pre-check and Legal Character Validation
 
 ```c
 #include <mulle-unicode/mulle-unicode.h>
 #include <stdio.h>
-#include <stdint.h>
 
-typedef struct {
-    int letters;
-    int digits;
-    int whitespace;
-    int punctuation;
-    int symbols;
-    int other;
-} CharStats;
 
-CharStats analyze_text(const int32_t *text, size_t len) {
-    CharStats stats = {0};
-    
-    for (size_t i = 0; i < len; i++) {
-        int32_t c = text[i];
-        
-        if (mulle_unicode_is_letter(c))
-            stats.letters++;
-        else if (mulle_unicode_is_digit(c))
-            stats.digits++;
-        else if (mulle_unicode_is_whitespaceornewline(c))
-            stats.whitespace++;
-        else if (mulle_unicode_is_punctuation(c))
-            stats.punctuation++;
-        else if (mulle_unicode_is_symbol(c))
-            stats.symbols++;
-        else
-            stats.other++;
-    }
-    
-    return stats;
-}
+int   main( void)
+{
+   int32_t   c;
 
-int main() {
-    int32_t text[] = {
-        'H', 'e', 'l', 'l', 'o', ',', ' ',
-        'W', 'o', 'r', 'l', 'd', '!', ' ',
-        '1', '2', '3', 0x00A9  // © symbol
-    };
-    
-    CharStats stats = analyze_text(text, 18);
-    printf("Letters: %d\n", stats.letters);
-    printf("Digits: %d\n", stats.digits);
-    printf("Whitespace: %d\n", stats.whitespace);
-    printf("Punctuation: %d\n", stats.punctuation);
-    printf("Symbols: %d\n", stats.symbols);
-    
-    return 0;
+   c = 0x1F600;  // 😀
+   if( mulle_unicode_is_legalcharacter( c))
+      if( mulle_unicode_is_symbolplane( c >> 16) && mulle_unicode_is_symbol( c))
+         printf( "U+%X is a symbol\n", c);
+
+   // surrogates are not legal characters since 2.4.14
+   printf( "surrogate legal: %d\n", mulle_unicode_is_legalcharacter( 0xD800));
+   return( 0);
 }
 ```
 
-### Example 6: UTF-16 Processing
+### Example 6: UTF-16 (BMP) Processing
 
 ```c
 #include <mulle-unicode/mulle-unicode.h>
 #include <stdio.h>
-#include <stdint.h>
 
-int main() {
-    uint16_t utf16_text[] = {
-        'H', 'i', 0x00E9,  // é in UTF-16 (BMP)
-        '!'
-    };
-    
-    for (int i = 0; i < 4; i++) {
-        uint16_t c = utf16_text[i];
-        printf("U+%04X: ", c);
-        
-        if (mulle_unicode16_is_letter(c))
-            printf("LETTER ");
-        if (mulle_unicode16_is_lowercase(c))
-            printf("LOWER ");
-        if (mulle_unicode16_is_punctuation(c))
-            printf("PUNCT ");
-        
-        printf("-> upper: U+%04X\n",
-               (uint16_t)mulle_unicode16_toupper(c));
-    }
-    
-    return 0;
+
+int   main( void)
+{
+   uint16_t   text[ 4];
+   uint16_t   c;
+   int        i;
+
+   text[ 0] = 'H';
+   text[ 1] = 'i';
+   text[ 2] = 0x00E9;   // é
+   text[ 3] = '!';
+
+   for( i = 0; i < 4; i++)
+   {
+      c = text[ i];
+      printf( "U+%04X", c);
+      if( mulle_unicode16_is_lowercase( c))
+         printf( " LOWER");
+      printf( " -> upper U+%04X\n", mulle_unicode16_toupper( c));
+   }
+   return( 0);
 }
 ```
 
 ## 7. Dependencies
 
-Direct mulle-sde dependencies:
-- `mulle-c11`: C11 compatibility macros and utilities for cross-platform support
+Direct mulle-sde dependencies (see `.mulle/etc/sourcetree/config`):
+
+- `mulle-c11` (minimum version 4.9.0 per `_mulle-unicode-versioncheck.h`):
+  cross-platform compiler glue macros (`MULLE_C_GLOBAL`,
+  `MULLE_C_EXTERN_GLOBAL`, `MULLE_C_UNUSED`).
+
+Only used at build time (no other library is linked at runtime).
+
+## 8. Revision Note
+
+The previous `index.md` was last committed as `ddc01b3` (2026-08-04). This
+revision incorporates the API-behavior changes from commit `946c064`
+"fix: harden ctype predicates against invalid inputs and exclude surrogates"
+and `6b72e6d`:
+
+- predicates now return `0` for out-of-range inputs (negative or > U+10FFFF)
+- `is_legalcharacter` rejects surrogates U+D800–U+DFFF
+- `totitlecase` covers the full 32-bit range including supplementary planes
+- version bumped to 2.4.14; Unicode data tables regenerated from Unicode 12.1
+- fuzz targets `fuzz-ctype` / `fuzz-conversion` added
+
+Behavior notes were verified by compiling the released sources.
