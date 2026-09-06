@@ -3,7 +3,7 @@
 #### 🈚 Unicode ctype like library
 
 a C (C99) library to classify and convert unicode characters, based on the
-Unicode 3.0.0 specification.
+Unicode 12.1 specification.
 The library uses the Unicode specification data to create C code.
 mulle-unicode is fairly compact for what it does, compiling down to around
 256KB.
@@ -22,7 +22,7 @@ mulle-unicode is fairly compact for what it does, compiling down to around
 | File                             | Description
 |----------------------------------| ----------------------------------------
 | [`Ctype`](dox/API_CTYPE.md)      | `<ctype.h>` like functionality for UTF32 and UTF16 strings
-| [`Conversion`](dox/API_CTYPE.md) | Converting strings back and forth
+| [`Conversion`](dox/API_CONVERSION.md) | Simple case conversion (tolower, toupper, totitlecase)
 
 
 ## Documentation & Guides
