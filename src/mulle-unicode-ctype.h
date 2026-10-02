@@ -37,6 +37,7 @@
 #define mulle_unicode_ctype_h__
 
 #include "mulle-unicode-is-alphanumeric.h"
+#include "mulle-unicode-is-ascii.h"
 #include "mulle-unicode-is-capitalized.h"
 #include "mulle-unicode-is-control.h"
 #include "mulle-unicode-is-decimaldigit.h"

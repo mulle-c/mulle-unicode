@@ -1,6 +1,6 @@
 {
    "name" : "mulle-unicode",
-   "version" : "2.4.14",
+   "version" : "2.4.15",
    "description" : "🈚 Unicode ctype like library",
    "keywords" : [],
    "license" : "BSD-3-Clause",
@@ -12,6 +12,7 @@
       "src/mulle-unicode-ctype.h",
       "src/mulle-unicode-is-alphanumeric.c",
       "src/mulle-unicode-is-alphanumeric.h",
+      "src/mulle-unicode-is-ascii.h",
       "src/mulle-unicode-is-capitalized.c",
       "src/mulle-unicode-is-capitalized.h",
       "src/mulle-unicode-is-control.c",

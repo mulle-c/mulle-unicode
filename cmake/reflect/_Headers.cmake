@@ -110,6 +110,7 @@ set( PUBLIC_HEADERS
 src/mulle-unicode-ctype.h
 src/mulle-unicode.h
 src/mulle-unicode-is-alphanumeric.h
+src/mulle-unicode-is-ascii.h
 src/mulle-unicode-is-capitalized.h
 src/mulle-unicode-is-control.h
 src/mulle-unicode-is-decimaldigit.h
