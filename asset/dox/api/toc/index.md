@@ -12,7 +12,7 @@ standalone via `clib` or `mulle-sde`.
 - The predicate and conversion data tables are generated from
   `UnicodeData.txt` (currently Unicode 12.1, see `src/unicode/README.md`)
   by the scripts in `unicode/`.
-- Version 2.4.14 (`MULLE__UNICODE_VERSION`). Since 2.4.14 the predicates
+- Version 2.4.15 (`MULLE__UNICODE_VERSION`). Since 2.4.14 the predicates
   were hardened: all `is_*` predicates return `0` for inputs outside
   U+0000–U+10FFFF (negative or > U+10FFFF no longer wrap or misreport),
   `is_legalcharacter` now rejects surrogates (U+D800–U+DFFF), and
@@ -53,9 +53,9 @@ dynamically).
 ### 3.1. `mulle-unicode.h`
 
 ```
-#define MULLE__UNICODE_VERSION  ((2UL << 20) | (4 << 8) | 14)
+#define MULLE__UNICODE_VERSION  ((2UL << 20) | (4 << 8) | 15)
 ```
-- **Purpose:** umbrella header; declares the library version (2.4.14) and
+- **Purpose:** umbrella header; declares the library version (2.4.15) and
   includes all sub-headers below.
 
 ### 3.2. Predicate headers (`mulle-unicode-ctype.h` and `mulle-unicode-is-*.h`)
@@ -239,6 +239,35 @@ int   mulle_unicode_is_nonbaseplane( unsigned int plane);
 ```
 - **`mulle_unicode_is_nonbase`:** combining (non-spacing/spacing/enclosing)
   marks (`M.`).
+
+#### ASCII-only predicates
+
+`mulle-unicode-is-ascii.h`
+```
+static inline int   mulle_unicode_is_asciidigit( int32_t c);
+static inline int   mulle_unicode_is_asciiuppercase( int32_t c);
+static inline int   mulle_unicode_is_asciilowercase( int32_t c);
+static inline int   mulle_unicode_is_asciiletter( int32_t c);
+static inline int   mulle_unicode_is_asciispace( int32_t c);
+static inline int   mulle_unicode_is_asciiidentifierstart( int32_t c);
+static inline int   mulle_unicode_is_asciiidentifiercontinuation( int32_t c);
+```
+- These are the ASCII-only counterparts of the classification predicates,
+  implemented as `static inline` helpers (no generated tables). A parser's
+  alphabet is usually ASCII *on purpose* (e.g. a cmake command name is
+  `[A-Za-z_]`, not "a Unicode letter"), and the difference is silent:
+  `mulle_unicode_is_letter` answers yes for many code points that `[A-Za-z]`
+  does not match, so a Unicode-aware predicate is not a drop-in replacement.
+- **`mulle_unicode_is_asciidigit`:** `[0-9]`.
+- **`mulle_unicode_is_asciiuppercase`:** `[A-Z]`.
+- **`mulle_unicode_is_asciilowercase`:** `[a-z]`.
+- **`mulle_unicode_is_asciiletter`:** uppercase or lowercase, i.e. `[A-Za-z]`.
+- **`mulle_unicode_is_asciispace`:** the whitespace of a lexer — space, tab,
+  newline, CR, form feed, vertical tab. Deliberately not `isspace()` and not
+  `mulle_unicode_is_whitespace()`, which also match Unicode whitespace such as
+  NBSP.
+- **`mulle_unicode_is_asciiidentifierstart`:** `[A-Za-z_]`.
+- **`mulle_unicode_is_asciiidentifiercontinuation`:** `[A-Za-z0-9_]`.
 
 #### Validation
 
@@ -559,7 +588,7 @@ int   main( void)
 
 Direct mulle-sde dependencies (see `.mulle/etc/sourcetree/config`):
 
-- `mulle-c11` (minimum version 4.9.0 per `_mulle-unicode-versioncheck.h`):
+- `mulle-c11` (minimum version 4.9.1 per `_mulle-unicode-versioncheck.h`):
   cross-platform compiler glue macros (`MULLE_C_GLOBAL`,
   `MULLE_C_EXTERN_GLOBAL`, `MULLE_C_UNUSED`).
 
@@ -579,3 +608,7 @@ and `6b72e6d`:
 - fuzz targets `fuzz-ctype` / `fuzz-conversion` added
 
 Behavior notes were verified by compiling the released sources.
+
+A subsequent revision added the ASCII-only predicate header
+`mulle-unicode-is-ascii.h`, bumped `MULLE__UNICODE_VERSION` to 2.4.15 and
+raised the minimum `mulle-c11` version to 4.9.1.
