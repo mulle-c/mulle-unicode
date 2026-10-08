@@ -1,6 +1,7 @@
 ### 2.4.15
 
 
+
 * Document `mulle-unicode-is-ascii.h` ASCII-only classification predicates `(`is_asciidigit`,` ``is_asciiuppercase`,` ``is_asciilowercase`,` ``is_asciiletter`,` ``is_asciispace`,` ``is_asciiidentifierstart`,` ``is_asciiidentifiercontinuation`)`
 * Explain that these are deliberate ASCII-only counterparts, not drop-in replacements for the Unicode-aware predicates
 
